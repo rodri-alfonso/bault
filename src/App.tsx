@@ -1,8 +1,14 @@
+import HomePage from './pages/Home'
+import CreatorPage from './pages/Creator'
+import { Route, Switch, Redirect } from 'wouter'
+
 function App() {
 	return (
-		<main>
-			<h1>Hello Vite + React!</h1>
-		</main>
+		<Switch>
+			<Route path='/' component={HomePage} />
+			<Route path='/create' component={CreatorPage} />
+			<Redirect to='/' />
+		</Switch>
 	)
 }
 

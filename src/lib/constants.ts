@@ -1,0 +1,3 @@
+export const ENVIRONMENTS = {
+	SECRET_ENCRYPTION_KEY: import.meta.env.VITE_SECRET_ENCRYPTION_KEY || '',
+}
