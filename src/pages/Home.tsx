@@ -6,7 +6,7 @@ import useFetch from '@/hooks/useFetch'
 import RecordCard from '@/components/RecordCard'
 
 export default function HomePage() {
-	const { data, isLoading, refetch } = useFetch(getRecords)
+	const { data, isLoading } = useFetch(getRecords)
 	console.log('🚀 ~ data:', data)
 
 	if (isLoading) return <p>Loading...</p>
@@ -17,7 +17,7 @@ export default function HomePage() {
 			<Header />
 			<div>
 				{data?.map((record) => (
-					<RecordCard record={record} key={record.email} onDelete={refetch} />
+					<RecordCard record={record} key={record.email} />
 				))}
 			</div>
 			<Link to='/create' className='bg-blue-300 rounded-md px-3 py-2 active:scale-95 transition-all'>
