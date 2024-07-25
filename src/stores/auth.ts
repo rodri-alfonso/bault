@@ -3,6 +3,8 @@ import type { User } from './types'
 import { getAuthStorage, removeAuthStorage, setAuthStorage } from '../lib/storage'
 import { signInWithPopup, signOut as googleSignOut } from 'firebase/auth'
 import { auth, provider } from '../firebase'
+import { addUserToCollection } from '@/services/users'
+import { encrypt } from '@/lib/encryption'
 
 type Store = {
 	user: User | null
@@ -20,10 +22,18 @@ export const signIn = () => {
 			const user = result.user
 
 			const { displayName, email, photoURL, uid } = user
-			const userData = { id: uid, name: displayName, email, picture: photoURL } as User
 
-			authStore.setState({ user: userData })
-			setAuthStorage(userData)
+			const payload = {
+				id: uid,
+				name: encrypt(displayName ?? ''),
+				email: encrypt(email ?? ''),
+				picture: encrypt(photoURL ?? ''),
+			} as User
+
+			addUserToCollection(payload).then(() => {
+				authStore.setState({ user: payload })
+				setAuthStorage(payload)
+			})
 		})
 		.catch(() => {
 			alert('Ha ocurrido un error, vuelve a intentarlo más tarde')

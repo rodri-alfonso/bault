@@ -8,5 +8,8 @@ export const ENVIRONMENTS = {
 	FIREBASE_MESSAGING_SENDER_ID: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || '',
 	FIREBASE_APP_ID: import.meta.env.VITE_FIREBASE_APP_ID || '',
 
+	FIRESTORE_RSK: import.meta.env.VITE_FIRESTORE_RSK || '',
+	FIRESTORE_USK: import.meta.env.VITE_FIRESTORE_USK || '',
+
 	LOCAL_STORAGE_KEY: import.meta.env.VITE_LOCAL_STORAGE_KEY || '',
 }
