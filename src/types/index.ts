@@ -4,4 +4,5 @@ export interface Register {
 	password: string
 	site: string
 	keys: string[]
+	color: string
 }

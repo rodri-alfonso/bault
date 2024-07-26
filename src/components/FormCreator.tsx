@@ -4,6 +4,9 @@ import { encrypt } from '../lib/encryption'
 import { addRecord } from '../services/records'
 import type { Register } from 'types'
 import { useLocation } from 'wouter'
+import { CARDS_COLORS } from '@/lib/colors'
+
+const randomColor = CARDS_COLORS[Math.floor(Math.random() * CARDS_COLORS.length)]
 
 export default function FormCreator() {
 	const [site, setSite] = useState('')
@@ -20,6 +23,7 @@ export default function FormCreator() {
 			site: encrypt(site),
 			user: encrypt(user),
 			keys: [],
+			color: randomColor,
 		}
 
 		addRecord(payload).then(() => {
