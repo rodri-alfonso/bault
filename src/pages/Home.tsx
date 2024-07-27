@@ -26,11 +26,12 @@ export default function HomePage() {
 		<Page className='flex flex-col justify-between gap-4'>
 			<Header />
 			<section className='pt-2'>
-				<Typography text={`Hello, ${firstName},`} variant='h1' />
-				<Typography text="Let's check your bault!" variant='h4' className='text-gray-500' />
+				<p className='text-2xl font-medium'>{`Hello ${firstName},`}</p>
+				<p className='text-gray-500 font-medium'>Let's check your bault!</p>
 			</section>
 
-			<div className='py-4'>
+			<div className='py-2'>
+				{/* <p className='text-lg font-medium pb-4'>Favorite records</p> */}
 				<section className='slides'>
 					{data?.map((record) => (
 						<RecordCard record={record} key={record.email} />
@@ -39,7 +40,7 @@ export default function HomePage() {
 			</div>
 
 			<div className='flex items-center justify-between'>
-				<p className='text-lg font-medium'>Your records</p>
+				<p className='text-lg font-medium'>Last records</p>
 				<button className='p-2 rounded-lg hover:bg-gray-100 transition-all active:scale-95'>
 					<ArrowRightIcon />
 				</button>

@@ -141,3 +141,117 @@ export const Notebookcon = (props: React.SVGProps<SVGSVGElement>) => (
 		<path d='M9 22L9 2' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
 	</svg>
 )
+
+export const MailIcon = (props: React.SVGProps<SVGSVGElement>) => (
+	<svg viewBox='0 0 24 24' width={24} height={24} color={'currentColor'} fill={'none'} {...props}>
+		<path
+			d='M2 6L8.91302 9.91697C11.4616 11.361 12.5384 11.361 15.087 9.91697L22 6'
+			stroke='currentColor'
+			strokeWidth='1.5'
+			strokeLinejoin='round'
+		/>
+		<path
+			d='M2.01577 13.4756C2.08114 16.5412 2.11383 18.0739 3.24496 19.2094C4.37608 20.3448 5.95033 20.3843 9.09883 20.4634C11.0393 20.5122 12.9607 20.5122 14.9012 20.4634C18.0497 20.3843 19.6239 20.3448 20.7551 19.2094C21.8862 18.0739 21.9189 16.5412 21.9842 13.4756C22.0053 12.4899 22.0053 11.5101 21.9842 10.5244C21.9189 7.45886 21.8862 5.92609 20.7551 4.79066C19.6239 3.65523 18.0497 3.61568 14.9012 3.53657C12.9607 3.48781 11.0393 3.48781 9.09882 3.53656C5.95033 3.61566 4.37608 3.65521 3.24495 4.79065C2.11382 5.92608 2.08114 7.45885 2.01576 10.5244C1.99474 11.5101 1.99475 12.4899 2.01577 13.4756Z'
+			stroke='currentColor'
+			strokeWidth='1.5'
+			strokeLinejoin='round'
+		/>
+	</svg>
+)
+
+export const PasswordIcon = (props: React.SVGProps<SVGSVGElement>) => (
+	<svg viewBox='0 0 24 24' width={24} height={24} color={'currentColor'} fill={'none'} {...props}>
+		<path
+			d='M4.26781 18.8447C4.49269 20.515 5.87613 21.8235 7.55966 21.9009C8.97627 21.966 10.4153 22 12 22C13.5847 22 15.0237 21.966 16.4403 21.9009C18.1239 21.8235 19.5073 20.515 19.7322 18.8447C19.879 17.7547 20 16.6376 20 15.5C20 14.3624 19.879 13.2453 19.7322 12.1553C19.5073 10.485 18.1239 9.17649 16.4403 9.09909C15.0237 9.03397 13.5847 9 12 9C10.4153 9 8.97627 9.03397 7.55966 9.09909C5.87613 9.17649 4.49269 10.485 4.26781 12.1553C4.12105 13.2453 4 14.3624 4 15.5C4 16.6376 4.12105 17.7547 4.26781 18.8447Z'
+			stroke='currentColor'
+			strokeWidth='1.5'
+		/>
+		<path
+			d='M7.5 9V6.5C7.5 4.01472 9.51472 2 12 2C14.4853 2 16.5 4.01472 16.5 6.5V9'
+			stroke='currentColor'
+			strokeWidth='1.5'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		/>
+		<path d='M16 15.49V15.5' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+		<path d='M12 15.49V15.5' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+		<path d='M8 15.49V15.5' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+	</svg>
+)
+
+export const ViewOffIcon = (props: React.SVGProps<SVGSVGElement>) => (
+	<svg viewBox='0 0 24 24' width={24} height={24} color={'currentColor'} fill={'none'} {...props}>
+		<path
+			d='M19.439 15.439C20.3636 14.5212 21.0775 13.6091 21.544 12.955C21.848 12.5287 22 12.3155 22 12C22 11.6845 21.848 11.4713 21.544 11.045C20.1779 9.12944 16.6892 5 12 5C11.0922 5 10.2294 5.15476 9.41827 5.41827M6.74742 6.74742C4.73118 8.1072 3.24215 9.94266 2.45604 11.045C2.15201 11.4713 2 11.6845 2 12C2 12.3155 2.15201 12.5287 2.45604 12.955C3.8221 14.8706 7.31078 19 12 19C13.9908 19 15.7651 18.2557 17.2526 17.2526'
+			stroke='currentColor'
+			strokeWidth='1.5'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		/>
+		<path
+			d='M9.85786 10C9.32783 10.53 9 11.2623 9 12.0711C9 13.6887 10.3113 15 11.9289 15C12.7377 15 13.47 14.6722 14 14.1421'
+			stroke='currentColor'
+			strokeWidth='1.5'
+			strokeLinecap='round'
+		/>
+		<path d='M3 3L21 21' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
+	</svg>
+)
+
+export const UserIcon = (props: React.SVGProps<SVGSVGElement>) => (
+	<svg viewBox='0 0 24 24' width={24} height={24} color={'currentColor'} fill={'none'} {...props}>
+		<path
+			d='M6.57757 15.4816C5.1628 16.324 1.45336 18.0441 3.71266 20.1966C4.81631 21.248 6.04549 22 7.59087 22H16.4091C17.9545 22 19.1837 21.248 20.2873 20.1966C22.5466 18.0441 18.8372 16.324 17.4224 15.4816C14.1048 13.5061 9.89519 13.5061 6.57757 15.4816Z'
+			stroke='currentColor'
+			strokeWidth='1.5'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		/>
+		<path
+			d='M16.5 6.5C16.5 8.98528 14.4853 11 12 11C9.51472 11 7.5 8.98528 7.5 6.5C7.5 4.01472 9.51472 2 12 2C14.4853 2 16.5 4.01472 16.5 6.5Z'
+			stroke='currentColor'
+			strokeWidth='1.5'
+		/>
+	</svg>
+)
+
+export const EarthIcon = (props: React.SVGProps<SVGSVGElement>) => (
+	<svg viewBox='0 0 24 24' width={24} height={24} color={'currentColor'} fill={'none'} {...props}>
+		<path
+			d='M12 22C6.47715 22 2 17.5228 2 12C2 9.20746 3.14465 6.68227 4.99037 4.86802M12 22C11.037 21.2864 11.1907 20.4555 11.6738 19.6247C12.4166 18.3474 12.4166 18.3474 12.4166 16.6444C12.4166 14.9414 13.4286 14.1429 17 14.8571C18.6047 15.1781 19.7741 12.9609 21.8573 13.693M12 22C16.9458 22 21.053 18.4096 21.8573 13.693M21.8573 13.693C21.9511 13.1427 22 12.5771 22 12C22 7.11857 18.5024 3.05405 13.8766 2.17579M13.8766 2.17579C14.3872 3.11599 14.1816 4.23551 13.1027 4.66298C11.3429 5.3603 12.6029 6.64343 11.1035 7.4356C10.1038 7.96372 8.6044 7.83152 7.10496 6.24716C6.31517 5.41264 5.83966 4.95765 4.99037 4.86802M13.8766 2.17579C13.2687 2.06039 12.6414 2 12 2C9.26969 2 6.79495 3.09421 4.99037 4.86802'
+			stroke='currentColor'
+			strokeWidth='1.5'
+			strokeLinejoin='round'
+		/>
+	</svg>
+)
+
+export const KeyIcon = (props: React.SVGProps<SVGSVGElement>) => (
+	<svg viewBox='0 0 24 24' width={24} height={24} color={'currentColor'} fill={'none'} {...props}>
+		<path
+			d='M15.5 14.5C18.8137 14.5 21.5 11.8137 21.5 8.5C21.5 5.18629 18.8137 2.5 15.5 2.5C12.1863 2.5 9.5 5.18629 9.5 8.5C9.5 9.38041 9.68962 10.2165 10.0303 10.9697L2.5 18.5V21.5H5.5V19.5H7.5V17.5H9.5L13.0303 13.9697C13.7835 14.3104 14.6196 14.5 15.5 14.5Z'
+			stroke='currentColor'
+			strokeWidth='1.5'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		/>
+		<path d='M17.5 6.5L16.5 7.5' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
+	</svg>
+)
+
+export const AddCircleIcon = (props: React.SVGProps<SVGSVGElement>) => (
+	<svg viewBox='0 0 24 24' width={24} height={24} color={'currentColor'} fill={'none'} {...props}>
+		<path
+			d='M12 8V16M16 12L8 12'
+			stroke='currentColor'
+			strokeWidth='1.5'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		/>
+		<path
+			d='M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z'
+			stroke='currentColor'
+			strokeWidth='1.5'
+		/>
+	</svg>
+)

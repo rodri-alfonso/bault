@@ -31,10 +31,6 @@
 	scroll-snap-align: center;
 }
 
-.slides article {
-	border-radius: 1rem;
-}
-
 .slides::-webkit-scrollbar {
 	display: none;
 }
