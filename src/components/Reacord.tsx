@@ -1,14 +1,14 @@
 import { RegisterWithId } from '@/services/records'
-import { useLocation, Link } from 'wouter'
+import { useLocation } from 'wouter'
 import { decrypt } from '@/lib/encryption'
-import { ViewIcon, CopyIcon } from '@/assets/icons'
+import { CopyIcon } from '@/assets/icons'
 
-export default function Record({ email, id, keys, password, site, user, color }: RegisterWithId) {
+export default function Record({ id, site, user, color }: RegisterWithId) {
 	const [_, navigate] = useLocation()
 
 	return (
 		<article
-			className={`border-2 border-solid borde-gray-200 rounded-2xl h-16 p-1 pr-3 flex items-center justify-between active:scale-95 transition-all hover:bg-gray-50`}
+			className={`border-2 border-solid borde-gray-200 rounded-2xl h-16 p-1 pr-3 flex items-center justify-between transition-all hover:bg-gray-50`}
 			style={{}}
 		>
 			<button
@@ -29,7 +29,10 @@ export default function Record({ email, id, keys, password, site, user, color }:
 				</div>
 			</button>
 
-			<button onClick={() => {}} className='bg-gray-900 text-white rounded-full p-2 active:scale-95 transition-all'>
+			<button
+				onClick={() => {}}
+				className='bg-gray-900 text-white rounded-full p-2 active:scale-95 transition-all z-20'
+			>
 				<CopyIcon className='w-5 h-5' />
 			</button>
 		</article>

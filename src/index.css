@@ -25,6 +25,7 @@
 	overscroll-behavior-y: contain;
 	scroll-snap-type: x mandatory;
 	scrollbar-width: none;
+	padding-bottom: 16px;
 }
 
 .slides > article {

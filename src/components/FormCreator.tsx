@@ -96,7 +96,7 @@ export default function FormCreator() {
 					)}
 				</div>
 
-				<section className='flex items-center gap-2'>
+				<section className='flex items-center gap-2 flex-wrap'>
 					{keys.map((key, index) => (
 						<span
 							className='bg-gray-100 rounded-full px-2 pl-2.5 py-1 flex items-center justify-between w-fit gap-2'

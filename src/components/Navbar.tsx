@@ -1,4 +1,3 @@
-import { Link } from 'wouter'
 import { PlusIcon, HomeIcon, HomeFilledIcon } from '@/assets/icons'
 import { useLocation } from 'wouter'
 
@@ -8,7 +7,7 @@ export default function Navbar() {
 	const isLocationPath = location.pathname === '/'
 
 	return (
-		<footer className='bg-gray-200 w-[95%] min-h-[60px] flex items-center relative rounded-2xl px-4'>
+		<footer className='bg-gray-200 w-[95%] min-h-[55px] flex items-center relative rounded-2xl px-4'>
 			<section></section>
 			<button className='flex items-center gap-1.5'>
 				{isLocationPath ? <HomeFilledIcon /> : <HomeIcon />}
@@ -17,7 +16,7 @@ export default function Navbar() {
 
 			<button
 				onClick={() => navigate('/create')}
-				className='absolute -right-5 bg-gray-800 text-white rounded-xl p-1.5 active:scale-95 transition-all'
+				className='absolute -right-5 bg-gray-800 text-white rounded-2xl p-2.5 active:scale-95 transition-all'
 			>
 				<PlusIcon />
 			</button>

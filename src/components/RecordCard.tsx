@@ -1,7 +1,7 @@
 import { decrypt } from '@/lib/encryption'
 import { RegisterWithId } from '@/services/records'
 import { useLocation } from 'wouter'
-import { CopyIcon, ViewIcon } from '@/assets/icons'
+import { ViewIcon } from '@/assets/icons'
 import Typography from '@/theme/Typography'
 
 interface Props {
