@@ -26,7 +26,6 @@ export default function ColorPicker({ color, setColor }: Props) {
 				<div className='bg-blue-800 rounded-full w-4 h-4' style={{ backgroundColor: color || color || 'whitesmoke' }} />
 			</button>
 
-			{/* {isModalOpen && <BlockPicker ref={pickerRef} />} */}
 			{isModalOpen && (
 				<TwitterPicker
 					triangle='hide'
