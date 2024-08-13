@@ -6,6 +6,11 @@ import type { Register } from 'types'
 import { useLocation } from 'wouter'
 import { CARDS_COLORS } from '@/lib/colors'
 import { EarthIcon, MailIcon, PasswordIcon, UserIcon, KeyIcon, AddCircleIcon } from '@/assets/icons'
+import Typography from '@/theme/Typography'
+import Button from '@/theme/Button'
+import ColorPicker from './ColorPicker'
+
+const randomColor = CARDS_COLORS[Math.floor(Math.random() * CARDS_COLORS.length)]
 
 export default function FormCreator() {
 	const [site, setSite] = useState('')
@@ -14,10 +19,10 @@ export default function FormCreator() {
 	const [user, setUser] = useState('')
 	const [keys, setKeys] = useState<string[]>([])
 	const [currentKey, setCurrentKey] = useState('')
+	const [color, setColor] = useState(randomColor)
 
 	const [_, navigate] = useLocation()
 
-	const randomColor = CARDS_COLORS[Math.floor(Math.random() * CARDS_COLORS.length)]
 	const isEmptyForm = !site || !email || !password || !user
 
 	const handleClick = () => {
@@ -29,7 +34,7 @@ export default function FormCreator() {
 			site: encrypt(site),
 			user: encrypt(user),
 			keys: [],
-			color: randomColor,
+			color: color,
 		}
 
 		addRecord(payload).then(() => {
@@ -50,13 +55,36 @@ export default function FormCreator() {
 
 	return (
 		<>
+			<div className='absolute top-6 right-4 '>
+				<ColorPicker color={color} setColor={setColor} />
+			</div>
+			<article
+				style={{
+					backgroundColor: color,
+				}}
+				className='rounded-3xl p-7 flex items-center justify-between shadow-lg'
+			>
+				<div className='flex items-center gap-4'>
+					<div className='grid place-items-center w-10 h-10 bg-gray-900 rounded-full text-white'>
+						<Typography text={site[0]?.toUpperCase() || 'S'} className='text-lg font-semibold' />
+					</div>
+
+					<div className='grid w-auto'>
+						<p className='font-semibold'>{site || 'Site'}</p>
+						<p className='text-sm text-gray-700 -mt-1.5'>{user || 'User'}</p>
+					</div>
+				</div>
+			</article>
+
 			<section className='grid gap-6'>
+				<p className='font-semibold pt-6'>Information</p>
 				<Input
 					icon={<EarthIcon />}
 					label='Site'
 					onChange={(e) => setSite(e.target.value)}
 					value={site}
 					placeholder='Site'
+					color={color}
 				/>
 				<Input
 					icon={<MailIcon />}
@@ -64,6 +92,7 @@ export default function FormCreator() {
 					onChange={(e) => setEmail(e.target.value)}
 					value={email}
 					placeholder='Email'
+					color={color}
 				/>
 				<Input
 					icon={<PasswordIcon />}
@@ -71,6 +100,7 @@ export default function FormCreator() {
 					onChange={(e) => setPassword(e.target.value)}
 					value={password}
 					placeholder='Password'
+					color={color}
 					type='password'
 				/>
 				<Input
@@ -79,9 +109,14 @@ export default function FormCreator() {
 					onChange={(e) => setUser(e.target.value)}
 					value={user}
 					placeholder='User'
+					color={color}
 				/>
 
-				<div className='bg-blue-50 p-3 px-4 rounded-xl flex items-center gap-1.5 text-gray-400'>
+				<p className='font-semibold pt-6'>Security Keys</p>
+				<div
+					className='py-2 px-4 rounded-xl flex items-center gap-1.5 text-gray-600'
+					style={{ backgroundColor: color + '4D' || '#dddd' }}
+				>
 					<div>{<KeyIcon />}</div>
 					<input
 						className={`w-full p-1 rounded outline-none focus:border-blue-500 bg-transparent text-gray-800`}
@@ -99,7 +134,7 @@ export default function FormCreator() {
 				<section className='flex items-center gap-2 flex-wrap'>
 					{keys.map((key, index) => (
 						<span
-							className='bg-gray-100 rounded-full px-2 pl-2.5 py-1 flex items-center justify-between w-fit gap-2'
+							className='bg-gray-100 rounded-full px-2 pl-2.5 py-1 flex items-center justify-between gap-2'
 							key={key + index}
 						>
 							{key}
@@ -113,13 +148,7 @@ export default function FormCreator() {
 					))}
 				</section>
 			</section>
-			<button
-				className='bg-gray-900 text-white mt-auto rounded-lg p-2 active:scale-95 transition-all disabled:opacity-40 disabled:scale-100 disabled:cursor-not-allowed'
-				onClick={handleClick}
-				disabled={isEmptyForm}
-			>
-				Create
-			</button>
+			<Button label={'Create'} onClick={handleClick} disabled={isEmptyForm} />
 		</>
 	)
 }
