@@ -10,12 +10,16 @@ import RecordCard from '@/components/RecordCard'
 import Input from '@/theme/Input'
 import Typography from '@/theme/Typography'
 import ColorPicker from '@/components/ColorPicker'
+import SpinnerScreen from '@/components/SpinnerScreen'
+import RecordSimpleCard from '@/components/RecordSimpleCard'
+import Modal from '@/theme/Modal'
 
 export default function RecordPage() {
 	const [_, navigate] = useLocation()
 	const { id } = useParams()
 	const { data, isLoading } = useFetch(() => getRecordById(id))
 	const [keyCheckedId, setKeyCheckedId] = useState('')
+	const [isModalOpen, setIsModalOpen] = useState(false)
 
 	const [site, setSite] = useState('')
 	const [email, setEmail] = useState('')
@@ -32,10 +36,6 @@ export default function RecordPage() {
 			setColor(data.color)
 		}
 	}, [isLoading])
-
-	function handleDelete() {
-		deleteRecord(id).then(() => navigate('/'))
-	}
 
 	function toggleKey(key: string) {
 		if (keyCheckedId === key) setKeyCheckedId('')
@@ -54,6 +54,8 @@ export default function RecordPage() {
 	// 	password !== decrypt(data?.password || '') ||
 	// 	user !== decrypt(data?.user || '')
 
+	if (isLoading) return <SpinnerScreen />
+
 	return (
 		<Page className='flex flex-col gap-4 relative'>
 			<Header />
@@ -67,28 +69,7 @@ export default function RecordPage() {
 				<p className='text-gray-500 font-medium'>Let's check your record!</p>
 			</section>
 
-			{isLoading ? (
-				<span>Loading...</span>
-			) : (
-				<article
-					style={{
-						backgroundColor: color || 'whitesmoke',
-					}}
-					className='rounded-3xl p-7 flex items-center justify-between shadow-lg active:scale-95 transition-all cursor-pointer'
-					onClick={() => {}}
-				>
-					<div className='flex items-center gap-4'>
-						<div className='grid place-items-center w-10 h-10 bg-gray-900 rounded-full text-white'>
-							<Typography text={site[0]?.toUpperCase()} className='text-lg font-semibold' />
-						</div>
-
-						<div className='grid w-10'>
-							<p className='font-semibold'>{site}</p>
-							<p className='text-sm text-gray-700 -mt-1.5'>{user}</p>
-						</div>
-					</div>
-				</article>
-			)}
+			<RecordSimpleCard site={site} user={user} color={color} />
 
 			<p className='font-semibold pt-6'>Information</p>
 			<div className='grid gap-3 pb-6'>
@@ -166,10 +147,10 @@ export default function RecordPage() {
 							</p>
 
 							<button
-								className='hover:bg-gray-100 ml-auto text-gray-600 rounded-full p-2 active:scale-95 transition-all z-20'
-								style={{
-									backgroundColor: color + '66',
-								}}
+								className='ml-auto text-white rounded-full p-1.5 active:scale-95 transition-all z-20 bg-gray-800'
+								// style={{
+								// 	backgroundColor: color + '66',
+								// }}
 							>
 								<CopyIcon className='w-5 h-5' />
 							</button>
