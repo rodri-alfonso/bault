@@ -3,21 +3,27 @@ import { RegisterWithId } from '@/services/records'
 import { useLocation } from 'wouter'
 import { ViewIcon } from '@/assets/icons'
 import Typography from '@/theme/Typography'
+import Alert from '@/theme/Alert'
+import { useState } from 'react'
 
 interface Props {
 	record: RegisterWithId
 }
 
 export default function RecordCard({ record }: Props) {
-	console.log('🚀 ~ record:', record)
 	const [_, navigate] = useLocation()
+	const [isAlertVisible, setIsAlertVisible] = useState(false)
 
 	function handleCopy(e: React.MouseEvent<HTMLButtonElement>) {
+		if (isAlertVisible) return
+
 		e.stopPropagation()
 		e.preventDefault()
 
 		const password = decrypt(record.password)
 		navigator.clipboard.writeText(password)
+
+		setIsAlertVisible(true)
 	}
 
 	function handleNavigate() {
@@ -49,6 +55,12 @@ export default function RecordCard({ record }: Props) {
 			>
 				<ViewIcon />
 			</button>
+			<Alert
+				isVisible={isAlertVisible}
+				message='Copied to clipboard!'
+				onClose={() => setIsAlertVisible(false)}
+				isEphemeral
+			/>
 		</article>
 	)
 }
