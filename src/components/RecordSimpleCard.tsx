@@ -1,19 +1,35 @@
+import { decrypt } from '@/lib/encryption'
+import Alert from '@/theme/Alert'
 import Typography from '@/theme/Typography'
+import { useState } from 'react'
 
 interface Props {
 	color?: string
 	site: string
 	user: string
+	password?: string
 }
 
-export default function RecordSimpleCard({ site, user, color }: Props) {
+export default function RecordSimpleCard({ site, user, color, password = '' }: Props) {
+	const [isAlertVisible, setIsAlertVisible] = useState(false)
+
+	function handleCopy(e: React.MouseEvent<HTMLButtonElement>) {
+		if (isAlertVisible) return
+
+		e.stopPropagation()
+		e.preventDefault()
+
+		const decryptedPassword = decrypt(password)
+		navigator.clipboard.writeText(decryptedPassword)
+
+		setIsAlertVisible(true)
+	}
+
 	return (
 		<article
-			style={{
-				backgroundColor: color || 'whitesmoke',
-			}}
+			style={{ backgroundColor: color || 'whitesmoke' }}
 			className='rounded-3xl p-7 flex items-center justify-between shadow-lg active:scale-95 transition-all cursor-pointer'
-			onClick={() => {}}
+			onClick={handleCopy}
 		>
 			<div className='flex items-center gap-4'>
 				<div className='grid place-items-center w-10 h-10 bg-gray-900 rounded-full text-white'>
@@ -25,6 +41,12 @@ export default function RecordSimpleCard({ site, user, color }: Props) {
 					<p className='text-sm text-gray-700 -mt-1.5'>{user}</p>
 				</div>
 			</div>
+			<Alert
+				isVisible={isAlertVisible}
+				message='Copied to clipboard!'
+				onClose={() => setIsAlertVisible(false)}
+				isEphemeral
+			/>
 		</article>
 	)
 }
