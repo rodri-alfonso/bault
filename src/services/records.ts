@@ -1,5 +1,5 @@
 import { db } from '../firebase'
-import { doc, collection, addDoc, getDocs, deleteDoc, getDoc } from 'firebase/firestore'
+import { doc, collection, addDoc, getDocs, deleteDoc, getDoc, updateDoc } from 'firebase/firestore'
 import type { Register } from 'types'
 import { ENVIRONMENTS } from '../lib/constants'
 import { getAuthStorage } from '@/lib/storage'
@@ -25,4 +25,6 @@ export const getRecordById = async (id: string) => {
 	}
 	return null
 }
-export const editRecord = async (id: string, record: Register) => {}
+export const editRecord = async (recordId: string, record: any) => {
+	await updateDoc(doc(recordsRef, recordId), record)
+}

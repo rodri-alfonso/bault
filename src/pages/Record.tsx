@@ -1,6 +1,6 @@
 import { useParams, useLocation } from 'wouter'
 import useFetch from '@/hooks/useFetch'
-import { getRecordById } from '@/services/records'
+import { editRecord, getRecordById } from '@/services/records'
 import { decrypt, encrypt } from '@/lib/encryption'
 import Page from '@/layout/Page'
 import Header from '@/components/Header'
@@ -47,6 +47,7 @@ export default function RecordPage() {
 			setUser(decrypt(data.user))
 			setColor(data.color)
 			setKeys(data.keys)
+			setIsMarked(data.marked)
 
 			// setIsEnabledButton(isEnabledButton)
 		}
@@ -84,6 +85,7 @@ export default function RecordPage() {
 			password: encrypt(password),
 			user: encrypt(user),
 			marked: isMarked,
+			color,
 		}
 
 		editRecord(id, payload).then(() => {
@@ -99,18 +101,21 @@ export default function RecordPage() {
 			email: setEmail,
 			password: setPassword,
 			user: setUser,
+			marked: setIsMarked,
+			color: setColor,
 		}
 
 		const setter = TYPE_MAP[type]
 
 		setter(payload)
-		console.log('TYPE: ', type, payload)
 
 		setIsEnabledButton(
 			site === decrypt(data.site) ||
 				email === decrypt(data.email) ||
 				password === decrypt(data.password) ||
-				user === decrypt(data.user)
+				user === decrypt(data.user) ||
+				isMarked === data.marked ||
+				color === data.color
 		)
 	}
 
@@ -121,10 +126,10 @@ export default function RecordPage() {
 			<Header />
 
 			<section className='absolute right-16 flex items-center top-6'>
-				<ColorPicker color={color} setColor={setColor} />
+				<ColorPicker color={color} setColor={(payload) => handleChange('color', payload)} />
 			</section>
 			<button
-				onClick={() => setIsMarked(!isMarked)}
+				onClick={() => handleChange('marked', !isMarked)}
 				className='absolute right-28 top-6 p-2 bg-gray-50 hover:bg-gray-100 rounded-xl active:scale-95 transition-all'
 			>
 				{isMarked ? (
@@ -140,7 +145,7 @@ export default function RecordPage() {
 			</section>
 
 			{/* <RecordSimpleCard site={site} user={user} color={color} password={data?.password} /> */}
-			<RecordCard record={{ email, site, user, color, password, keys, id }} />
+			<RecordCard record={{ email, site, user, color, password, keys, id, marked: isMarked }} />
 
 			<p className='font-semibold pt-6'>Information</p>
 			<div className='grid gap-3 pb-6'>

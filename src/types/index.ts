@@ -5,4 +5,6 @@ export interface Register {
 	site: string
 	keys: string[]
 	color: string
+	marked: boolean
+	id?: string
 }
