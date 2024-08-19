@@ -299,3 +299,70 @@ export const TickIcon = (props: React.SVGProps<SVGSVGElement>) => (
 		/>
 	</svg>
 )
+
+export const BookmarkIcon = (props: React.SVGProps<SVGSVGElement>) => (
+	<svg viewBox='0 0 24 24' width={24} height={24} color={'currentColor'} fill={'none'} {...props}>
+		<path
+			d='M4 17.9808V9.70753C4 6.07416 4 4.25748 5.17157 3.12874C6.34315 2 8.22876 2 12 2C15.7712 2 17.6569 2 18.8284 3.12874C20 4.25748 20 6.07416 20 9.70753V17.9808C20 20.2867 20 21.4396 19.2272 21.8523C17.7305 22.6514 14.9232 19.9852 13.59 19.1824C12.8168 18.7168 12.4302 18.484 12 18.484C11.5698 18.484 11.1832 18.7168 10.41 19.1824C9.0768 19.9852 6.26947 22.6514 4.77285 21.8523C4 21.4396 4 20.2867 4 17.9808Z'
+			stroke='currentColor'
+			strokeWidth='1.5'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		/>
+	</svg>
+)
+export const BookmarkFilledIcon = (props: React.SVGProps<SVGSVGElement>) => (
+	<svg viewBox='0 0 24 24' width={24} height={24} color={'currentColor'} fill={'none'} {...props}>
+		<path
+			d='M4 17.9808V9.70753C4 6.07416 4 4.25748 5.17157 3.12874C6.34315 2 8.22876 2 12 2C15.7712 2 17.6569 2 18.8284 3.12874C20 4.25748 20 6.07416 20 9.70753V17.9808C20 20.2867 20 21.4396 19.2272 21.8523C17.7305 22.6514 14.9232 19.9852 13.59 19.1824C12.8168 18.7168 12.4302 18.484 12 18.484C11.5698 18.484 11.1832 18.7168 10.41 19.1824C9.0768 19.9852 6.26947 22.6514 4.77285 21.8523C4 21.4396 4 20.2867 4 17.9808Z'
+			fill='currentColor'
+			strokeWidth='1.5'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		/>
+	</svg>
+)
+
+export const PaintBucketIcon = (props: React.SVGProps<SVGSVGElement>) => (
+	<svg viewBox='0 0 24 24' width={24} height={24} color={'currentColor'} fill={'none'} {...props}>
+		<path
+			d='M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C12.8417 22 14 22.1163 14 21C14 20.391 13.6832 19.9212 13.3686 19.4544C12.9082 18.7715 12.4523 18.0953 13 17C13.6667 15.6667 14.7778 15.6667 16.4815 15.6667C17.3334 15.6667 18.3334 15.6667 19.5 15.5C21.601 15.1999 22 13.9084 22 12Z'
+			stroke='currentColor'
+			strokeWidth='1.5'
+		/>
+		<path
+			d='M7 15.002L7.00868 14.9996'
+			stroke='currentColor'
+			strokeWidth='2'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		/>
+		<circle cx='9.5' cy='8.5' r='1.5' stroke='currentColor' strokeWidth='1.5' />
+		<circle cx='16.5' cy='9.5' r='1.5' stroke='currentColor' strokeWidth='1.5' />
+	</svg>
+)
+
+export const NotebookIcon = (props: React.SVGProps<SVGSVGElement>) => (
+	<svg viewBox='0 0 24 24' width={24} height={24} color={'currentColor'} fill={'none'} {...props}>
+		<path
+			d='M22 14V10C22 6.22876 22 4.34315 20.8284 3.17157C19.6569 2 17.7712 2 14 2H12C8.22876 2 6.34315 2 5.17157 3.17157C4 4.34315 4 6.22876 4 10V14C4 17.7712 4 19.6569 5.17157 20.8284C6.34315 22 8.22876 22 12 22H14C17.7712 22 19.6569 22 20.8284 20.8284C22 19.6569 22 17.7712 22 14Z'
+			stroke='currentColor'
+			strokeWidth='1.5'
+		/>
+		<path
+			d='M5 6L2 6M5 12H2M5 18H2'
+			stroke='currentColor'
+			strokeWidth='1.5'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		/>
+		<path
+			d='M17.5 7L13.5 7M15.5 11H13.5'
+			stroke='currentColor'
+			strokeWidth='1.5'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		/>
+		<path d='M9 22L9 2' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
+	</svg>
+)
