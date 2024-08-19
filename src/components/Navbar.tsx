@@ -1,4 +1,4 @@
-import { PlusIcon, HomeIcon, HomeFilledIcon } from '@/assets/icons'
+import { PlusIcon, HomeIcon, HomeFilledIcon, NotebookIcon } from '@/assets/icons'
 import { useLocation } from 'wouter'
 
 export default function Navbar() {
@@ -7,11 +7,15 @@ export default function Navbar() {
 	const isLocationPath = location.pathname === '/'
 
 	return (
-		<footer className='bg-gray-200 w-[95%] min-h-[55px] flex items-center relative rounded-2xl px-4'>
+		<footer className='bg-gray-200 w-[95%] min-h-[55px] flex items-center relative rounded-2xl gap-4 px-4'>
 			<section></section>
 			<button className='flex items-center gap-1.5'>
 				{isLocationPath ? <HomeFilledIcon /> : <HomeIcon />}
-				{isLocationPath && <span className='font-medium text-xs'>Home</span>}
+				{/* {isLocationPath && <span className='font-medium text-xs'>Home</span>} */}
+			</button>
+
+			<button className='flex items-center gap-1.5'>
+				<NotebookIcon />
 			</button>
 
 			<button
