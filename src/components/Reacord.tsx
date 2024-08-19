@@ -1,10 +1,31 @@
 import { RegisterWithId } from '@/services/records'
 import { useLocation } from 'wouter'
 import { decrypt } from '@/lib/encryption'
-import { CopyIcon } from '@/assets/icons'
+import { CopyIcon, ViewIcon } from '@/assets/icons'
+import { useState } from 'react'
+import Alert from '@/theme/Alert'
+import Confetti from 'canvas-confetti'
 
-export default function Record({ id, site, user, color }: RegisterWithId) {
+export default function Record({ id, site, user, color, password }: RegisterWithId) {
 	const [_, navigate] = useLocation()
+	const [isAlertVisible, setIsAlertVisible] = useState(false)
+
+	function handleCopy(e: React.MouseEvent<HTMLButtonElement>) {
+		if (isAlertVisible) return
+
+		e.stopPropagation()
+		e.preventDefault()
+
+		navigator.clipboard.writeText(decrypt(password))
+		Confetti({
+			ticks: 80,
+			origin: { x: 0.5, y: 0.25 },
+			spread: 80,
+			zIndex: -20,
+		})
+
+		setIsAlertVisible(true)
+	}
 
 	return (
 		<article
@@ -30,11 +51,17 @@ export default function Record({ id, site, user, color }: RegisterWithId) {
 			</button>
 
 			<button
-				onClick={() => {}}
-				className='bg-gray-900 text-white rounded-full p-2 active:scale-95 transition-all z-20'
+				onClick={handleCopy}
+				className='bg-gray-800 text-white rounded-xl p-2 active:scale-95 transition-all z-20'
 			>
 				<CopyIcon className='w-5 h-5' />
 			</button>
+			<Alert
+				isVisible={isAlertVisible}
+				message='Copied to clipboard!'
+				onClose={() => setIsAlertVisible(false)}
+				isEphemeral
+			/>
 		</article>
 	)
 }

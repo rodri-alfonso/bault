@@ -5,7 +5,7 @@ import { ENVIRONMENTS } from '../lib/constants'
 import { getAuthStorage } from '@/lib/storage'
 
 export interface RegisterWithId extends Register {
-	id: string
+	id?: string
 }
 
 const userId = getAuthStorage()?.id || ''
@@ -25,3 +25,4 @@ export const getRecordById = async (id: string) => {
 	}
 	return null
 }
+export const editRecord = async (id: string, record: Register) => {}
