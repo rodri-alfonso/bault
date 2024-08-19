@@ -4,7 +4,7 @@ import Header from '@/components/Header'
 
 export default function CreatorPage() {
 	return (
-		<Page className='flex flex-col gap-8'>
+		<Page className='grid gap-8'>
 			<Header />
 			<section>
 				<p className='text-2xl font-medium'>Welcome back,</p>

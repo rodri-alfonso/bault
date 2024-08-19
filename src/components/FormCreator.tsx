@@ -21,12 +21,16 @@ export default function FormCreator() {
 	const [currentKey, setCurrentKey] = useState('')
 	const [color, setColor] = useState(randomColor)
 
+	const [loading, setLoading] = useState(false)
+
 	const [_, navigate] = useLocation()
 
 	const isEmptyForm = !site || !email || !password || !user
 
 	const handleClick = () => {
 		if (isEmptyForm) return
+
+		setLoading(true)
 
 		const payload: Register = {
 			email: encrypt(email),
@@ -76,8 +80,8 @@ export default function FormCreator() {
 				</div>
 			</article>
 
-			<section className='grid gap-6'>
-				<p className='font-semibold pt-6'>Information</p>
+			<section className='grid gap-3 pb-6'>
+				<p className='font-semibold pt-6 pb-1'>Information</p>
 				<Input
 					icon={<EarthIcon />}
 					label='Site'
@@ -131,24 +135,27 @@ export default function FormCreator() {
 					)}
 				</div>
 
-				<section className='flex items-center gap-2 flex-wrap'>
+				<section className='flex items-center gap-3 flex-wrap pt-2'>
 					{keys.map((key, index) => (
 						<span
-							className='bg-gray-100 rounded-full px-2 pl-2.5 py-1  max-w-sm truncate flex items-center justify-between gap-2'
+							className='bg-gray-100 rounded-full px-2 pl-2.5 py-1  max-w-xs flex items-center justify-between gap-2'
 							key={key + index}
 						>
+							<div className='truncate'>{key}</div>
 							<button
 								onClick={() => handleDeleteKey(key)}
 								className='rotate-45 text-gray-400 hover:text-gray-900 active:scale-95 transition-all'
 							>
 								{<AddCircleIcon />}
 							</button>
-							<div>{key}</div>
 						</span>
 					))}
 				</section>
 			</section>
-			<Button label={'Create'} onClick={handleClick} disabled={isEmptyForm} />
+
+			<div className='mt-auto sticky bottom-0 z-20 grid py-3 bg-white'>
+				<Button label={'Create'} onClick={handleClick} disabled={loading || isEmptyForm} loading={loading} />
+			</div>
 		</>
 	)
 }

@@ -87,8 +87,7 @@ export default function RecordPage() {
 		}
 
 		editRecord(id, payload).then(() => {
-			setIsEditing(false)
-			setIsMarked(true)
+			navigate('/')
 		})
 	}
 
