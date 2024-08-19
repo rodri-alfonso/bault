@@ -134,16 +134,16 @@ export default function FormCreator() {
 				<section className='flex items-center gap-2 flex-wrap'>
 					{keys.map((key, index) => (
 						<span
-							className='bg-gray-100 rounded-full px-2 pl-2.5 py-1 flex items-center justify-between gap-2'
+							className='bg-gray-100 rounded-full px-2 pl-2.5 py-1  max-w-sm truncate flex items-center justify-between gap-2'
 							key={key + index}
 						>
-							{key}
 							<button
 								onClick={() => handleDeleteKey(key)}
 								className='rotate-45 text-gray-400 hover:text-gray-900 active:scale-95 transition-all'
 							>
 								{<AddCircleIcon />}
 							</button>
+							<div>{key}</div>
 						</span>
 					))}
 				</section>
