@@ -9,7 +9,7 @@ interface Props {
 	message: string
 }
 
-export default function Alert({ message, isVisible, onClose, isEphemeral, lifetime = 2000 }: Props) {
+export default function Alert({ message, isVisible, onClose, isEphemeral, lifetime = 1000 }: Props) {
 	useEffect(() => {
 		if (isEphemeral) {
 			const timeout = setTimeout(() => {
