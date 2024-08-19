@@ -4,14 +4,16 @@ import { getRecords } from '@/services/records'
 import useFetch from '@/hooks/useFetch'
 import { authStore } from '@/stores/auth'
 import { decrypt } from '@/lib/encryption'
-import { ArrowRightIcon } from '@/assets/icons'
+import { ArrowRightIcon, PlusIcon } from '@/assets/icons'
 import Record from '@/components/Reacord'
 import Navbar from '@/components/Navbar'
 import RecordsSlider from '@/components/RecordsSlider'
+import { useLocation } from 'wouter'
 
 export default function HomePage() {
 	const { user } = authStore()
 	const { data, isLoading } = useFetch(getRecords)
+	const [_, navigate] = useLocation()
 
 	const firstName = decrypt(user?.name ?? '').split(' ')[0]
 
@@ -51,11 +53,24 @@ export default function HomePage() {
 						<div className='w-full bg-gray-200 rounded-xl py-8' />
 					</>
 				) : (
-					data?.map((record) => <Record {...record} key={record.id} />)
+					<>
+						<button
+							className={`border-2 border-solid border-gray-200 rounded-2xl h-16 p-1 pr-3 flex items-center gap-4 transition-all hover:bg-gray-50`}
+							onClick={() => navigate('/create')}
+						>
+							<div className='grid place-items-center h-full w-12 rounded-2xl text-gray-200 text-lg font-semibold  bg-gray-100'>
+								<PlusIcon className='w-6 h-6 text-gray-400' />
+							</div>
+							<p className=' text-gray-400'>Create new record</p>
+						</button>
+						{data?.map((record) => (
+							<Record {...record} key={record.id} />
+						))}
+					</>
 				)}
 			</section>
 
-			<Navbar />
+			{/* <Navbar /> */}
 		</Page>
 	)
 }
