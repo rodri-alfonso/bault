@@ -3,9 +3,11 @@ import { CopyIcon, TickIcon } from "@/assets/icons"
 interface Props {
     checked: boolean
     onCheck: () => void
+    value: string
 }
 
-export default function KeyItem({checked, onCheck}: Props){
+export default function KeyItem({checked, onCheck, value}: Props){
+
     return(
         <div
         className={`h-10 flex items-center text-gray-400 gap-3 w-full ${
@@ -25,7 +27,7 @@ export default function KeyItem({checked, onCheck}: Props){
                 checked ? 'line-through text-gray-300 font-medium' : 'font-medium text-gray-500'
             }`}
         >
-            aaksljdhaskjdhzasdsadasdasddasdkljhasdasdasd
+           {value}
         </p>
 
         <button

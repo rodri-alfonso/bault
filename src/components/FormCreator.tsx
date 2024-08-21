@@ -38,7 +38,7 @@ export default function FormCreator() {
 			site: encrypt(site),
 			user: encrypt(user),
 			marked: false,
-			keys: [],
+			keys: keys.map((key)=> ({...key, value: encrypt(key.value)})),
 			color: color,
 		}
 

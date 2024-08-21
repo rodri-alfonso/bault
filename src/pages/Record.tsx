@@ -31,7 +31,6 @@ export default function RecordPage() {
 	const [_, navigate] = useLocation()
 	const { id } = useParams()
 	const { data, isLoading } = useFetch(() => getRecordById(id))
-	const [keyCheckedId, setKeyCheckedId] = useState('')
 	const [isEditing, setIsEditing] = useState(false)
 
 	const [site, setSite] = useState('')
@@ -40,6 +39,7 @@ export default function RecordPage() {
 	const [user, setUser] = useState('')
 	const [color, setColor] = useState('')
 	const [keys, setKeys] = useState<Key[]>([])
+	console.log("🚀 ~ RecordPage ~ keys:", keys)
 	const [isMarked, setIsMarked] = useState(false)
 
 	const [isEnabledButton, setIsEnabledButton] = useState(false)
@@ -51,8 +51,7 @@ export default function RecordPage() {
 			setPassword(decrypt(data.password))
 			setUser(decrypt(data.user))
 			setColor(data.color)
-			// setKeys(data.keys)
-			setKeys(MOCK_KEYS)
+			setKeys(data.keys.map((key) => ({ checked: key.checked, value: decrypt(key.value) })))
 			setIsMarked(Boolean(data.marked))
 		}
 	}, [isLoading])
@@ -64,7 +63,6 @@ export default function RecordPage() {
 		})
 
 		setKeys(updatedKeys)
-		setKeyCheckedId(keyToChange)
 	}
 
 	function handleEdit() {
@@ -76,6 +74,7 @@ export default function RecordPage() {
 			password: encrypt(password),
 			user: encrypt(user),
 			marked: isMarked,
+			keys: keys.map((key) => ({ ...key, value: encrypt(key.value) })),
 			color,
 		}
 
@@ -84,7 +83,7 @@ export default function RecordPage() {
 		})
 	}
 
-	function handleChange(type, payload) {
+	function handleChange(type, payload: string | boolean) {
 		if (!data) return
 
 		const TYPE_MAP = {
@@ -176,13 +175,13 @@ export default function RecordPage() {
 				/>
 			</div>
 
-			{Boolean(MOCK_KEYS.length) && (
+			{Boolean(keys.length) && (
 				<section className='grid gap-4 pb-6'>
 					<p className='font-semibold'>Security Keys</p>
 
 					<div className='grid gap-2'>
 						{keys.map((key) => (
-							<KeyItem key={key.value} checked={key.checked} onCheck={() => handleChange('keys', key.value)}/>
+							<KeyItem key={key.value} value={decrypt(key.value)} checked={key.checked} onCheck={() => handleChange('keys', key.value)}/>
 						))}
 					</div>
 				</section>
