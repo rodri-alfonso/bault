@@ -30,7 +30,7 @@ export default function HomePage() {
 			{isLoadingData ? (
 				<div className='w-full bg-gray-200 rounded-3xl py-12  mb-auto' />
 			) : (
-				<RecordsSlider records={data || []} />
+				<RecordsSlider records={data?.filter((record) => record.marked) || []} />
 			)}
 
 			<div className='flex items-center justify-between'>

@@ -2,7 +2,7 @@ import Input from '../theme/Input'
 import { useState } from 'react'
 import { encrypt } from '../lib/encryption'
 import { addRecord } from '../services/records'
-import type { Register } from 'types'
+import type { Register, Key } from 'types'
 import { useLocation } from 'wouter'
 import { CARDS_COLORS } from '@/lib/colors'
 import { EarthIcon, MailIcon, PasswordIcon, UserIcon, KeyIcon, AddCircleIcon } from '@/assets/icons'
@@ -17,7 +17,7 @@ export default function FormCreator() {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [user, setUser] = useState('')
-	const [keys, setKeys] = useState<string[]>([])
+	const [keys, setKeys] = useState<Key[]>([])
 	const [currentKey, setCurrentKey] = useState('')
 	const [color, setColor] = useState(randomColor)
 
@@ -37,6 +37,7 @@ export default function FormCreator() {
 			password: encrypt(password),
 			site: encrypt(site),
 			user: encrypt(user),
+			marked: false,
 			keys: [],
 			color: color,
 		}
@@ -49,12 +50,21 @@ export default function FormCreator() {
 	function handleAddKey() {
 		if (!currentKey) return
 
-		setKeys([...keys, currentKey])
+		const isKeyAlreadyAdded = keys.some((key) => key.value.toLowerCase() === currentKey.toLowerCase())
+		if (isKeyAlreadyAdded) return setCurrentKey('')
+
+		setKeys([
+			...keys,
+			{
+				value: currentKey,
+				checked: false,
+			},
+		])
 		setCurrentKey('')
 	}
 
-	function handleDeleteKey(key: string) {
-		setKeys(keys.filter((k) => k !== key))
+	function handleDeleteKey(keyToDelete: string) {
+		setKeys(keys.filter((key) => key.value !== keyToDelete))
 	}
 
 	return (
@@ -139,11 +149,11 @@ export default function FormCreator() {
 					{keys.map((key, index) => (
 						<span
 							className='bg-gray-100 rounded-full px-2 pl-2.5 py-1  max-w-xs flex items-center justify-between gap-2'
-							key={key + index}
+							key={key.value + index}
 						>
-							<div className='truncate'>{key}</div>
+							<div className='truncate'>{key.value}</div>
 							<button
-								onClick={() => handleDeleteKey(key)}
+								onClick={() => handleDeleteKey(key.value)}
 								className='rotate-45 text-gray-400 hover:text-gray-900 active:scale-95 transition-all'
 							>
 								{<AddCircleIcon />}

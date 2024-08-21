@@ -7,11 +7,9 @@ import Header from '@/components/Header'
 import {
 	BookmarkIcon,
 	BookmarkFilledIcon,
-	CopyIcon,
 	EarthIcon,
 	MailIcon,
 	PasswordIcon,
-	TickIcon,
 	UserIcon,
 } from '@/assets/icons'
 import { useEffect, useState } from 'react'
@@ -20,13 +18,20 @@ import Input from '@/theme/Input'
 import ColorPicker from '@/components/ColorPicker'
 import SpinnerScreen from '@/components/SpinnerScreen'
 import Button from '@/theme/Button'
+import { Key } from '@/types'
+import KeyItem from '@/components/KeyItem'
+
+const MOCK_KEYS = [
+	{ value: 'Exlslkjs0sd7ehdsdjkfy78wefnjksdfn9w8efy', checked: false },
+	{ value: 'Exlslkjs0sd7ehdsdjkfy78wefnjksdfn9wdowi', checked: false },
+	{ value: 'EIvm09sslkjs0sd7ehdsdjkfy78wefnjksdfn9wdowi', checked: false },
+]
 
 export default function RecordPage() {
 	const [_, navigate] = useLocation()
 	const { id } = useParams()
 	const { data, isLoading } = useFetch(() => getRecordById(id))
 	const [keyCheckedId, setKeyCheckedId] = useState('')
-	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [isEditing, setIsEditing] = useState(false)
 
 	const [site, setSite] = useState('')
@@ -34,7 +39,7 @@ export default function RecordPage() {
 	const [password, setPassword] = useState('')
 	const [user, setUser] = useState('')
 	const [color, setColor] = useState('')
-	const [keys, setKeys] = useState<string[]>([])
+	const [keys, setKeys] = useState<Key[]>([])
 	const [isMarked, setIsMarked] = useState(false)
 
 	const [isEnabledButton, setIsEnabledButton] = useState(false)
@@ -46,35 +51,21 @@ export default function RecordPage() {
 			setPassword(decrypt(data.password))
 			setUser(decrypt(data.user))
 			setColor(data.color)
-			setKeys(data.keys)
-			setIsMarked(data.marked)
-
-			// setIsEnabledButton(isEnabledButton)
+			// setKeys(data.keys)
+			setKeys(MOCK_KEYS)
+			setIsMarked(Boolean(data.marked))
 		}
 	}, [isLoading])
 
-	// useEffect(() => {
-	// 	if (!isLoading && data) {
-	// 		const isEnabledButton =
-	// 			site === decrypt(data.site) ||
-	// 			email === decrypt(data.email) ||
-	// 			password === decrypt(data.password) ||
-	// 			user === decrypt(data.user)
+	function toggleKey(keyToChange: string) {
 
-	// 		setIsEnabledButton(isEnabledButton)
-	// 	}
-	// }, [site, email, password, user])
+		const updatedKeys = keys.map((key) => {
+			return key.value === keyToChange ? { value: key.value, checked: !key.checked } : key
+		})
 
-	function toggleKey(key: string) {
-		if (keyCheckedId === key) setKeyCheckedId('')
-		else setKeyCheckedId(key)
+		setKeys(updatedKeys)
+		setKeyCheckedId(keyToChange)
 	}
-
-	const MOCK_KEYS = [
-		'Exlslkjs0sd7ehdsdjkfy78wefnjksdfn9w8efy',
-		'Exlslkjs0sd7ehdsdjkfy78wefnjksdfn9wdowi',
-		'EIvm09sslkjs0sd7ehdsdjkfy78wefnjksdfn9wdowi',
-	]
 
 	function handleEdit() {
 		setIsEditing(true)
@@ -103,6 +94,7 @@ export default function RecordPage() {
 			user: setUser,
 			marked: setIsMarked,
 			color: setColor,
+			keys: toggleKey
 		}
 
 		const setter = TYPE_MAP[type]
@@ -184,58 +176,27 @@ export default function RecordPage() {
 				/>
 			</div>
 
-			{Boolean(keys.length) && (
+			{Boolean(MOCK_KEYS.length) && (
 				<section className='grid gap-4 pb-6'>
 					<p className='font-semibold'>Security Keys</p>
 
 					<div className='grid gap-2'>
-						{MOCK_KEYS.map((key) => (
-							<div
-								key={key}
-								className={`h-10 flex items-center text-gray-400 gap-3 w-full ${
-									keyCheckedId === key ? 'justify-start' : ''
-								}`}
-							>
-								<button
-									onClick={() => toggleKey(key)}
-									className={`active:scale-95 transition-all w-6 overflow-hidden h-6 border-gray-700 rounded-lg border-solid border-2 grid place-items-center
-									${keyCheckedId === key ? 'bg-gray-700' : 'bg-white'}
-									`}
-									// style={{
-									// 	borderColor: color || '#11827',
-									// }}
-								>
-									{keyCheckedId === key && <TickIcon className={`w-full h-full text-white bg-gray-700`} />}
-								</button>
-								<p
-									className={`truncate w-auto max-w-[200px] ${
-										keyCheckedId === key ? 'line-through text-gray-300 font-medium' : 'font-medium text-gray-500'
-									}`}
-								>
-									aaksljdhaskjdhzasdsadasdasddasdkljhasdasdasd
-								</p>
-
-								<button
-									className='ml-auto text-white rounded-full p-2 active:scale-95 transition-all z-20 bg-gray-800'
-									// style={{
-									// 	backgroundColor: color + '66',
-									// }}
-								>
-									<CopyIcon className='w-5 h-5' />
-								</button>
-							</div>
+						{keys.map((key) => (
+							<KeyItem key={key.value} checked={key.checked} onCheck={() => handleChange('keys', key.value)}/>
 						))}
 					</div>
 				</section>
 			)}
 
+<div className='mt-auto sticky bottom-0 z-20 bg-white grid py-3'>
 			<Button
-				label={isEditing ? 'Editing...' : 'Edit'}
+				label={isEditing ? 'Saving...' : 'Save'}
 				loading={isEditing}
 				disabled={isEditing || !isEnabledButton}
 				onClick={handleEdit}
-				className='mt-auto sticky bottom-0 z-20'
-			/>
+				className=''
+				/>
+				</div>
 		</Page>
 	)
 }
