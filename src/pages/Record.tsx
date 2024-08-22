@@ -27,7 +27,6 @@ export default function RecordPage() {
   const [color, setColor] = useState("")
   const [keys, setKeys] = useState<Key[]>([])
   const [isMarked, setIsMarked] = useState(false)
-
   const [isEnabledButton, setIsEnabledButton] = useState(false)
 
   useEffect(() => {
