@@ -22,6 +22,8 @@ export default function useAuthState() {
 
         authStore.setState({ user: payload })
         setLoading(false)
+      } else {
+        setLoading(false)
       }
     })
   }, [])
