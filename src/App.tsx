@@ -23,7 +23,7 @@ function PrivateRouter() {
 }
 
 function App() {
-  const { user, setUser } = authStore()
+  const { user } = authStore()
   const { isProtected } = timestampStore()
   const { isInRegisterCode } = registerStore()
 
@@ -35,7 +35,7 @@ function App() {
   if (loading) return <LoaderPage />
 
   if (isInRegisterCode) return <RegisterPage />
-  // if (isProtected) return <SecurityPage />
+  if (isProtected) return <SecurityPage />
   if (user) return <PrivateRouter />
 
   return (

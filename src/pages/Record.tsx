@@ -67,7 +67,10 @@ export default function RecordPage() {
     })
   }
 
-  function handleChange(type, payload: string | boolean) {
+  function handleChange(
+    type: 'site' | 'email' | 'password' | 'user' | 'marked' | 'color' | 'keys',
+    payload: string | boolean
+  ) {
     if (!data) return
 
     const TYPE_MAP = {
@@ -80,7 +83,7 @@ export default function RecordPage() {
       keys: toggleKey,
     }
 
-    const setter = TYPE_MAP[type]
+    const setter = TYPE_MAP[type] as any
 
     setter(payload)
 

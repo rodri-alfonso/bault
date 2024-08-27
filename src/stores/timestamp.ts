@@ -1,6 +1,5 @@
 import { create } from 'zustand'
-import { getExpirationStorage, setExpirationStorage } from '@/lib/storage'
-import { encrypt } from '@/lib/encryption'
+import { setExpirationStorage } from '@/lib/storage'
 
 type Store = {
   timestamp: number
@@ -10,10 +9,9 @@ type Store = {
 }
 
 export const timestampStore = create<Store>()((set) => ({
-  // timestamp: getExpirationStorage(),
   timestamp: 0,
   setTimestamp: () =>
-    set((state) => {
+    set(() => {
       const timestamp = new Date().getTime()
       setExpirationStorage(timestamp)
 

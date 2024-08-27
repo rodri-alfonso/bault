@@ -1,12 +1,10 @@
 import { useState } from 'react'
 import Button from '@/theme/Button'
-import { timestampStore } from '@/stores/timestamp'
 import OtpInput, { AllowedInputTypes } from 'react-otp-input'
 
 const MAX_NUMBER_INPUTS = 4
 
 export default function SecurityPage() {
-  const { setIsProtected } = timestampStore()
   const [otp, setOtp] = useState('')
   const [type, setType] = useState<AllowedInputTypes>('password')
 
