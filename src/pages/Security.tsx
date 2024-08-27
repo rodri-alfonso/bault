@@ -1,19 +1,20 @@
 import { useState } from 'react'
 import Button from '@/theme/Button'
 import OtpInput, { AllowedInputTypes } from 'react-otp-input'
+import { timestampStore } from '@/stores/timestamp'
 
 const MAX_NUMBER_INPUTS = 4
 
 export default function SecurityPage() {
   const [otp, setOtp] = useState('')
   const [type, setType] = useState<AllowedInputTypes>('password')
+  const { setIsProtected } = timestampStore()
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    console.log('🚀 ~ SecurityPage ~ otp:', otp)
     if (!otp.length) return
 
-    // setIsProtected(false)
+    setIsProtected(false)
   }
 
   function handleChangeVisibility() {
