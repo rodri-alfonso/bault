@@ -1,18 +1,18 @@
-import { useParams, useLocation } from "wouter"
-import useFetch from "@/hooks/useFetch"
-import { editRecord, getRecordById } from "@/services/records"
-import { decrypt, encrypt } from "@/lib/encryption"
-import Page from "@/layout/Page"
-import Header from "@/components/Header"
-import { BookmarkIcon, BookmarkFilledIcon, EarthIcon, MailIcon, PasswordIcon, UserIcon } from "@/assets/icons"
-import { useEffect, useState } from "react"
-import RecordCard from "@/components/RecordCard"
-import Input from "@/theme/Input"
-import ColorPicker from "@/components/ColorPicker"
-import SpinnerScreen from "@/components/SpinnerScreen"
-import Button from "@/theme/Button"
-import { Key } from "@/types"
-import KeyItem from "@/components/KeyItem"
+import { useParams, useLocation } from 'wouter'
+import useFetch from '@/hooks/useFetch'
+import { editRecord, getRecordById } from '@/services/records'
+import { decrypt, encrypt } from '@/lib/encryption'
+import Page from '@/layout/Page'
+import Header from '@/components/Header'
+import { BookmarkIcon, BookmarkFilledIcon, EarthIcon, MailIcon, PasswordIcon, UserIcon } from '@/assets/icons'
+import { useEffect, useState } from 'react'
+import RecordCard from '@/components/RecordCard'
+import Input from '@/theme/Input'
+import ColorPicker from '@/components/ColorPicker'
+import SpinnerScreen from '@/components/SpinnerScreen'
+import Button from '@/theme/Button'
+import { Key } from '@/types'
+import KeyItem from '@/components/KeyItem'
 
 export default function RecordPage() {
   const [_, navigate] = useLocation()
@@ -20,11 +20,11 @@ export default function RecordPage() {
   const { data, isLoading } = useFetch(() => getRecordById(id))
   const [isEditing, setIsEditing] = useState(false)
 
-  const [site, setSite] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [user, setUser] = useState("")
-  const [color, setColor] = useState("")
+  const [site, setSite] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [user, setUser] = useState('')
+  const [color, setColor] = useState('')
   const [keys, setKeys] = useState<Key[]>([])
   const [isMarked, setIsMarked] = useState(false)
   const [isEnabledButton, setIsEnabledButton] = useState(false)
@@ -63,7 +63,7 @@ export default function RecordPage() {
     }
 
     editRecord(id, payload).then(() => {
-      navigate("/")
+      navigate('/')
     })
   }
 
@@ -101,10 +101,10 @@ export default function RecordPage() {
       <Header />
 
       <section className='absolute right-16 flex items-center top-6'>
-        <ColorPicker color={color} setColor={(payload) => handleChange("color", payload)} />
+        <ColorPicker color={color} setColor={(payload) => handleChange('color', payload)} />
       </section>
       <button
-        onClick={() => handleChange("marked", !isMarked)}
+        onClick={() => handleChange('marked', !isMarked)}
         className='absolute right-28 top-6 p-2 bg-gray-50 hover:bg-gray-100 rounded-xl active:scale-95 transition-all'
       >
         {isMarked ? (
@@ -127,7 +127,7 @@ export default function RecordPage() {
         <Input
           icon={<EarthIcon className='w-5 h-5' />}
           label='Site'
-          onChange={(e) => handleChange("site", e.target.value)}
+          onChange={(e) => handleChange('site', e.target.value)}
           value={site}
           placeholder='Site'
           color={color}
@@ -135,7 +135,7 @@ export default function RecordPage() {
         <Input
           icon={<MailIcon className='w-5 h-5' />}
           label='Email'
-          onChange={(e) => handleChange("email", e.target.value)}
+          onChange={(e) => handleChange('email', e.target.value)}
           value={email}
           placeholder='Email'
           color={color}
@@ -143,7 +143,7 @@ export default function RecordPage() {
         <Input
           icon={<PasswordIcon className='w-5 h-5' />}
           label='Password'
-          onChange={(e) => handleChange("password", e.target.value)}
+          onChange={(e) => handleChange('password', e.target.value)}
           value={password}
           placeholder='Password'
           color={color}
@@ -152,7 +152,7 @@ export default function RecordPage() {
         <Input
           icon={<UserIcon className='w-5 h-5' />}
           label='User'
-          onChange={(e) => handleChange("user", e.target.value)}
+          onChange={(e) => handleChange('user', e.target.value)}
           value={user}
           placeholder='User'
           color={color}
@@ -169,7 +169,7 @@ export default function RecordPage() {
                 key={key.value}
                 value={decrypt(key.value)}
                 checked={key.checked}
-                onCheck={() => handleChange("keys", key.value)}
+                onCheck={() => handleChange('keys', key.value)}
               />
             ))}
           </div>
@@ -178,7 +178,7 @@ export default function RecordPage() {
 
       <div className='mt-auto sticky bottom-0 z-20 bg-white grid py-3'>
         <Button
-          label={isEditing ? "Saving..." : "Save"}
+          label={isEditing ? 'Saving...' : 'Save'}
           loading={isEditing}
           disabled={isEditing || !isEnabledButton}
           onClick={handleEdit}
