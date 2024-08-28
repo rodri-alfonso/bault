@@ -3,7 +3,6 @@ import Page from '../layout/Page'
 import { getRecords } from '@/services/records'
 import useFetch from '@/hooks/useFetch'
 import { authStore } from '@/stores/auth'
-import { decrypt } from '@/lib/encryption'
 import { ArrowRightIcon, PlusIcon } from '@/assets/icons'
 import Record from '@/components/Reacord'
 import RecordsSlider from '@/components/RecordsSlider'
@@ -11,10 +10,12 @@ import { useLocation } from 'wouter'
 
 export default function HomePage() {
   const { user } = authStore()
+  console.log('🚀 ~ HomePage ~ user:', user)
   const { data, isLoading } = useFetch(getRecords)
+  console.log('🚀 ~ HomePage ~ data:', data)
   const [_, navigate] = useLocation()
 
-  const firstName = decrypt(user?.name ?? '').split(' ')[0]
+  const firstName = (user?.name || '').split(' ')[0]
 
   const isLoadingData = !data?.length && isLoading
 
@@ -67,8 +68,6 @@ export default function HomePage() {
           </>
         )}
       </section>
-
-      {/* <Navbar /> */}
     </Page>
   )
 }

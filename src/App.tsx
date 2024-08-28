@@ -6,8 +6,8 @@ import { authStore } from './stores/auth'
 import RecordPage from './pages/Record'
 // import { timestampStore } from './stores/timestamp'
 // import SecurityPage from './pages/Security'
-import { registerStore } from './stores/security'
-import RegisterPage from './pages/Register'
+// import { registerStore } from './stores/security'
+// import RegisterPage from './pages/Register'
 import useAuthState from './hooks/useAuthState'
 import LoaderPage from './pages/Loader'
 
@@ -25,7 +25,7 @@ function PrivateRouter() {
 function App() {
   const { user } = authStore()
   // const { isProtected } = timestampStore()
-  const { isInRegisterCode } = registerStore()
+  // const { isInRegisterCode } = registerStore()
 
   const { loading } = useAuthState()
 
@@ -34,7 +34,7 @@ function App() {
 
   if (loading) return <LoaderPage />
 
-  if (isInRegisterCode) return <RegisterPage />
+  // if (isInRegisterCode) return <RegisterPage />
   // if (isProtected) return <SecurityPage />
   if (user) return <PrivateRouter />
 
