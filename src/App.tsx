@@ -35,7 +35,7 @@ function App() {
   if (loading) return <LoaderPage />
 
   if (isInRegisterCode) return <RegisterPage />
-  if (isProtected) return <SecurityPage />
+  // if (isProtected) return <SecurityPage />
   if (user) return <PrivateRouter />
 
   return (
