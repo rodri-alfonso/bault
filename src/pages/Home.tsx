@@ -10,13 +10,10 @@ import { useLocation } from 'wouter'
 
 export default function HomePage() {
   const { user } = authStore()
-  console.log('🚀 ~ HomePage ~ user:', user)
   const { data, isLoading } = useFetch(getRecords)
-  console.log('🚀 ~ HomePage ~ data:', data)
   const [_, navigate] = useLocation()
 
   const firstName = (user?.name || '').split(' ')[0]
-
   const isLoadingData = !data?.length && isLoading
 
   return (
