@@ -170,7 +170,7 @@ export default function RecordPage() {
             {keys.map((key) => (
               <KeyItem
                 key={key.value}
-                value={decrypt(key.value)}
+                value={key.value}
                 checked={key.checked}
                 onCheck={() => handleChange('keys', key.value)}
               />

@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { VitePWA } from 'vite-plugin-pwa'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
@@ -14,8 +13,8 @@ export default defineConfig({
         enabled: true,
       },
       manifest: {
-        name: 'React Vite PWA',
-        short_name: 'React Vite PWA',
+        name: 'Bault',
+        short_name: 'Bault',
         theme_color: '#000000',
         icons: [
           {
