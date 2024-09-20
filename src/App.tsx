@@ -10,8 +10,6 @@ import SecurityPage from './pages/Security'
 import { timestampStore } from './stores/timestamp'
 import { useSecure } from './hooks/useSecure'
 import SecurePage from './pages/Secure'
-import { useEffect } from 'react'
-import { getSecureCode } from '@/services/security'
 
 function PrivateRouter() {
   return (

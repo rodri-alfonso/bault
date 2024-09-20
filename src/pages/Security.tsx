@@ -6,7 +6,6 @@ import { useLocation } from 'wouter'
 import { ViewIcon, ViewOffIcon } from '@/assets/icons'
 import { isSecureMatch } from '@/services/security'
 import { authStore } from '@/stores/auth'
-import { decrypt, encrypt } from '@/lib/encryption'
 
 const MAX_NUMBER_INPUTS = 4
 
