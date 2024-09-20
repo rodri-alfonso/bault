@@ -8,14 +8,14 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
     VitePWA({
-      registerType: 'autoUpdate',
+      registerType: 'prompt',
       devOptions: {
         enabled: true,
       },
       manifest: {
         name: 'Bault',
         short_name: 'Bault',
-        theme_color: '#000000',
+        theme_color: '#ffffff',
         icons: [
           {
             src: '/favicon.svg',
