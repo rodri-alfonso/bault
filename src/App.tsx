@@ -4,12 +4,14 @@ import { Route, Switch, Redirect } from 'wouter'
 import LoginPage from './pages/Login'
 import { authStore } from './stores/auth'
 import RecordPage from './pages/Record'
-// import { timestampStore } from './stores/timestamp'
-// import SecurityPage from './pages/Security'
-// import { registerStore } from './stores/security'
-// import RegisterPage from './pages/Register'
 import useAuthState from './hooks/useAuthState'
 import LoaderPage from './pages/Loader'
+import SecurityPage from './pages/Security'
+import { timestampStore } from './stores/timestamp'
+import { useSecure } from './hooks/useSecure'
+import SecurePage from './pages/Secure'
+import { useEffect } from 'react'
+import { getSecureCode } from '@/services/security'
 
 function PrivateRouter() {
   return (
@@ -24,18 +26,17 @@ function PrivateRouter() {
 
 function App() {
   const { user } = authStore()
-  // const { isProtected } = timestampStore()
-  // const { isInRegisterCode } = registerStore()
-
+  const { timestamp } = timestampStore()
   const { loading } = useAuthState()
+  const { isLoading: isSecureLoading, hasCode } = useSecure()
 
-  // const isTimestampPassedAfterTwoMinutes = new Date().getTime() - timestamp > 120000
-  // console.log('🚀 ~ App ~ isTimestampPassedAfterTwoMinutes:', isTimestampPassedAfterTwoMinutes)
+  const isTimestampPassedAfterThreeHours = new Date().getTime() - timestamp > 10800000
 
+  if (isSecureLoading) return <LoaderPage />
   if (loading) return <LoaderPage />
 
-  // if (isInRegisterCode) return <RegisterPage />
-  // if (isProtected) return <SecurityPage />
+  if (!hasCode) return <SecurePage />
+  if (isTimestampPassedAfterThreeHours) return <SecurityPage />
   if (user) return <PrivateRouter />
 
   return (
