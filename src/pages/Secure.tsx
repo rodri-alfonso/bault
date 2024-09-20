@@ -3,7 +3,6 @@ import { authStore } from '@/stores/auth'
 import { useState } from 'react'
 import OtpInput, { AllowedInputTypes } from 'react-otp-input'
 import Button from '@/theme/Button'
-import { useLocation } from 'wouter'
 import { ViewIcon, ViewOffIcon } from '@/assets/icons'
 
 const MAX_NUMBER_INPUTS = 4
@@ -14,7 +13,6 @@ export default function SecurePage() {
   const [confirmOtp, setConfirmOtp] = useState('')
   const [type, setType] = useState<AllowedInputTypes>('password')
   const [isLoading, setIsLoading] = useState(false)
-  const [_, navigate] = useLocation()
 
   function handleSetSecureCode() {
     const userId = user?.id || ''
@@ -22,8 +20,7 @@ export default function SecurePage() {
     setIsLoading(true)
     setSecureCode(userId, otp)
       .then(() => {
-        alert('Code setted')
-        navigate('/')
+        location.reload()
       })
       .finally(() => {
         setIsLoading(false)

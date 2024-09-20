@@ -11,7 +11,16 @@ import { timestampStore } from './stores/timestamp'
 import { useSecure } from './hooks/useSecure'
 import SecurePage from './pages/Secure'
 
-function PrivateRouter() {
+function PrivateRouter({ hasUser }) {
+  const { timestamp } = timestampStore()
+  const { isLoading, hasCode } = useSecure()
+
+  const isTimestampPassedAfterThreeHours = new Date().getTime() - timestamp > 10800000
+
+  if (hasUser && isLoading) return <LoaderPage />
+  if (hasUser && !hasCode) return <SecurePage />
+  if (isTimestampPassedAfterThreeHours) return <SecurityPage />
+
   return (
     <Switch>
       <Route path='/' component={HomePage} />
@@ -24,18 +33,10 @@ function PrivateRouter() {
 
 function App() {
   const { user } = authStore()
-  const { timestamp } = timestampStore()
   const { loading } = useAuthState()
-  const { isLoading: isSecureLoading, hasCode } = useSecure()
 
-  const isTimestampPassedAfterThreeHours = new Date().getTime() - timestamp > 10800000
-
-  if (isSecureLoading) return <LoaderPage />
   if (loading) return <LoaderPage />
-
-  if (!hasCode) return <SecurePage />
-  if (isTimestampPassedAfterThreeHours) return <SecurityPage />
-  if (user) return <PrivateRouter />
+  if (user) return <PrivateRouter hasUser={Boolean(user)} />
 
   return (
     <Switch>

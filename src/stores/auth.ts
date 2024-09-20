@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import type { User } from './types'
 import { signInWithPopup, signOut as googleSignOut } from 'firebase/auth'
 import { auth, provider } from '../firebase'
+import { timestampStore } from './timestamp'
 
 type Store = {
   user: User | null
@@ -27,6 +28,7 @@ export const signIn = () => {
       } as User
 
       authStore.setState({ user: payload })
+      timestampStore.setState({ timestamp: new Date().getTime() })
     })
     .catch(() => {
       alert('Ha ocurrido un error, vuelve a intentarlo más tarde')
