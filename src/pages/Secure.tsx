@@ -4,8 +4,7 @@ import { useState } from 'react'
 import OtpInput, { AllowedInputTypes } from 'react-otp-input'
 import Button from '@/theme/Button'
 import { ViewIcon, ViewOffIcon } from '@/assets/icons'
-
-const MAX_NUMBER_INPUTS = 4
+import { OTP_INPUT_NUMBER } from '@/lib/constants'
 
 export default function SecurePage() {
   const { user } = authStore()
@@ -38,7 +37,7 @@ export default function SecurePage() {
         <OtpInput
           value={otp}
           onChange={setOtp}
-          numInputs={MAX_NUMBER_INPUTS}
+          numInputs={OTP_INPUT_NUMBER}
           renderSeparator={<span>-</span>}
           renderInput={(props) => <input {...props} />}
           containerStyle={'p-8 w-full m-auto'}
@@ -55,7 +54,7 @@ export default function SecurePage() {
         <OtpInput
           value={confirmOtp}
           onChange={setConfirmOtp}
-          numInputs={MAX_NUMBER_INPUTS}
+          numInputs={OTP_INPUT_NUMBER}
           renderSeparator={<span>-</span>}
           renderInput={(props) => <input {...props} />}
           containerStyle={'p-8 w-full m-auto'}
@@ -77,7 +76,7 @@ export default function SecurePage() {
       </div>
       <Button
         label={isLoading ? 'Setting code...' : 'Set secure code'}
-        disabled={isLoading || otp.length !== MAX_NUMBER_INPUTS || otp !== confirmOtp}
+        disabled={isLoading || otp.length !== OTP_INPUT_NUMBER || otp !== confirmOtp}
         loading={isLoading}
         onClick={handleSetSecureCode}
       />
