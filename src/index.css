@@ -3,42 +3,66 @@
 @tailwind utilities;
 
 @font-face {
-	font-family: 'DMSans';
-	src: url('/fonts/DMSans.ttf') format('truetype');
-	font-weight: 1 999;
+  font-family: 'DMSans';
+  src: url('/fonts/DMSans.ttf') format('truetype');
+  font-weight: 1 999;
 }
 @font-face {
-	font-family: 'DMSans-italic';
-	src: url('/fonts/DMSans-italic.ttf') format('truetype');
-	font-weight: 1 999;
+  font-family: 'DMSans-italic';
+  src: url('/fonts/DMSans-italic.ttf') format('truetype');
+  font-weight: 1 999;
 }
 
 * {
-	font-family: 'DMSans', sans-serif;
+  font-family: 'DMSans', sans-serif;
 }
 
 .slides {
-	display: grid;
-	grid-auto-flow: column;
-	gap: 1rem;
-	overflow-y: auto;
-	overscroll-behavior-y: contain;
-	scroll-snap-type: x mandatory;
-	scrollbar-width: none;
-	padding-bottom: 16px;
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1rem;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 16px;
 }
 
 .slides > article {
-	scroll-snap-align: center;
+  scroll-snap-align: center;
 }
 
 .slides::-webkit-scrollbar {
-	display: none;
+  display: none;
 }
 
 *:focus,
 :active {
-	-webkit-tap-highlight-color: transparent;
-	-ms-touch-action: manipulation;
-	touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 40px;
+  aspect-ratio: 2;
+  --_g: no-repeat radial-gradient(circle closest-side, #000 90%, #0000);
+  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  background-size: calc(100% / 3) 50%;
+  animation: l3 1s infinite linear;
+}
+@keyframes l3 {
+  20% {
+    background-position: 0% 0%, 50% 50%, 100% 50%;
+  }
+  40% {
+    background-position: 0% 100%, 50% 0%, 100% 50%;
+  }
+  60% {
+    background-position: 0% 50%, 50% 100%, 100% 0%;
+  }
+  80% {
+    background-position: 0% 50%, 50% 50%, 100% 100%;
+  }
 }
