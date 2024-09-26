@@ -45,7 +45,7 @@ export default function SecurityPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='h-screen grid'>
+    <form onSubmit={handleSubmit} className='h-screen grid mx-auto  sm:max-w-sm'>
       <div>
         <h1 className='text-2xl font-bold text-center mt-8'>Verification</h1>
         <p className='text-center text-gray-500'>Enter the 4-digit code sent to your email</p>

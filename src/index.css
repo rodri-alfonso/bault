@@ -26,6 +26,11 @@
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   padding-bottom: 16px;
+
+  @screen sm {
+    display: flex;
+    gap: 10;
+  }
 }
 
 .slides > article {

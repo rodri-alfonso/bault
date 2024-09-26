@@ -40,7 +40,7 @@ export default function HomePage() {
         )}
       </div>
 
-      <section className='grid gap-2 overflow-y-auto mb-auto'>
+      <section className='grid gap-2 overflow-y-auto mb-auto md:flex  md:flex-wrap md:gap-4'>
         {isLoadingData ? (
           <>
             <div className='w-full bg-gray-200 rounded-xl py-8' />
@@ -51,7 +51,7 @@ export default function HomePage() {
         ) : (
           <>
             <button
-              className={`border-2 border-solid border-gray-200 rounded-2xl h-16 p-1 pr-3 flex items-center gap-4 transition-all hover:bg-gray-50`}
+              className={`md:hidden border-2 border-solid border-gray-200 rounded-2xl h-16 p-1 pr-3 flex items-center gap-4 transition-all hover:bg-gray-50`}
               onClick={() => navigate('/create')}
             >
               <div className='grid place-items-center h-full w-12 rounded-2xl text-gray-200 text-lg font-semibold  bg-gray-100'>
