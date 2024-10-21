@@ -4,7 +4,7 @@ import { auth } from '@/firebase'
 import { User } from '@/stores/types'
 
 export default function useAuthState() {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     setLoading(true)
