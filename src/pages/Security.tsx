@@ -6,6 +6,7 @@ import { useLocation } from 'wouter'
 import { ViewIcon, ViewOffIcon } from '@/assets/icons'
 import { isSecureMatch } from '@/services/security'
 import { authStore } from '@/stores/auth'
+import ModalError from '@/components/Modals/Error'
 
 const MAX_NUMBER_INPUTS = 4
 
@@ -16,6 +17,7 @@ export default function SecurityPage() {
   const { setIsProtected, setTimestamp } = timestampStore()
   const [_, navigate] = useLocation()
   const [isLoading, setIsLoading] = useState(false)
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -26,7 +28,8 @@ export default function SecurityPage() {
     isSecureMatch(user?.id || '', otp)
       .then((isVerificated) => {
         if (!isVerificated) {
-          alert('Invalid code')
+          // alert('Invalid code')
+          setIsModalVisible(true)
           setOtp('')
           return
         }
@@ -78,6 +81,7 @@ export default function SecurityPage() {
           loading={isLoading}
         />
       </div>
+      <ModalError isVisible={isModalVisible} onClose={() => setIsModalVisible(false)} />
     </form>
   )
 }
