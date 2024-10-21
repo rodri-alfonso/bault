@@ -3,7 +3,6 @@ import { CopyIcon } from '@/assets/icons'
 import Typography from '@/theme/Typography'
 import Alert from '@/theme/Alert'
 import { useState } from 'react'
-import confetti from 'canvas-confetti'
 
 interface Props {
   record: RegisterWithId
@@ -17,14 +16,6 @@ export default function RecordCard({ record }: Props) {
 
     e.stopPropagation()
     e.preventDefault()
-
-    navigator.clipboard.writeText(record.password)
-    confetti({
-      ticks: 80,
-      origin: { x: 0.5, y: 0.25 },
-      spread: 80,
-      zIndex: -20,
-    })
 
     setIsAlertVisible(true)
   }

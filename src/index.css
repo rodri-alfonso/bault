@@ -71,3 +71,18 @@
     background-position: 0% 50%, 50% 50%, 100% 100%;
   }
 }
+
+.bottom-appear-element {
+  position: fixed;
+  bottom: -100px;
+  opacity: 0;
+  border-radius: 10px;
+  animation: bottom-smooth-appear 0.7s ease forwards;
+}
+
+@keyframes bottom-smooth-appear {
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}

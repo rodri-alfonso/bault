@@ -4,7 +4,6 @@ import { decrypt } from '@/lib/encryption'
 import { CopyIcon } from '@/assets/icons'
 import { useState } from 'react'
 import Alert from '@/theme/Alert'
-import Confetti from 'canvas-confetti'
 
 export default function Record({ id, site, user, color, password }: RegisterWithId) {
   const [_, navigate] = useLocation()
@@ -17,12 +16,6 @@ export default function Record({ id, site, user, color, password }: RegisterWith
     e.preventDefault()
 
     navigator.clipboard.writeText(decrypt(password))
-    Confetti({
-      ticks: 80,
-      origin: { x: 0.5, y: 0.25 },
-      spread: 80,
-      zIndex: -20,
-    })
 
     setIsAlertVisible(true)
   }
