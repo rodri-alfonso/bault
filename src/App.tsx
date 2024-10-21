@@ -11,14 +11,14 @@ import { timestampStore } from './stores/timestamp'
 import { useSecure } from './hooks/useSecure'
 import SecurePage from './pages/Secure'
 
-function PrivateRouter({ loggedUser }: { loggedUser: boolean }) {
+function PrivateRouter() {
   const { timestamp } = timestampStore()
   const { isLoading, hasCode } = useSecure()
 
   const isTimestampPassedAfterThreeHours = new Date().getTime() - timestamp > 10800000
 
-  if (loggedUser && isLoading) return <LoaderPage />
-  if (loggedUser && !hasCode) return <SecurePage />
+  if (isLoading || !hasCode) return <LoaderPage />
+  if (!hasCode) return <SecurePage />
   if (isTimestampPassedAfterThreeHours) return <SecurityPage />
 
   return (
@@ -36,7 +36,7 @@ function App() {
   const { loading } = useAuthState()
 
   if (loading) return <LoaderPage />
-  if (user) return <PrivateRouter loggedUser={Boolean(user)} />
+  if (user) return <PrivateRouter />
 
   return (
     <Switch>
