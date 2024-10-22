@@ -59,7 +59,7 @@ export default function HomePage() {
               </div>
               <p className=' text-gray-400'>Create new record</p>
             </button>
-            {data?.map((record) => (
+            {data?.slice(0, 4).map((record) => (
               <Record {...record} key={record.id} />
             ))}
           </>
