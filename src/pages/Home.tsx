@@ -3,17 +3,21 @@ import Page from '../layout/Page'
 import { getRecords } from '@/services/records'
 import useFetch from '@/hooks/useFetch'
 import { authStore } from '@/stores/auth'
-import { ArrowRightIcon, PlusIcon } from '@/assets/icons'
+import { PlusIcon, BookmarkIcon } from '@/assets/icons'
 import Record from '@/components/Reacord'
 import RecordsSlider from '@/components/RecordsSlider'
 import { useLocation } from 'wouter'
+import { useState } from 'react'
+import FavouritesModal from '@/components/Modals/Favourites'
+import { BookmarkedRecord } from '@/components/Modals/Favourites'
 
 export default function HomePage() {
   const { user } = authStore()
-  const { data, isLoading } = useFetch(getRecords)
+  const { data, isLoading, refetch } = useFetch(getRecords)
+  const [isFavouritesModalOpen, setIsFavouritesModalOpen] = useState(false)
   const [_, navigate] = useLocation()
 
-  const firstName = (user?.name || '').split(' ')[0]
+  const [firstName] = (user?.name || '').split(' ')
   const isLoadingData = !data?.length && isLoading
 
   return (
@@ -30,12 +34,15 @@ export default function HomePage() {
       )}
 
       <div className='flex items-center justify-between'>
-        <p className='text-lg font-medium'>Last records</p>
+        <p className='text-lg font-medium'>All records</p>
         {isLoadingData ? (
           <div />
         ) : (
-          <button className='p-2 rounded-lg hover:bg-gray-100 transition-all active:scale-95'>
-            <ArrowRightIcon />
+          <button
+            onClick={() => setIsFavouritesModalOpen(true)}
+            className='p-2 rounded-lg hover:bg-gray-100 transition-all active:scale-95 bg-gray-50'
+          >
+            <BookmarkIcon />
           </button>
         )}
       </div>
@@ -59,12 +66,18 @@ export default function HomePage() {
               </div>
               <p className=' text-gray-400'>Create new record</p>
             </button>
-            {data?.slice(0, 4).map((record) => (
+            {data?.map((record) => (
               <Record {...record} key={record.id} />
             ))}
           </>
         )}
       </section>
+      <FavouritesModal
+        isVisible={isFavouritesModalOpen}
+        onCancel={() => setIsFavouritesModalOpen(false)}
+        onConfirm={refetch}
+        records={(data as BookmarkedRecord[]) || []}
+      />
     </Page>
   )
 }
