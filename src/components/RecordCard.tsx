@@ -1,8 +1,8 @@
 import { RegisterWithId } from '@/services/records'
-import { CopyIcon } from '@/assets/icons'
+import { CopyIcon, TickIcon } from '@/assets/icons'
 import Typography from '@/theme/Typography'
 import Alert from '@/theme/Alert'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface Props {
   record: RegisterWithId
@@ -11,6 +11,11 @@ interface Props {
 
 export default function RecordCard({ record, full }: Props) {
   const [isAlertVisible, setIsAlertVisible] = useState(false)
+  const [wasCopied, setWasCopied] = useState(false)
+
+  useEffect(() => {
+    if (wasCopied) setTimeout(() => setWasCopied(false), 1000)
+  }, [wasCopied])
 
   function handleCopy(e: React.MouseEvent<HTMLButtonElement>) {
     if (isAlertVisible) return
@@ -19,6 +24,7 @@ export default function RecordCard({ record, full }: Props) {
     e.preventDefault()
 
     setIsAlertVisible(true)
+    setWasCopied(true)
   }
 
   return (
@@ -42,12 +48,17 @@ export default function RecordCard({ record, full }: Props) {
         </div>
       </div>
 
-      <div className='text-white p-2 shadow-sm rounded-xl bg-gray-800 active:scale-95 transition-all'>
-        <CopyIcon />
-      </div>
+      <span
+        className={`text-white p-2 shadow-sm rounded-xl bg-gray-800 ${
+          wasCopied ? '' : ''
+        } active:scale-95 transition-all`}
+      >
+        {wasCopied ? <TickIcon /> : <CopyIcon />}
+      </span>
+
       <Alert
         isVisible={isAlertVisible}
-        message='Copied to clipboard!'
+        message='Copied to clipboard! 🎉'
         onClose={() => setIsAlertVisible(false)}
         isEphemeral
       />

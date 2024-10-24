@@ -1,13 +1,18 @@
 import { RegisterWithId } from '@/services/records'
 import { useLocation } from 'wouter'
 import { decrypt } from '@/lib/encryption'
-import { CopyIcon } from '@/assets/icons'
-import { useState } from 'react'
+import { CopyIcon, TickIcon } from '@/assets/icons'
+import { useEffect, useState } from 'react'
 import Alert from '@/theme/Alert'
 
 export default function Record({ id, site, user, color, password }: RegisterWithId) {
   const [_, navigate] = useLocation()
   const [isAlertVisible, setIsAlertVisible] = useState(false)
+  const [wasCopied, setWasCopied] = useState(false)
+
+  useEffect(() => {
+    if (wasCopied) setTimeout(() => setWasCopied(false), 1000)
+  }, [wasCopied])
 
   function handleCopy(e: React.MouseEvent<HTMLButtonElement>) {
     if (isAlertVisible) return
@@ -18,6 +23,7 @@ export default function Record({ id, site, user, color, password }: RegisterWith
     navigator.clipboard.writeText(decrypt(password))
 
     setIsAlertVisible(true)
+    setWasCopied(true)
   }
 
   return (
@@ -47,11 +53,11 @@ export default function Record({ id, site, user, color, password }: RegisterWith
         onClick={handleCopy}
         className='bg-gray-800 text-white rounded-xl p-2 active:scale-95 transition-all z-20'
       >
-        <CopyIcon className='w-5 h-5' />
+        {wasCopied ? <TickIcon className='w-5 h-5' /> : <CopyIcon className='w-5 h-5' />}
       </button>
       <Alert
         isVisible={isAlertVisible}
-        message='Copied to clipboard!'
+        message='Copied to clipboard! 🎉'
         onClose={() => setIsAlertVisible(false)}
         isEphemeral
       />

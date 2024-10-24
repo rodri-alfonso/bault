@@ -9,7 +9,7 @@ interface Props {
   message: string
 }
 
-export default function Alert({ message, isVisible, onClose, isEphemeral, lifetime = 900 }: Props) {
+export default function Alert({ message, isVisible, onClose, isEphemeral, lifetime = 1000 }: Props) {
   useEffect(() => {
     if (isEphemeral) {
       const timeout = setTimeout(() => {
@@ -25,7 +25,7 @@ export default function Alert({ message, isVisible, onClose, isEphemeral, lifeti
   const alertRoot = document.getElementById('modal-root') as DocumentFragment | Element
 
   return createPortal(
-    <div className='absolute w-full text-white bg-transparent font-medium pt-6 grid place-items-center z-10 transition-all bottom-appear-element'>
+    <div className='absolute w-full text-white bg-transparent font-medium pt-6 grid place-items-center z-50 transition-all bottom-appear-element'>
       <span className='bg-gray-800 p-2 rounded-lg '>{message}</span>
     </div>,
     alertRoot
