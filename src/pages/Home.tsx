@@ -28,33 +28,25 @@ export default function HomePage() {
         <p className='text-gray-500 font-medium'>Let's check your bault!</p>
       </section>
       {isLoadingData ? (
-        <div className='w-full bg-gray-200 rounded-3xl py-12  mb-auto' />
+        <div className='bg-gray-200 rounded-3xl py-11 mt-4 max-w-[310px] mb-6' />
       ) : (
         <RecordsSlider records={data?.filter((record) => record.marked) || []} />
       )}
 
       <div className='flex items-center justify-between'>
         <p className='text-lg font-medium'>All records</p>
-        {isLoadingData ? (
-          <div />
-        ) : (
-          <button
-            onClick={() => setIsFavouritesModalOpen(true)}
-            className='p-2 rounded-lg hover:bg-gray-100 transition-all active:scale-95 bg-gray-50'
-          >
-            <BookmarkIcon />
-          </button>
-        )}
+
+        <button
+          onClick={() => setIsFavouritesModalOpen(true)}
+          className='p-2 rounded-lg hover:bg-gray-100 transition-all active:scale-95 bg-gray-50'
+        >
+          <BookmarkIcon />
+        </button>
       </div>
 
       <section className='grid gap-2 overflow-y-auto mb-auto md:flex  md:flex-wrap md:gap-4'>
         {isLoadingData ? (
-          <>
-            <div className='w-full bg-gray-200 rounded-xl py-8' />
-            <div className='w-full bg-gray-200 rounded-xl py-8' />
-            <div className='w-full bg-gray-200 rounded-xl py-8' />
-            <div className='w-full bg-gray-200 rounded-xl py-8' />
-          </>
+          <div className='w-full bg-gray-200 rounded-xl py-8' />
         ) : (
           <>
             <button
