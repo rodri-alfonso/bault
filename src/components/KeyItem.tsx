@@ -26,7 +26,7 @@ export default function KeyItem({ checked, onCheck, value }: Props) {
       </p>
 
       <button
-        className='ml-auto text-white rounded-full p-2 active:scale-95 transition-all z-20 bg-gray-800 disabled:opacity-30 disabled:pointer-events-none'
+        className='ml-auto text-white rounded-xl p-2 active:scale-95 transition-all z-20 bg-gray-800 disabled:opacity-30 disabled:pointer-events-none'
         disabled={checked}
       >
         <CopyIcon className='w-5 h-5' />

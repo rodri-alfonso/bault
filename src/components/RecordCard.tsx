@@ -6,9 +6,10 @@ import { useState } from 'react'
 
 interface Props {
   record: RegisterWithId
+  full?: boolean
 }
 
-export default function RecordCard({ record }: Props) {
+export default function RecordCard({ record, full }: Props) {
   const [isAlertVisible, setIsAlertVisible] = useState(false)
 
   function handleCopy(e: React.MouseEvent<HTMLButtonElement>) {
@@ -25,7 +26,9 @@ export default function RecordCard({ record }: Props) {
       style={{
         backgroundColor: record.color || 'whitesmoke',
       }}
-      className='rounded-3xl p-7 flex items-center justify-between shadow-lg max-w-[380px] min-w-[310px] active:scale-95 transition-all cursor-pointer'
+      className={`rounded-3xl p-7 flex items-center justify-between shadow-lg ${
+        full ? 'w-full' : 'max-w-[380px] min-w-[310px]'
+      } active:scale-95 transition-all cursor-pointer`}
       onClick={handleCopy}
     >
       <div className='flex items-center gap-4'>

@@ -4,7 +4,7 @@ import { editRecord, getRecordById } from '@/services/records'
 import { decrypt, encrypt } from '@/lib/encryption'
 import Page from '@/layout/Page'
 import Header from '@/components/Header'
-import { EarthIcon, MailIcon, PasswordIcon, UserIcon } from '@/assets/icons'
+import { AddCircleIcon, EarthIcon, KeyIcon, MailIcon, PasswordIcon, UserIcon } from '@/assets/icons'
 import { useEffect, useState } from 'react'
 import RecordCard from '@/components/RecordCard'
 import Input from '@/theme/Input'
@@ -25,8 +25,9 @@ export default function RecordPage() {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState('')
   const [color, setColor] = useState('')
-  const [keys, setKeys] = useState<Key[]>([])
   const [isEnabledButton, setIsEnabledButton] = useState(false)
+  const [keys, setKeys] = useState<Key[]>([])
+  const [currentKey, setCurrentKey] = useState('')
 
   useEffect(() => {
     if (!isLoading && data) {
@@ -64,7 +65,10 @@ export default function RecordPage() {
     })
   }
 
-  function handleChange(type: 'site' | 'email' | 'password' | 'user' | 'color' | 'keys', payload: string | boolean) {
+  function handleChange(
+    type: 'site' | 'email' | 'password' | 'user' | 'color' | 'keys' | 'addKey',
+    payload: string | boolean
+  ) {
     if (!data) return
 
     const TYPE_MAP = {
@@ -74,6 +78,7 @@ export default function RecordPage() {
       user: setUser,
       color: setColor,
       keys: toggleKey,
+      addKey: handleAddKey,
     }
 
     const setter = TYPE_MAP[type] as any
@@ -85,8 +90,25 @@ export default function RecordPage() {
         email === decrypt(data.email) ||
         password === decrypt(data.password) ||
         user === decrypt(data.user) ||
-        color === data.color
+        color === data.color ||
+        data.keys.length !== keys.length
     )
+  }
+
+  function handleAddKey() {
+    if (!currentKey) return
+
+    const isKeyAlreadyAdded = keys.some((key) => key.value.toLowerCase() === currentKey.toLowerCase())
+    if (isKeyAlreadyAdded) return setCurrentKey('')
+
+    setKeys([
+      ...keys,
+      {
+        value: currentKey,
+        checked: false,
+      },
+    ])
+    setCurrentKey('')
   }
 
   if (isLoading || !data) return <LoaderPage />
@@ -104,7 +126,7 @@ export default function RecordPage() {
         <p className='text-gray-500 font-medium'>Let's check your record!</p>
       </section>
 
-      <RecordCard record={{ email, site, user, color, password, keys, id, marked: data.marked }} />
+      <RecordCard full record={{ email, site, user, color, password, keys, id, marked: data.marked }} />
 
       <p className='font-semibold pt-6'>Information</p>
       <div className='grid gap-3 pb-6'>
@@ -143,22 +165,41 @@ export default function RecordPage() {
         />
       </div>
 
-      {Boolean(keys.length) && (
-        <section className='grid gap-4 pb-6'>
-          <p className='font-semibold'>Security Keys</p>
+      <section className='grid gap-4 pb-4'>
+        <p className='font-semibold'>Security Keys</p>
 
-          <div className='grid gap-2'>
-            {keys.map((key) => (
-              <KeyItem
-                key={key.value}
-                value={key.value}
-                checked={key.checked}
-                onCheck={() => handleChange('keys', key.value)}
-              />
-            ))}
-          </div>
-        </section>
-      )}
+        <div
+          className='py-2 px-4 rounded-xl flex items-center gap-1.5 text-gray-600'
+          style={{ backgroundColor: color + '4D' || '#dddd' }}
+        >
+          <div>{<KeyIcon />}</div>
+          <input
+            className={`w-full p-1 rounded outline-none focus:border-blue-500 bg-transparent text-gray-800`}
+            placeholder='Add new key'
+            value={currentKey}
+            onChange={(e) => setCurrentKey(e.target.value)}
+          />
+          {currentKey.trim() && (
+            <button
+              onClick={() => handleChange('addKey', currentKey)}
+              className='hover:text-gray-700 active:scale-95 transition-all bg-gray-700 rounded-full'
+            >
+              <AddCircleIcon className=' text-white ' />
+            </button>
+          )}
+        </div>
+
+        <div className='grid gap-2 px-3'>
+          {keys.map((key) => (
+            <KeyItem
+              key={key.value}
+              value={key.value}
+              checked={key.checked}
+              onCheck={() => handleChange('keys', key.value)}
+            />
+          ))}
+        </div>
+      </section>
 
       <div className='mt-auto sticky bottom-0 z-20 bg-white grid py-3'>
         <Button
