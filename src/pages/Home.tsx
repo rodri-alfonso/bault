@@ -33,35 +33,30 @@ export default function HomePage() {
         <RecordsSlider records={data?.filter((record) => record.marked) || []} />
       )}
 
-      <div className='flex items-center justify-between'>
+      <div className='flex items-center justify-between pt-4'>
         <p className='text-lg font-medium'>All records</p>
 
-        <button
-          onClick={() => setIsFavouritesModalOpen(true)}
-          className='p-2 rounded-lg hover:bg-gray-100 transition-all active:scale-95 bg-gray-50'
-        >
-          <BookmarkIcon />
-        </button>
+        <div className='flex items-center gap-2 mx-3'>
+          <button
+            onClick={() => setIsFavouritesModalOpen(true)}
+            className='p-2 rounded-xl hover:bg-gray-200 transition-all active:scale-95 bg-gray-100'
+          >
+            <BookmarkIcon className='' />
+          </button>
+          <button
+            onClick={() => navigate('/create')}
+            className='p-2 rounded-xl hover:bg-gray-200  transition-all active:scale-95 bg-gray-100'
+          >
+            <PlusIcon className='w-6 h-6' />
+          </button>
+        </div>
       </div>
 
       <section className='grid gap-2 overflow-y-auto mb-auto md:flex  md:flex-wrap md:gap-4'>
         {isLoadingData ? (
           <div className='w-full bg-gray-200 rounded-xl py-8' />
         ) : (
-          <>
-            <button
-              className={`md:hidden border-2 border-solid border-gray-200 rounded-2xl h-16 p-1 pr-3 flex items-center gap-4 transition-all hover:bg-gray-50`}
-              onClick={() => navigate('/create')}
-            >
-              <div className='grid place-items-center h-full w-12 rounded-2xl text-gray-200 text-lg font-semibold  bg-gray-100'>
-                <PlusIcon className='w-6 h-6 text-gray-400' />
-              </div>
-              <p className=' text-gray-400'>Create new record</p>
-            </button>
-            {data?.map((record) => (
-              <Record {...record} key={record.id} />
-            ))}
-          </>
+          data?.map((record) => <Record {...record} key={record.id} />)
         )}
       </section>
       <FavouritesModal
