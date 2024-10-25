@@ -45,7 +45,7 @@ export default function Header() {
   }
 
   return (
-    <header className='flex items-center justify-between'>
+    <header className='flex items-center justify-between px-4'>
       {isCreatorPath || isRecordPath ? (
         <button
           className='text-gray-900 p-2 bg-gray-50 rounded-lg hover:bg-gray-100 active:scale-95 transition-all'
