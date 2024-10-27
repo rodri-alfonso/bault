@@ -21,7 +21,7 @@ export default function HomePage() {
 
   return (
     <main className='flex flex-col gap-4 h-screen py-6 pb-4'>
-      <Header />
+      <Header className='px-4' />
       <section className='pt-2 px-4'>
         <p className='text-2xl font-medium'>{`Hello ${firstName},`}</p>
         <p className='text-gray-500 font-medium'>Let's check your bault!</p>
@@ -33,7 +33,7 @@ export default function HomePage() {
       )}
 
       <div className='flex items-center justify-between pt-4 px-4 '>
-        <p className='text-lg font-medium'>All records {data?.length && `(${data?.length})`}</p>
+        <p className='text-lg font-medium'>All records</p>
 
         <div className='flex items-center gap-2'>
           <button
