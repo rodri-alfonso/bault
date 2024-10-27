@@ -69,7 +69,7 @@ export default function FavouritesModal({ isVisible, onConfirm, onCancel, record
 
         <section className='grid gap-4 h-64 overflow-y-scroll pb-4'>
           {markedRecords.map((record) => (
-            <RecordBookmark record={record} onSelect={handleBookmark} />
+            <RecordBookmark record={record} onSelect={handleBookmark} key={record.id} />
           ))}
         </section>
 

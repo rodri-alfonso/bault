@@ -13,11 +13,12 @@ import Button from '@/theme/Button'
 import { Key } from '@/types'
 import KeyItem from '@/components/KeyItem'
 import LoaderPage from './Loader'
+import { useRecord } from '@/hooks/useRecords'
 
 export default function RecordPage() {
   const [_, navigate] = useLocation()
   const { id } = useParams()
-  const { data, isLoading } = useFetch(() => getRecordById(id))
+  const { isLoading, record } = useRecord(id)
   const [isEditing, setIsEditing] = useState(false)
 
   const [site, setSite] = useState('')
@@ -30,13 +31,13 @@ export default function RecordPage() {
   const [currentKey, setCurrentKey] = useState('')
 
   useEffect(() => {
-    if (!isLoading && data) {
-      setSite(decrypt(data.site))
-      setEmail(decrypt(data.email))
-      setPassword(decrypt(data.password))
-      setUser(decrypt(data.user))
-      setColor(data.color)
-      setKeys(data.keys.map((key) => ({ checked: key.checked, value: decrypt(key.value) })))
+    if (!isLoading && record) {
+      setSite(decrypt(record.site))
+      setEmail(decrypt(record.email))
+      setPassword(decrypt(record.password))
+      setUser(decrypt(record.user))
+      setColor(record.color)
+      setKeys(record.keys.map((key) => ({ checked: key.checked, value: decrypt(key.value) })))
     }
   }, [isLoading])
 
@@ -69,7 +70,7 @@ export default function RecordPage() {
     type: 'site' | 'email' | 'password' | 'user' | 'color' | 'keys' | 'addKey',
     payload: string | boolean
   ) {
-    if (!data) return
+    if (!record) return
 
     const TYPE_MAP = {
       site: setSite,
@@ -86,12 +87,12 @@ export default function RecordPage() {
     setter(payload)
 
     setIsEnabledButton(
-      site === decrypt(data.site) ||
-        email === decrypt(data.email) ||
-        password === decrypt(data.password) ||
-        user === decrypt(data.user) ||
-        color === data.color ||
-        data.keys.length !== keys.length
+      site === decrypt(record.site) ||
+        email === decrypt(record.email) ||
+        password === decrypt(record.password) ||
+        user === decrypt(record.user) ||
+        color === record.color ||
+        record.keys.length !== keys.length
     )
   }
 
@@ -111,7 +112,7 @@ export default function RecordPage() {
     setCurrentKey('')
   }
 
-  if (isLoading || !data) return <LoaderPage />
+  if (isLoading || !record) return <LoaderPage />
 
   return (
     <Page className='flex flex-col gap-4 relative'>
@@ -126,7 +127,9 @@ export default function RecordPage() {
         <p className='text-gray-500 font-medium'>Let's check your record!</p>
       </section>
 
-      <RecordCard full record={{ email, site, user, color, password, keys, id, marked: data.marked }} />
+      <div className='pt-2'>
+        <RecordCard full record={{ email, site, user, color, password, keys, id, marked: record.marked }} />
+      </div>
 
       <p className='font-semibold pt-6'>Information</p>
       <div className='grid gap-3 pb-6'>
