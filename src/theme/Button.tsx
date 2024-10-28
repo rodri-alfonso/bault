@@ -1,18 +1,19 @@
-interface Props {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string
-  className?: string
-  onClick?: () => void
   loading?: boolean
-  disabled?: boolean
   icon?: React.ReactNode
+  trailerIcon?: boolean
 }
 
-export default function Button({ label, className, disabled, loading, onClick, icon }: Props) {
+export default function Button({ label, className, disabled, loading, onClick, icon, trailerIcon, ...props }: Props) {
   return (
     <button
       onClick={onClick}
-      className={`flex justify-center gap-2 items-center bg-gray-900 text-white mt-auto rounded-lg p-2 active:scale-95 transition-all disabled:opacity-40 disabled:scale-100 disabled:cursor-not-allowed ${className}`}
+      className={`${
+        trailerIcon ? 'flex-row-reverse' : ''
+      } flex justify-center gap-2 items-center bg-gray-900 text-white mt-auto rounded-lg p-2 active:scale-95 transition-all disabled:opacity-40 disabled:scale-100 disabled:cursor-not-allowed ${className}`}
       disabled={disabled || loading}
+      {...props}
     >
       {icon}
       {loading && (

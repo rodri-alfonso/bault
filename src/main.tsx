@@ -4,9 +4,9 @@ import App from './App.tsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-	<React.StrictMode>
-		<App />
-		<div id='modal-root'></div>
-		<div id='alert-root'></div>
-	</React.StrictMode>
+  <React.StrictMode>
+    <App />
+    <div id='modal-root'></div>
+    <div id='alert-root'></div>
+  </React.StrictMode>
 )
