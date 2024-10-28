@@ -1,10 +1,11 @@
 import { create } from 'zustand'
+import type { RegisterWithId } from '@/services/records'
 
 type Store = {
-  records: [] | null
-  setRecords: (records: []) => void
-  record: any | null
-  setRecord: (record: any | null) => void
+  records: RegisterWithId[] | null
+  setRecords: (records: RegisterWithId[]) => void
+  record: RegisterWithId | null
+  setRecord: (record: RegisterWithId | null) => void
 }
 
 export const recordStore = create<Store>()((set) => ({

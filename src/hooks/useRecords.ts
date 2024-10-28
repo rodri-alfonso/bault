@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getRecordById, getRecords } from '@/services/records'
+import { getRecordById, getRecords, RegisterWithId } from '@/services/records'
 import { recordStore } from '@/stores/records'
 
 export function useRecord(id?: string) {
@@ -15,7 +15,7 @@ export function useRecord(id?: string) {
       .then((response) => {
         setRecords(response)
       })
-      .catch((error) => {
+      .catch(() => {
         setError(true)
       })
       .finally(() => setIsLoading(false))
@@ -28,7 +28,7 @@ export function useRecord(id?: string) {
       .then((res) => {
         setRecord(res)
       })
-      .catch((error) => {
+      .catch(() => {
         setError(true)
       })
       .finally(() => setIsLoading(false))
@@ -38,7 +38,7 @@ export function useRecord(id?: string) {
     if (!records) fetchRecords()
     if (!records && id) fetchRecord()
     if (records && id) {
-      const currentRecord = records.find((record: any) => record.id === id)
+      const currentRecord = records.find((record: RegisterWithId) => record.id === id) || null
       setRecord(currentRecord)
       setIsLoading(false)
     }

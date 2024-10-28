@@ -1,6 +1,5 @@
 import { useParams, useLocation } from 'wouter'
-import useFetch from '@/hooks/useFetch'
-import { editRecord, getRecordById } from '@/services/records'
+import { editRecord } from '@/services/records'
 import { decrypt, encrypt } from '@/lib/encryption'
 import Page from '@/layout/Page'
 import Header from '@/components/Header'
