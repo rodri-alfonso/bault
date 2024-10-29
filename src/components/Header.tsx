@@ -6,6 +6,7 @@ import { ArrowRightIcon, DeleteIcon } from '@/assets/icons'
 import { useState } from 'react'
 import { deleteRecord } from '@/services/records'
 import ConfirmModal from './Modals/Confirm'
+import { recordStore } from '@/stores/records'
 
 interface IconButtonProps {
   children: React.ReactNode | React.ReactNode[]
@@ -22,6 +23,7 @@ export default function Header({ className }: HeaderProps) {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
+  const { setRecords } = recordStore()
 
   const isCreatorPath = location === '/create'
   const isRecordPath = location.includes('record/')
@@ -45,7 +47,10 @@ export default function Header({ className }: HeaderProps) {
   function handleDelete() {
     setIsDeleting(true)
     const locationId = location.split('/')[2]
-    deleteRecord(locationId).then(() => navigation('/'))
+    deleteRecord(locationId).then(() => {
+      setRecords([])
+      navigation('/')
+    })
   }
 
   return (

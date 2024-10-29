@@ -14,7 +14,7 @@ const MAX_NUMBER_INPUTS = 4
 export default function SecurityPage() {
   const { user } = authStore()
   const [otp, setOtp] = useState('')
-  const [type, setType] = useState<AllowedInputTypes>('text')
+  const [type, setType] = useState<AllowedInputTypes>('password')
   const { setIsProtected, setTimestamp } = timestampStore()
   const [_, navigate] = useLocation()
   const [isLoading, setIsLoading] = useState(false)

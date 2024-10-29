@@ -9,6 +9,7 @@ import { EarthIcon, MailIcon, PasswordIcon, UserIcon, KeyIcon, AddCircleIcon, Pl
 import Typography from '@/theme/Typography'
 import Button from '@/theme/Button'
 import ColorPicker from './ColorPicker'
+import { recordStore } from '@/stores/records'
 
 const randomColor = CARDS_COLORS[Math.floor(Math.random() * CARDS_COLORS.length)]
 
@@ -20,6 +21,7 @@ export default function FormCreator() {
   const [keys, setKeys] = useState<Key[]>([])
   const [currentKey, setCurrentKey] = useState('')
   const [color, setColor] = useState(randomColor)
+  const { setRecords } = recordStore()
 
   const [loading, setLoading] = useState(false)
 
@@ -43,6 +45,7 @@ export default function FormCreator() {
     }
 
     addRecord(payload).then(() => {
+      setRecords([])
       navigate('/')
     })
   }

@@ -35,8 +35,8 @@ export function useRecord(id?: string) {
   }
 
   useEffect(() => {
-    if (!records) fetchRecords()
-    if (!records && id) fetchRecord()
+    if (!records?.length) fetchRecords()
+    if (!records?.length && id) fetchRecord()
     if (records && id) {
       const currentRecord = records.find((record: RegisterWithId) => record.id === id) || null
       setRecord(currentRecord)
