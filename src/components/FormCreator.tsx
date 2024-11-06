@@ -93,7 +93,7 @@ export default function FormCreator() {
         </div>
       </article>
 
-      <section className='grid gap-3 pb-6'>
+      <section className='grid gap-3 pb-6 h-full overflow-y-auto'>
         <p className='font-semibold pt-6 pb-1'>Information</p>
         <Input
           icon={<EarthIcon />}

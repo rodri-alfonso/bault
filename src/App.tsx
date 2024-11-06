@@ -17,7 +17,7 @@ function PrivateRouter() {
 
   const isTimestampPassedAfterThreeHours = new Date().getTime() - timestamp > 10800000
 
-  if (isLoading || !hasCode) return <LoaderPage />
+  if (isLoading) return <LoaderPage />
   if (!hasCode) return <SecurePage />
   if (isTimestampPassedAfterThreeHours) return <SecurityPage />
 

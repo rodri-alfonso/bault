@@ -35,12 +35,14 @@ export default function HomePage() {
         <p className='text-lg font-medium'>All records</p>
 
         <div className='flex items-center gap-2'>
-          <button
-            onClick={() => setIsFavouritesModalOpen(true)}
-            className='p-2 rounded-xl hover:bg-gray-200 transition-all active:scale-95 bg-gray-100'
-          >
-            <BookmarkIcon className='' />
-          </button>
+          {Boolean(records?.length) && (
+            <button
+              onClick={() => setIsFavouritesModalOpen(true)}
+              className='p-2 rounded-xl hover:bg-gray-200 transition-all active:scale-95 bg-gray-100'
+            >
+              <BookmarkIcon className='' />
+            </button>
+          )}
           <button
             onClick={() => navigate('/create')}
             className='p-2 rounded-xl hover:bg-gray-200  transition-all active:scale-95 bg-gray-100'

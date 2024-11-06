@@ -130,8 +130,8 @@ export default function RecordPage() {
         <RecordCard full record={{ email, site, user, color, password, keys, id, marked: record.marked }} />
       </div>
 
-      <p className='font-semibold pt-6'>Information</p>
-      <div className='grid gap-3 pb-6'>
+      <div className='grid gap-3 pb-6 h-full overflow-y-auto'>
+        <p className='font-semibold pt-6'>Information</p>
         <Input
           icon={<EarthIcon className='w-5 h-5' />}
           label='Site'
@@ -165,43 +165,43 @@ export default function RecordPage() {
           placeholder='User'
           color={color}
         />
-      </div>
 
-      <section className='grid gap-4 pb-4'>
-        <p className='font-semibold'>Security Keys</p>
+        <section className='grid gap-4 pt-4'>
+          <p className='font-semibold'>Security Keys</p>
 
-        <div
-          className='py-2 px-4 rounded-xl flex items-center gap-1.5 text-gray-600'
-          style={{ backgroundColor: color + '4D' || '#dddd' }}
-        >
-          <div>{<KeyIcon />}</div>
-          <input
-            className={`w-full p-1 rounded outline-none focus:border-blue-500 bg-transparent text-gray-800`}
-            placeholder='Add new key'
-            value={currentKey}
-            onChange={(e) => setCurrentKey(e.target.value)}
-          />
-          {currentKey.trim() && (
-            <button
-              onClick={() => handleChange('addKey', currentKey)}
-              className='hover:text-gray-700 active:scale-95 transition-all bg-gray-700 rounded-full'
-            >
-              <AddCircleIcon className=' text-white ' />
-            </button>
-          )}
-        </div>
-
-        <div className='grid gap-2 px-3'>
-          {keys.map((key) => (
-            <KeyItem
-              key={key.value}
-              value={key.value}
-              checked={key.checked}
-              onCheck={() => handleChange('keys', key.value)}
+          <div
+            className='py-2 px-4 rounded-xl flex items-center gap-1.5 text-gray-600'
+            style={{ backgroundColor: color + '4D' || '#dddd' }}
+          >
+            <div>{<KeyIcon />}</div>
+            <input
+              className={`w-full p-1 rounded outline-none focus:border-blue-500 bg-transparent text-gray-800`}
+              placeholder='Add new key'
+              value={currentKey}
+              onChange={(e) => setCurrentKey(e.target.value)}
             />
-          ))}
-        </div>
-      </section>
+            {currentKey.trim() && (
+              <button
+                onClick={() => handleChange('addKey', currentKey)}
+                className='hover:text-gray-700 active:scale-95 transition-all bg-gray-700 rounded-full'
+              >
+                <AddCircleIcon className=' text-white ' />
+              </button>
+            )}
+          </div>
+
+          <div className='grid gap-2 px-3'>
+            {keys.map((key) => (
+              <KeyItem
+                key={key.value}
+                value={key.value}
+                checked={key.checked}
+                onCheck={() => handleChange('keys', key.value)}
+              />
+            ))}
+          </div>
+        </section>
+      </div>
 
       <div className='mt-auto sticky bottom-0 z-20 bg-white grid py-3'>
         <Button

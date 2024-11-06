@@ -1,24 +1,36 @@
 import { setSecureCode } from '@/services/security'
 import { authStore } from '@/stores/auth'
 import { useState } from 'react'
-import OtpInput, { AllowedInputTypes } from 'react-otp-input'
 import Button from '@/theme/Button'
-import { ViewIcon, ViewOffIcon } from '@/assets/icons'
-import { OTP_INPUT_NUMBER } from '@/lib/constants'
+import Otp from '@/theme/Otp'
+import SplashLayout from '@/layout/Splash'
+import ModalError from '@/components/Modals/Error'
+import { timestampStore } from '@/stores/timestamp'
+
+const MAX_NUMBER_INPUTS = 4
 
 export default function SecurePage() {
   const { user } = authStore()
+  const { setTimestamp } = timestampStore()
   const [otp, setOtp] = useState('')
   const [confirmOtp, setConfirmOtp] = useState('')
-  const [type, setType] = useState<AllowedInputTypes>('password')
+  const [isModalVisible, setIsModalVisible] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
-  function handleSetSecureCode() {
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+
+    if (otp !== confirmOtp) {
+      setIsModalVisible(true)
+      return
+    }
+
     const userId = user?.id || ''
 
     setIsLoading(true)
     setSecureCode(userId, otp)
       .then(() => {
+        setTimestamp()
         location.reload()
       })
       .finally(() => {
@@ -26,60 +38,35 @@ export default function SecurePage() {
       })
   }
 
-  function handleChangeVisibility() {
-    setType(type === 'password' ? 'number' : 'password')
-  }
-
   return (
-    <div className='grid place-items-center gap-2'>
-      <div className=''>
-        <p>Set your secure code</p>
-        <OtpInput
-          value={otp}
-          onChange={setOtp}
-          numInputs={OTP_INPUT_NUMBER}
-          renderSeparator={<span>-</span>}
-          renderInput={(props) => <input {...props} />}
-          containerStyle={'p-8 w-full m-auto'}
-          inputType={type}
-          inputStyle={
-            'w-[80px] text-xl font-medium h-[80px] p-2 rounded-xl bg-gray-200 text-center flex justify-center items-center m-auto'
-          }
-          skipDefaultStyles
-          shouldAutoFocus
-        />
-      </div>
-      <div className=''>
-        <p>Confirm your secure code</p>
-        <OtpInput
-          value={confirmOtp}
-          onChange={setConfirmOtp}
-          numInputs={OTP_INPUT_NUMBER}
-          renderSeparator={<span>-</span>}
-          renderInput={(props) => <input {...props} />}
-          containerStyle={'p-8 w-full m-auto'}
-          inputType={type}
-          inputStyle={
-            'w-[80px] text-xl font-medium h-[80px] p-2 rounded-xl bg-gray-200 text-center flex justify-center items-center m-auto'
-          }
-          skipDefaultStyles
-          shouldAutoFocus
-        />
-      </div>
+    <SplashLayout>
+      <form onSubmit={handleSubmit} className='h-full flex flex-col mx-auto gap-10 sm:max-w-sm'>
+        <div className='pt-20'>
+          <h1 className='text-2xl font-bold text-center'>Security step</h1>
+          <p className='text-center text-gray-500'>Let's create a 4-digit code to access to your bault</p>
+        </div>
 
-      <div className='m-auto flex gap-2'>
-        <button type='button' onClick={handleChangeVisibility}>
-          Change visibility
-        </button>
+        <div className='h-1/2 overflow-y-auto grid gap-4'>
+          <Otp value={otp} setValue={setOtp} label='Security code' />
+          <Otp value={confirmOtp} setValue={setConfirmOtp} label='Repeat security code' />
+        </div>
 
-        {type === 'password' ? <ViewIcon /> : <ViewOffIcon />}
-      </div>
-      <Button
-        label={isLoading ? 'Setting code...' : 'Set secure code'}
-        disabled={isLoading || otp.length !== OTP_INPUT_NUMBER || otp !== confirmOtp}
-        loading={isLoading}
-        onClick={handleSetSecureCode}
+        <div className='grid px-3 pb-4 gap-2 mt-auto'>
+          <Button
+            label={isLoading ? 'Creating...' : 'Create'}
+            disabled={isLoading || confirmOtp.length !== MAX_NUMBER_INPUTS}
+            loading={isLoading}
+          />
+        </div>
+      </form>
+      <ModalError
+        isVisible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        onConfirm={() => setIsModalVisible(false)}
+        confirmText='Close'
+        title='Validation error'
+        message='The security codes do not match.'
       />
-    </div>
+    </SplashLayout>
   )
 }
