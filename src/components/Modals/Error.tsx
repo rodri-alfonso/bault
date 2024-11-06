@@ -11,7 +11,7 @@ interface Props {
   closable?: boolean
 }
 
-export default function ModalError({ isVisible, onClose, closable, confirmText, message, onConfirm, title }: Props) {
+export default function ModalError({ isVisible, onClose, confirmText, message, onConfirm, title }: Props) {
   return (
     <Modal isVisible={isVisible}>
       <div className='flex flex-col gap-6 rounded-2xl bg-white p-6 m-4 max-w-sm'>
@@ -20,7 +20,13 @@ export default function ModalError({ isVisible, onClose, closable, confirmText, 
           <p className='text-gray-600'>{message}</p>
         </div>
 
-        <Button onClick={onConfirm} label={confirmText} />
+        <Button
+          onClick={() => {
+            onConfirm && onConfirm()
+            onClose()
+          }}
+          label={confirmText}
+        />
       </div>
     </Modal>
   )

@@ -2,7 +2,6 @@ import OTPInput from 'react-otp-input'
 import { OTP_INPUT_NUMBER } from '@/lib/constants'
 import { useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@/assets/icons'
-import IconButton from './IconButton'
 
 type Type = 'password' | 'text'
 
