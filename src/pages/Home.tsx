@@ -32,7 +32,7 @@ export default function HomePage() {
       )}
 
       <div className='flex items-center justify-between pt-4 px-4 '>
-        <p className='text-lg font-medium'>All records</p>
+        <p className='text-lg font-medium'>Last records</p>
 
         <div className='flex items-center gap-2'>
           {Boolean(records?.length) && (
