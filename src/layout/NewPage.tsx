@@ -25,7 +25,7 @@ export default function NewPage({ children, className, records, onConfirmModal }
   }
 
   return (
-    <main className='grid place-items-center h-screen w-full relative px-4'>
+    <main className='grid place-items-center h-screen w-full relative px-4 bg-[url("/waves.svg")]'>
       {/* <Brand /> */}
       <div className='bg-gray-800 p-2.5 rounded-[32px] flex'>
         <div className='flex flex-col items-center py-5 ml-2 mr-4 justify-between'>
