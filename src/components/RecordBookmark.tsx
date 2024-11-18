@@ -1,4 +1,4 @@
-import { BookmarkFilledIcon, BookmarkIcon } from '@/assets/icons'
+import { BookmarkFilledIcon, Bookmark01Icon } from '@/assets/icons'
 import Typography from '@/theme/Typography'
 import { decrypt } from '@/lib/encryption'
 import type { Register } from 'types'
@@ -36,7 +36,7 @@ export default function RecordBookmark({ record, onSelect }: Props) {
           marked ? (
             <BookmarkFilledIcon className='w-6 h-6 text-gray-800' />
           ) : (
-            <BookmarkIcon className='w-6 h-6 text-gray-700' />
+            <Bookmark01Icon className='w-6 h-6 text-gray-700' />
           )
         }
       />
