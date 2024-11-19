@@ -95,39 +95,42 @@ export default function FormCreator() {
 
       <section className='grid gap-3 pb-6 h-full overflow-y-auto'>
         <p className='font-semibold pt-6 pb-1'>Information</p>
-        <Input
-          icon={<EarthIcon />}
-          label='Site'
-          onChange={(e) => setSite(e.target.value)}
-          value={site}
-          placeholder='Site'
-          color={color}
-        />
-        <Input
-          icon={<MailIcon />}
-          label='Email'
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          placeholder='Email'
-          color={color}
-        />
-        <Input
-          icon={<PasswordIcon />}
-          label='Password'
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          placeholder='Password'
-          color={color}
-          type='password'
-        />
-        <Input
-          icon={<UserIcon />}
-          label='User'
-          onChange={(e) => setUser(e.target.value)}
-          value={user}
-          placeholder='User'
-          color={color}
-        />
+
+        <div className='grid gap-3 md:grid-cols-2 '>
+          <Input
+            icon={<EarthIcon />}
+            label='Site'
+            onChange={(e) => setSite(e.target.value)}
+            value={site}
+            placeholder='Site'
+            color={color}
+          />
+          <Input
+            icon={<MailIcon />}
+            label='Email'
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            placeholder='Email'
+            color={color}
+          />
+          <Input
+            icon={<PasswordIcon />}
+            label='Password'
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            placeholder='Password'
+            color={color}
+            type='password'
+          />
+          <Input
+            icon={<UserIcon />}
+            label='User'
+            onChange={(e) => setUser(e.target.value)}
+            value={user}
+            placeholder='User'
+            color={color}
+          />
+        </div>
 
         <p className='font-semibold pt-6'>Security Keys</p>
         <div

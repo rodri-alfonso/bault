@@ -1,7 +1,6 @@
 import { useParams, useLocation } from 'wouter'
 import { editRecord } from '@/services/records'
 import { decrypt, encrypt } from '@/lib/encryption'
-import Page from '@/layout/Page'
 import Header from '@/components/Header'
 import { AddCircleIcon, EarthIcon, KeyIcon, MailIcon, PasswordIcon, UserIcon } from '@/assets/icons'
 import { useEffect, useState } from 'react'
@@ -13,6 +12,9 @@ import { Key } from '@/types'
 import KeyItem from '@/components/KeyItem'
 import LoaderPage from './Loader'
 import { useRecord } from '@/hooks/useRecords'
+import NewPage from '@/layout/NewPage'
+import Heading from '@/components/Heading'
+import { recordStore } from '@/stores/records'
 
 export default function RecordPage() {
   const [_, navigate] = useLocation()
@@ -28,6 +30,7 @@ export default function RecordPage() {
   const [isEnabledButton, setIsEnabledButton] = useState(false)
   const [keys, setKeys] = useState<Key[]>([])
   const [currentKey, setCurrentKey] = useState('')
+  const { setRecords } = recordStore()
 
   useEffect(() => {
     if (!isLoading && record) {
@@ -61,6 +64,7 @@ export default function RecordPage() {
     }
 
     editRecord(id, payload).then(() => {
+      setRecords([])
       navigate('/')
     })
   }
@@ -114,57 +118,57 @@ export default function RecordPage() {
   if (isLoading || !record) return <LoaderPage />
 
   return (
-    <Page className='flex flex-col gap-4 relative'>
-      <Header />
+    <NewPage disabledEditing={isEditing || !isEnabledButton} loadingEditing={isEditing} onSaveEditing={handleEdit}>
+      <Header className='md:hidden' />
 
       <section className='absolute right-16 flex items-center top-6'>
         <ColorPicker color={color} setColor={(payload) => handleChange('color', payload)} />
       </section>
 
-      <section className='pt-2'>
-        <p className='text-2xl font-medium'>Welcome back,</p>
-        <p className='text-gray-500 font-medium'>Let's check your record!</p>
-      </section>
+      <Heading subtitle="Let's check your record!" title='Welcome back,' className='pt-2 px-4 md:pt-6' />
 
-      <div className='pt-2'>
+      <div className='pt-2 md:px-4 md:pt-6 md:pr-5 md:max-w-md'>
         <RecordCard full record={{ email, site, user, color, password, keys, id, marked: record.marked }} />
       </div>
 
-      <div className='grid gap-3 pb-6 h-full overflow-y-auto'>
+      <div className='grid gap-3 pb-6 h-full overflow-y-auto md:px-4 md:pr-5'>
         <p className='font-semibold pt-6'>Information</p>
-        <Input
-          icon={<EarthIcon className='w-5 h-5' />}
-          label='Site'
-          onChange={(e) => handleChange('site', e.target.value)}
-          value={site}
-          placeholder='Site'
-          color={color}
-        />
-        <Input
-          icon={<MailIcon className='w-5 h-5' />}
-          label='Email'
-          onChange={(e) => handleChange('email', e.target.value)}
-          value={email}
-          placeholder='Email'
-          color={color}
-        />
-        <Input
-          icon={<PasswordIcon className='w-5 h-5' />}
-          label='Password'
-          onChange={(e) => handleChange('password', e.target.value)}
-          value={password}
-          placeholder='Password'
-          color={color}
-          type='password'
-        />
-        <Input
-          icon={<UserIcon className='w-5 h-5' />}
-          label='User'
-          onChange={(e) => handleChange('user', e.target.value)}
-          value={user}
-          placeholder='User'
-          color={color}
-        />
+
+        <div className='grid gap-3 md:grid-cols-2 '>
+          <Input
+            icon={<EarthIcon className='w-5 h-5' />}
+            label='Site'
+            onChange={(e) => handleChange('site', e.target.value)}
+            value={site}
+            placeholder='Site'
+            color={color}
+          />
+          <Input
+            icon={<MailIcon className='w-5 h-5' />}
+            label='Email'
+            onChange={(e) => handleChange('email', e.target.value)}
+            value={email}
+            placeholder='Email'
+            color={color}
+          />
+          <Input
+            icon={<PasswordIcon className='w-5 h-5' />}
+            label='Password'
+            onChange={(e) => handleChange('password', e.target.value)}
+            value={password}
+            placeholder='Password'
+            color={color}
+            type='password'
+          />
+          <Input
+            icon={<UserIcon className='w-5 h-5' />}
+            label='User'
+            onChange={(e) => handleChange('user', e.target.value)}
+            value={user}
+            placeholder='User'
+            color={color}
+          />
+        </div>
 
         <section className='grid gap-4 pt-4'>
           <p className='font-semibold'>Security Keys</p>
@@ -202,8 +206,7 @@ export default function RecordPage() {
           </div>
         </section>
       </div>
-
-      <div className='mt-auto sticky bottom-0 z-20 bg-white grid py-3'>
+      <div className='mt-auto sticky bottom-0 z-20 bg-white grid py-3 md:hidden'>
         <Button
           label={isEditing ? 'Saving...' : 'Save'}
           loading={isEditing}
@@ -212,6 +215,6 @@ export default function RecordPage() {
           className=''
         />
       </div>
-    </Page>
+    </NewPage>
   )
 }

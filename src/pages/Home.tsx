@@ -10,6 +10,7 @@ import { BookmarkedRecord } from '@/components/Modals/Favourites'
 import { useRecord } from '@/hooks/useRecords'
 import NewPage from '@/layout/NewPage'
 import StatCard from '@/components/StatCard'
+import Heading from '@/components/Heading'
 
 export default function HomePage() {
   const { user } = authStore()
@@ -21,18 +22,12 @@ export default function HomePage() {
   const isLoadingData = !records?.length && isLoading
 
   return (
-    <NewPage
-      className='flex flex-col gap-4 py-6 pb-4 md:bg-gray-800 md:max-w-4xl md:max-h-[600px] rounded-3xl'
-      records={(records as BookmarkedRecord[]) || []}
-      onConfirmModal={refetch}
-    >
+    <NewPage>
       {/* <main className='flex flex-col gap-4 h-screen py-6 pb-4 md:bg-gray-800 md:max-w-4xl md:max-h-[600px] md:m-auto md:mt-10 rounded-3xl'> */}
       <Header className='px-4 md:hidden' />
       <section className='pt-2 px-4 md:pt-6 flex w-full justify-between items-start'>
-        <div>
-          <p className='text-2xl font-medium md:text-3xl'>{`Hello ${firstName},`}</p>
-          <p className='text-gray-500 font-medium md:text-xl'>Let's check your bault!</p>
-        </div>
+        <Heading title={`Hello ${firstName},`} subtitle="Let's check your bault!" />
+
         <div className='flex items-center gap-2 rounded-2xl'>
           <StatCard count={records?.length || 0} icon={<LicenseIcon className='w-5' />} label='Records' />
           <StatCard
