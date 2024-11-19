@@ -1,16 +1,15 @@
 import Page from '../layout/Page'
 import FormCreator from '../components/FormCreator'
 import Header from '@/components/Header'
+import NewPage from '@/layout/NewPage'
+import Heading from '@/components/Heading'
 
 export default function CreatorPage() {
   return (
-    <Page className='grid gap-6'>
-      <Header />
-      <section>
-        <p className='text-2xl font-medium'>Welcome,</p>
-        <p className='text-gray-500 font-medium'>Let's create a new record!</p>
-      </section>
+    <NewPage>
+      <Header className='md:hidden' />
+      <Heading className='pt-2 px-4 md:pt-6' title='Welcome,' subtitle="Let's create a new record!" />
       <FormCreator />
-    </Page>
+    </NewPage>
   )
 }
