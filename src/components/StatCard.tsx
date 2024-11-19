@@ -19,7 +19,6 @@ export default function StatCard({ count, icon, label }: Props) {
       <div className='flex items-center gap-1 text-gray-700'>
         <p className='text-xl font-normal'>{count}</p>
         <span className='rounded-full grid place-items-center'>{icon}</span>
-        {/* <p className='text-xs text-gray-500'>{label}</p> */}
       </div>
     </div>
   )
