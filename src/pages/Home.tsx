@@ -60,7 +60,7 @@ export default function HomePage() {
           )}
           <button
             onClick={() => navigate('/create')}
-            className='p-2 rounded-xl hover:bg-gray-200  transition-all active:scale-95 bg-gray-100'
+            className='p-2 rounded-xl hover:bg-gray-200  transition-all active:scale-95 bg-gray-100 md:hidden'
           >
             <PlusIcon className='w-6 h-6' />
           </button>

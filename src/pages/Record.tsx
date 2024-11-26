@@ -1,8 +1,8 @@
 import { useParams, useLocation } from 'wouter'
-import { editRecord } from '@/services/records'
+import { deleteRecord, editRecord } from '@/services/records'
 import { decrypt, encrypt } from '@/lib/encryption'
 import Header from '@/components/Header'
-import { AddCircleIcon, EarthIcon, KeyIcon, MailIcon, PasswordIcon, UserIcon } from '@/assets/icons'
+import { AddCircleIcon, DeleteIcon, EarthIcon, KeyIcon, MailIcon, PasswordIcon, UserIcon } from '@/assets/icons'
 import { useEffect, useState } from 'react'
 import RecordCard from '@/components/RecordCard'
 import Input from '@/theme/Input'
@@ -15,12 +15,20 @@ import { useRecord } from '@/hooks/useRecords'
 import NewPage from '@/layout/NewPage'
 import Heading from '@/components/Heading'
 import { recordStore } from '@/stores/records'
+import ConfirmModal from '@/components/Modals/Confirm'
+
+interface IconButtonProps {
+  children: React.ReactNode | React.ReactNode[]
+  onClick: () => void
+}
 
 export default function RecordPage() {
-  const [_, navigate] = useLocation()
+  const [location, navigate] = useLocation()
   const { id } = useParams()
   const { isLoading, record } = useRecord(id)
   const [isEditing, setIsEditing] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
 
   const [site, setSite] = useState('')
   const [email, setEmail] = useState('')
@@ -115,26 +123,52 @@ export default function RecordPage() {
     setCurrentKey('')
   }
 
+  function handleDelete() {
+    setIsDeleting(true)
+    const locationId = location.split('/')[2]
+    deleteRecord(locationId).then(() => {
+      setRecords([])
+      navigate('/')
+    })
+  }
+
   if (isLoading || !record) return <LoaderPage />
+
+  const IconButton = ({ children, onClick }: IconButtonProps) => {
+    return (
+      <button
+        onClick={onClick}
+        className='text-gray-500 p-2 bg-gray-50 rounded-lg hover:text-gray-800 hover:bg-gray-100 active:scale-95 transition-all'
+      >
+        {children}
+      </button>
+    )
+  }
 
   return (
     <NewPage disabledEditing={isEditing || !isEnabledButton} loadingEditing={isEditing} onSaveEditing={handleEdit}>
       <Header className='md:hidden' />
 
-      <section className='absolute right-16 flex items-center top-6'>
-        <ColorPicker color={color} setColor={(payload) => handleChange('color', payload)} />
-      </section>
+      <div className='flex items-start gap-2 absolute right-16 top-6 md:right-4 md:top-4'>
+        <section className=' flex items-center '>
+          <ColorPicker color={color} setColor={(payload) => handleChange('color', payload)} />
+        </section>
+
+        <section className='flex gap-2'>
+          <IconButton onClick={() => setIsDeleteModalVisible(true)}>
+            <DeleteIcon />
+          </IconButton>
+        </section>
+      </div>
 
       <Heading subtitle="Let's check your record!" title='Welcome back,' className='pt-2 px-4 md:pt-6' />
-
       <div className='pt-2 md:px-4 md:pt-6 md:pr-5 md:max-w-md'>
         <RecordCard full record={{ email, site, user, color, password, keys, id, marked: record.marked }} />
       </div>
 
-      <div className='grid gap-3 pb-6 h-full overflow-y-auto md:px-4 md:pr-5'>
-        <p className='font-semibold pt-6'>Information</p>
-
-        <div className='grid gap-3 md:grid-cols-2 '>
+      <div className='grid md:grid-cols-2 gap-3 pb-6 h-full overflow-y-auto md:overflow-hidden md:px-4 md:pr-5'>
+        <div className='flex flex-col gap-2'>
+          <p className='font-semibold pt-6 pb-2'>Information</p>
           <Input
             icon={<EarthIcon className='w-5 h-5' />}
             label='Site'
@@ -169,12 +203,11 @@ export default function RecordPage() {
             color={color}
           />
         </div>
-
-        <section className='grid gap-4 pt-4'>
+        <section className='flex flex-col gap-4 pt-6 md:overflow-y-auto h-full relative'>
           <p className='font-semibold'>Security Keys</p>
 
           <div
-            className='py-2 px-4 rounded-xl flex items-center gap-1.5 text-gray-600'
+            className='py-2 px-4 rounded-xl flex items-center gap-1.5 text-gray-600 sticky'
             style={{ backgroundColor: color + '4D' || '#dddd' }}
           >
             <div>{<KeyIcon />}</div>
@@ -206,6 +239,7 @@ export default function RecordPage() {
           </div>
         </section>
       </div>
+
       <div className='mt-auto sticky bottom-0 z-20 bg-white grid py-3 md:hidden'>
         <Button
           label={isEditing ? 'Saving...' : 'Save'}
@@ -215,6 +249,18 @@ export default function RecordPage() {
           className=''
         />
       </div>
+
+      <ConfirmModal
+        isVisible={isDeleteModalVisible}
+        onCancel={() => setIsDeleteModalVisible(false)}
+        title='Delete record'
+        message='Are you sure you want to delete this record?'
+        cancelLabel='Cancel'
+        onConfirm={handleDelete}
+        confirmDisabled={isDeleting}
+        confirmLabel={isDeleting ? 'Deleting...' : 'Delete'}
+        loading={isDeleting}
+      />
     </NewPage>
   )
 }
