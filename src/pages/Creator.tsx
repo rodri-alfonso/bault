@@ -86,7 +86,7 @@ export default function CreatorPage() {
         style={{
           backgroundColor: color,
         }}
-        className='rounded-3xl p-7 flex items-center md:pr-0 justify-between shadow-lg md:max-w-md md:ml-4 md:mt-6'
+        className='rounded-3xl p-7 flex items-center md:pr-0 justify-between shadow-lg md:max-w-[415px] md:ml-4 md:mt-6'
       >
         <div className='flex items-center gap-4'>
           <div className='grid place-items-center w-10 h-10 bg-gray-900 rounded-full text-white'>
