@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react'
 import Checkbox from '@/theme/Checkbox'
 import CircularSlider from '@fseehawer/react-circular-slider'
 import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from '@/lib/config'
-import IconButton from '@/theme/IconButton'
 
 interface Props {
   isVisible: boolean
@@ -15,7 +14,7 @@ interface Props {
 
 type ConfigType = 'LOWERCASE' | 'UPPERCASE' | 'SYMBOLS' | 'NUMBERS'
 
-export default function GeneratorModal({ isVisible, onClose, onConfirm }: Props) {
+export default function GeneratorModal({ isVisible, onClose }: Props) {
   const [password, setPassword] = useState('')
   const [config, setConfig] = useState<ConfigType[]>(['LOWERCASE', 'NUMBERS', 'SYMBOLS', 'UPPERCASE'])
   const [length, setLength] = useState(MAX_PASSWORD_LENGTH)

@@ -1,5 +1,4 @@
 import { CopyIcon, TickIcon } from '@/assets/icons'
-import Tooltip from '@/theme/Tooltip'
 
 interface Props {
   checked: boolean
