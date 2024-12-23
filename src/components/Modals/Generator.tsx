@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import Checkbox from '@/theme/Checkbox'
 import CircularSlider from '@fseehawer/react-circular-slider'
 import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from '@/lib/config'
+import IconButton from '@/theme/IconButton'
 
 interface Props {
   isVisible: boolean
@@ -115,11 +116,10 @@ export default function GeneratorModal({ isVisible, onClose, onConfirm }: Props)
 
         <section className='flex items-center gap-2.5 justify-center pt-3'>
           <button
-            className='bg-gray-100 text-gray-600 active:scale-95 transition-all py-1 px-3 rounded-full border-solid border border-gray-400 font-medium'
+            className='bg-gray-100 text-gray-600 active:scale-95 transition-all p-2 rounded-full border-solid border border-gray-400 font-medium'
             onClick={onClose}
           >
-            {/* <PlusIcon className='rotate-45 w-5 h-5' /> */}
-            Close
+            <PlusIcon className='rotate-45 w-6 h-6' />
           </button>
           <button
             className='p-2.5 rounded-full bg-gray-800 text-white active:scale-95 transition-all ring-2 ring-opacity-50 border-solid border-2 border-white ring-black'
@@ -128,11 +128,11 @@ export default function GeneratorModal({ isVisible, onClose, onConfirm }: Props)
             <RepeatIcon className='w-7 h-7' />
           </button>
           <button
-            className='bg-gray-100 text-gray-600 active:scale-95 transition-all py-1 px-3 rounded-full border-solid border border-gray-400 font-medium'
+            className='bg-gray-100 text-gray-600 active:scale-95 transition-all p-2 rounded-full border-solid border border-gray-400 font-medium'
             onClick={handleCopyPassword}
           >
-            {/* <CopyIcon className='w-5 h-5' /> */}
-            Copy
+            <CopyIcon className='w-6 h-6' />
+            {/* Copy */}
           </button>
         </section>
       </div>
