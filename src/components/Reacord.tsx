@@ -4,6 +4,7 @@ import { decrypt } from '@/lib/encryption'
 import { CopyIcon, TickIcon } from '@/assets/icons'
 import { useEffect, useState } from 'react'
 import Alert from '@/theme/Alert'
+import { ALERT_COPY_DEFAULT_MESSAGE } from '@/lib/config'
 
 export default function Record({ id, site, user, color, password }: RegisterWithId) {
   const [_, navigate] = useLocation()
@@ -48,7 +49,6 @@ export default function Record({ id, site, user, color, password }: RegisterWith
           <p className='-mt-1 font-medium text-sm text-gray-400 truncate w-36'>{decrypt(user)}</p>
         </div>
       </button>
-
       <button
         onClick={handleCopy}
         className='bg-gray-800 text-white rounded-xl p-2 active:scale-95 transition-all z-20'
@@ -57,7 +57,7 @@ export default function Record({ id, site, user, color, password }: RegisterWith
       </button>
       <Alert
         isVisible={isAlertVisible}
-        message='Copied to clipboard! 🎉'
+        message={ALERT_COPY_DEFAULT_MESSAGE}
         onClose={() => setIsAlertVisible(false)}
         isEphemeral
       />

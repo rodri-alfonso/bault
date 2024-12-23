@@ -3,6 +3,7 @@ import { CopyIcon, TickIcon } from '@/assets/icons'
 import Typography from '@/theme/Typography'
 import Alert from '@/theme/Alert'
 import { useEffect, useState } from 'react'
+import { ALERT_COPY_DEFAULT_MESSAGE } from '@/lib/config'
 
 interface Props {
   record: RegisterWithId
@@ -58,7 +59,7 @@ export default function RecordCard({ record, full }: Props) {
 
       <Alert
         isVisible={isAlertVisible}
-        message='Copied to clipboard! 🎉'
+        message={ALERT_COPY_DEFAULT_MESSAGE}
         onClose={() => setIsAlertVisible(false)}
         isEphemeral
       />

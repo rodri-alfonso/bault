@@ -1,3 +1,4 @@
+import { ALERT_COPY_DEFAULT_MESSAGE } from '@/lib/config'
 import { decrypt } from '@/lib/encryption'
 import Alert from '@/theme/Alert'
 import Typography from '@/theme/Typography'
@@ -43,7 +44,7 @@ export default function RecordSimpleCard({ site, user, color, password = '' }: P
       </div>
       <Alert
         isVisible={isAlertVisible}
-        message='Copied to clipboard! 🎉'
+        message={ALERT_COPY_DEFAULT_MESSAGE}
         onClose={() => setIsAlertVisible(false)}
         isEphemeral
       />

@@ -5,3 +5,5 @@ export const SYMBOLS_LIST = '!¡@#$%&¿?[]{}<>+=-*|_.,;:^'
 
 export const MAX_PASSWORD_LENGTH = 30
 export const MIN_PASSWORD_LENGTH = 6
+
+export const ALERT_COPY_DEFAULT_MESSAGE = 'Copied to clipboard! 🎉'
