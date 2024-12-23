@@ -26,7 +26,7 @@ export default function Alert({ message, isVisible, onClose, isEphemeral, lifeti
 
   return createPortal(
     <div className='absolute w-full text-white bg-transparent font-medium pt-6 grid place-items-center z-50 transition-all bottom-appear-element'>
-      <span className='bg-gray-800 p-2 rounded-lg '>{message}</span>
+      <span className='bg-gray-800 py-2 px-3 rounded-lg '>{message}</span>
     </div>,
     alertRoot
   )

@@ -11,6 +11,7 @@ import { useRecord } from '@/hooks/useRecords'
 import NewPage from '@/layout/NewPage'
 import StatCard from '@/components/StatCard'
 import Heading from '@/components/Heading'
+import Tooltip from '@/theme/Tooltip'
 
 export default function HomePage() {
   const { user } = authStore()
@@ -29,12 +30,16 @@ export default function HomePage() {
         <Heading title={`Hello ${firstName},`} subtitle="Let's check your bault!" />
 
         <div className='flex items-center gap-2 rounded-2xl'>
-          <StatCard count={records?.length || 0} icon={<LicenseIcon className='w-5' />} label='Records' />
-          <StatCard
-            count={records?.filter((record) => record.marked).length || 0}
-            icon={<Bookmark01Icon className='w-5' />}
-            label='Bookmarks'
-          />
+          <Tooltip content={`Records`} direction='bottom'>
+            <StatCard count={records?.length || 0} icon={<LicenseIcon className='w-5' />} label='Records' primary />
+          </Tooltip>
+          <Tooltip content={`Bookmarks`} direction='bottom'>
+            <StatCard
+              count={records?.filter((record) => record.marked).length || 0}
+              icon={<Bookmark01Icon className='w-5' />}
+              label='Bookmarks'
+            />
+          </Tooltip>
         </div>
       </section>
       {isLoadingData ? (
