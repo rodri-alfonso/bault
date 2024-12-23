@@ -24,8 +24,10 @@ export default function RecordCard({ record, full }: Props) {
     e.stopPropagation()
     e.preventDefault()
 
-    setIsAlertVisible(true)
-    setWasCopied(true)
+    navigator.clipboard.writeText(record.password).then(() => {
+      setIsAlertVisible(true)
+      setWasCopied(true)
+    })
   }
 
   return (
