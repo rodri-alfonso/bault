@@ -9,7 +9,7 @@ interface Props {
 export default function RecordsSlider({ records }: Props) {
   return (
     <div className='py-2'>
-      <section className='slides px-4'>
+      <section className='slides px-4 w-screen md:w-full'>
         {records.map((record) => {
           const parsedRecord: RegisterWithId = {
             color: record.color,

@@ -6,9 +6,9 @@ interface Props {
 
 export default function Heading({ title, subtitle, className }: Props) {
   return (
-    <section className={className}>
-      <p className='text-2xl font-medium md:text-3xl'>{title}</p>
-      <p className='text-gray-500 font-medium md:text-xl'>{subtitle}</p>
+    <section className={`pt-4 md:pt-0${className}`}>
+      <p className='text-3xl font-medium'>{title}</p>
+      <p className='text-gray-500 font-medium text-xl'>{subtitle}</p>
     </section>
   )
 }

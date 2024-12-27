@@ -8,7 +8,7 @@ interface Props {
 export default function StatCard({ count, icon, primary }: Props) {
   return (
     <div
-      className={`p-2 px-4 rounded-2xl border border-solid text-gray-800 font-medium text-sm grid bg-opacity-70 ${
+      className={`p-1 px-2.5 rounded-xl md:p-2 md:px-4 md:rounded-2xl border border-solid text-gray-800 font-medium text-sm grid bg-opacity-70 ${
         primary ? 'bg-pink-50 border-pink-100' : 'bg-blue-50 border-blue-100'
       }`}
     >
