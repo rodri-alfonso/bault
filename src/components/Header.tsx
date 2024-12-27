@@ -2,7 +2,7 @@ import { signOut } from '../stores/auth'
 import { authStore } from '../stores/auth'
 import { MenuSquareIcon } from '@/assets/icons'
 import { useLocation } from 'wouter'
-import { ArrowRightIcon, DeleteIcon } from '@/assets/icons'
+import { ArrowRightIcon, DeleteIcon, KeyIcon } from '@/assets/icons'
 import { useState } from 'react'
 import { deleteRecord } from '@/services/records'
 import ConfirmModal from './Modals/Confirm'
@@ -63,12 +63,14 @@ export default function Header({ className }: HeaderProps) {
           <ArrowRightIcon className='rotate-180' />
         </button>
       ) : (
-        <button
-          onClick={() => setIsModalVisible(true)}
-          className='text-gray-900 p-2 bg-gray-50 rounded-lg hover:bg-gray-100 active:scale-95 transition-all'
-        >
-          <MenuSquareIcon />
-        </button>
+        <div className='flex items-center gap-2'>
+          <button
+            onClick={() => setIsModalVisible(true)}
+            className='text-gray-900 p-2 bg-gray-50 rounded-xl hover:bg-gray-100 active:scale-95 transition-all'
+          >
+            <MenuSquareIcon />
+          </button>
+        </div>
       )}
 
       {!isCreatorPath && !isRecordPath && (

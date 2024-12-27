@@ -15,6 +15,7 @@ import Tooltip from '@/theme/Tooltip'
 
 export default function HomePage() {
   const { user } = authStore()
+  // const { isLoading, records, refetch } = useRecord()
   const { isLoading, records, refetch } = useRecord()
   const [isFavouritesModalOpen, setIsFavouritesModalOpen] = useState(false)
   const [_, navigate] = useLocation()
@@ -23,13 +24,12 @@ export default function HomePage() {
   const isLoadingData = !records?.length && isLoading
 
   return (
-    <NewPage>
-      {/* <main className='flex flex-col gap-4 h-screen py-6 pb-4 md:bg-gray-800 md:max-w-4xl md:max-h-[600px] md:m-auto md:mt-10 rounded-3xl'> */}
+    <NewPage className='grid h-screen items-start content-baseline'>
       <Header className='px-4 md:hidden' />
       <section className='pt-2 px-4 md:pt-6 flex w-full justify-between items-start'>
         <Heading title={`Hello ${firstName},`} subtitle="Let's check your bault!" />
 
-        <div className='flex items-center gap-2 rounded-2xl'>
+        <div className='hidden md:flex items-center gap-2'>
           <Tooltip content={`Records`} direction='bottom'>
             <StatCard count={records?.length || 0} icon={<LicenseIcon className='w-5' />} label='Records' primary />
           </Tooltip>
@@ -45,13 +45,13 @@ export default function HomePage() {
       {isLoadingData ? (
         <div className='bg-gray-200 rounded-3xl py-11 mt-4 max-w-[310px] mb-6 ml-4' />
       ) : (
-        <div className='pt-4'>
-          <p className='text-lg font-medium md:font-semibold pb-2 px-4'>Bookmarks</p>
+        <div className='pt-2 md:max-w-[888px]'>
+          <p className='md:block hidden text-lg font-medium md:font-semibold pb-2 px-4'>Bookmarks</p>
           <RecordsSlider records={records?.filter((record) => record.marked) || []} />
         </div>
       )}
 
-      <div className='flex items-center justify-between pt-4 px-4 md:pt-0'>
+      <div className='flex items-center justify-between px-4'>
         <p className='text-lg font-medium md:font-semibold'>Last records</p>
 
         <div className='flex items-center gap-2'>
@@ -72,7 +72,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <section className='grid gap-2 overflow-y-auto mb-auto md:flex  md:flex-wrap md:gap-2 px-3'>
+      <section className='grid gap-2 h-full overflow-y-auto md:flex md:flex-wrap md:gap-2 px-3'>
         {isLoadingData ? (
           <div className='w-full bg-gray-200 rounded-xl py-8' />
         ) : (
@@ -85,7 +85,6 @@ export default function HomePage() {
         onConfirm={refetch}
         records={(records as BookmarkedRecord[]) || []}
       />
-      {/* </main> */}
     </NewPage>
   )
 }
