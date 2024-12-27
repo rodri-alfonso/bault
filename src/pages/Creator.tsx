@@ -14,6 +14,7 @@ import Typography from '@/theme/Typography'
 import Button from '@/theme/Button'
 import ColorPicker from '@/components/ColorPicker'
 import { recordStore } from '@/stores/records'
+import GeneratorModal from '@/components/Modals/Generator'
 
 const randomColor = CARDS_COLORS[Math.floor(Math.random() * CARDS_COLORS.length)]
 
@@ -25,6 +26,7 @@ export default function CreatorPage() {
   const [keys, setKeys] = useState<Key[]>([])
   const [currentKey, setCurrentKey] = useState('')
   const [color, setColor] = useState(randomColor)
+  const [isGeneratorVisible, setIsGeneratorVisible] = useState(false)
   const { setRecords } = recordStore()
 
   const [loading, setLoading] = useState(false)
@@ -75,32 +77,45 @@ export default function CreatorPage() {
   }
 
   return (
-    <NewPage onSaveCreating={handleCreate} loadingCreating={loading} disabledCreating={loading || isEmptyForm}>
-      <Header className='md:hidden' />
-      <Heading className='pt-2 px-4 md:pt-6' title='Welcome,' subtitle="Let's create a new record!" />
-      <div className='absolute top-6 right-4 md:right-4 md:top-4'>
-        <ColorPicker color={color} setColor={setColor} />
+    <NewPage
+      onSaveCreating={handleCreate}
+      loadingCreating={loading}
+      disabledCreating={loading || isEmptyForm}
+      className='px-4 h-screen'
+    >
+      <div className='grid gap-6'>
+        <Header className='md:hidden' />
+        <Heading className='pt-2 px-4 md:pt-6' title='Welcome,' subtitle="Let's create a new record!" />
+        <div className='absolute top-6 right-4 md:right-4 md:top-4'>
+          <ColorPicker color={color} setColor={setColor} />
+        </div>
+        <button
+          onClick={() => setIsGeneratorVisible(true)}
+          className='md:hidden absolute top-6 right-16 text-gray-900 p-2 bg-gray-50 rounded-xl hover:bg-gray-100 active:scale-95 transition-all'
+        >
+          <KeyIcon />
+        </button>
+
+        <article
+          style={{
+            backgroundColor: color,
+          }}
+          className='rounded-3xl p-7 flex items-center mb-3 md:mb-0 md:pr-0 justify-between shadow-lg md:max-w-[415px] md:ml-4 md:mt-6'
+        >
+          <div className='flex items-center gap-4'>
+            <div className='grid place-items-center w-10 h-10 bg-gray-900 rounded-full text-white'>
+              <Typography text={site[0]?.toUpperCase() || 'S'} className='text-lg font-semibold' />
+            </div>
+
+            <div className='grid w-auto'>
+              <p className='font-semibold'>{site || 'Site'}</p>
+              <p className='text-sm text-gray-700 -mt-1.5'>{user || 'User'}</p>
+            </div>
+          </div>
+        </article>
       </div>
 
-      <article
-        style={{
-          backgroundColor: color,
-        }}
-        className='rounded-3xl p-7 flex items-center md:pr-0 justify-between shadow-lg md:max-w-[415px] md:ml-4 md:mt-6'
-      >
-        <div className='flex items-center gap-4'>
-          <div className='grid place-items-center w-10 h-10 bg-gray-900 rounded-full text-white'>
-            <Typography text={site[0]?.toUpperCase() || 'S'} className='text-lg font-semibold' />
-          </div>
-
-          <div className='grid w-auto'>
-            <p className='font-semibold'>{site || 'Site'}</p>
-            <p className='text-sm text-gray-700 -mt-1.5'>{user || 'User'}</p>
-          </div>
-        </div>
-      </article>
-
-      <div className='grid md:grid-cols-2 gap-3 pb-6 h-full overflow-y-auto md:overflow-hidden md:px-4 md:pr-5'>
+      <div className='grid md:grid-cols-2 gap-3 pb-6 md:h-full overflow-y-auto md:overflow-hidden md:px-4 md:pr-5'>
         <div className='flex flex-col gap-2'>
           <p className='font-semibold pt-6 pb-2'>Information</p>
 
@@ -177,9 +192,10 @@ export default function CreatorPage() {
           </section>
         </section>
       </div>
-      <div className='mt-auto sticky bottom-0 z-20 grid py-3 bg-white md:hidden'>
+      <div className='mt-auto sticky bottom-0 z-20 grid py-1 bg-white md:hidden'>
         <Button label={'Create'} onClick={handleCreate} disabled={loading || isEmptyForm} loading={loading} />
       </div>
+      <GeneratorModal isVisible={isGeneratorVisible} onClose={() => setIsGeneratorVisible(false)} />
     </NewPage>
   )
 }

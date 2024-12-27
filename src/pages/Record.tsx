@@ -2,7 +2,7 @@ import { useParams, useLocation } from 'wouter'
 import { deleteRecord, editRecord } from '@/services/records'
 import { decrypt, encrypt } from '@/lib/encryption'
 import Header from '@/components/Header'
-import { AddCircleIcon, DeleteIcon, EarthIcon, KeyIcon, MailIcon, PasswordIcon, UserIcon } from '@/assets/icons'
+import { AddCircleIcon, EarthIcon, KeyIcon, MailIcon, PasswordIcon, UserIcon } from '@/assets/icons'
 import { useEffect, useState } from 'react'
 import RecordCard from '@/components/RecordCard'
 import Input from '@/theme/Input'
@@ -16,11 +16,7 @@ import NewPage from '@/layout/NewPage'
 import Heading from '@/components/Heading'
 import { recordStore } from '@/stores/records'
 import ConfirmModal from '@/components/Modals/Confirm'
-
-interface IconButtonProps {
-  children: React.ReactNode | React.ReactNode[]
-  onClick: () => void
-}
+import GeneratorModal from '@/components/Modals/Generator'
 
 export default function RecordPage() {
   const [location, navigate] = useLocation()
@@ -29,6 +25,7 @@ export default function RecordPage() {
   const [isEditing, setIsEditing] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
+  const [isGeneratorVisible, setIsGeneratorVisible] = useState(false)
 
   const [site, setSite] = useState('')
   const [email, setEmail] = useState('')
@@ -134,31 +131,25 @@ export default function RecordPage() {
 
   if (isLoading || !record) return <LoaderPage />
 
-  const IconButton = ({ children, onClick }: IconButtonProps) => {
-    return (
-      <button
-        onClick={onClick}
-        className='text-gray-500 p-2 bg-gray-50 rounded-lg hover:text-gray-800 hover:bg-gray-100 active:scale-95 transition-all'
-      >
-        {children}
-      </button>
-    )
-  }
-
   return (
-    <NewPage disabledEditing={isEditing || !isEnabledButton} loadingEditing={isEditing} onSaveEditing={handleEdit}>
+    <NewPage
+      disabledEditing={isEditing || !isEnabledButton}
+      loadingEditing={isEditing}
+      onSaveEditing={handleEdit}
+      className='px-4 h-screen md:px-0'
+    >
       <Header className='md:hidden' />
 
       <div className='flex items-start gap-2 absolute right-16 top-6 md:right-4 md:top-4'>
         <section className=' flex items-center '>
           <ColorPicker color={color} setColor={(payload) => handleChange('color', payload)} />
         </section>
-
-        <section className='flex gap-2'>
-          <IconButton onClick={() => setIsDeleteModalVisible(true)}>
-            <DeleteIcon />
-          </IconButton>
-        </section>
+        <button
+          onClick={() => setIsGeneratorVisible(true)}
+          className='md:hidden text-gray-900 p-2 bg-gray-50 rounded-xl hover:bg-gray-100 active:scale-95 transition-all'
+        >
+          <KeyIcon />
+        </button>
       </div>
 
       <Heading subtitle="Let's check your record!" title='Welcome back,' className='pt-2 px-4 md:pt-6' />
@@ -240,7 +231,7 @@ export default function RecordPage() {
         </section>
       </div>
 
-      <div className='mt-auto sticky bottom-0 z-20 bg-white grid py-3 md:hidden'>
+      <div className='mt-auto sticky bottom-0 z-20 py-1 bg-white grid md:hidden'>
         <Button
           label={isEditing ? 'Saving...' : 'Save'}
           loading={isEditing}
@@ -261,6 +252,7 @@ export default function RecordPage() {
         confirmLabel={isDeleting ? 'Deleting...' : 'Delete'}
         loading={isDeleting}
       />
+      <GeneratorModal isVisible={isGeneratorVisible} onClose={() => setIsGeneratorVisible(false)} />
     </NewPage>
   )
 }
