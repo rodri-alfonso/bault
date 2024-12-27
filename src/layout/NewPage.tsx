@@ -65,6 +65,7 @@ interface Props {
 
 export default function NewPage({
   children,
+  className,
   disabledEditing,
   loadingEditing,
   onSaveEditing = () => {},
@@ -88,9 +89,9 @@ export default function NewPage({
   }
 
   return (
-    <main className='grid place-items-center h-screen w-full relative px-4 bg-[url("/waves.svg")]'>
-      <div className='bg-gray-800 p-2.5 rounded-[32px] flex md:min-w-[61.3rem]'>
-        <div className='flex flex-col items-center py-5 ml-2 mr-4 justify-between'>
+    <main className='grid place-items-center h-screen w-full relative md:px-4 md:bg-[url("/waves.svg")]'>
+      <div className='md:bg-gray-800 w-full md:w-auto md:p-2.5 md:rounded-[32px] md:flex md:min-w-[61.3rem]'>
+        <div className='hidden md:flex flex-col items-center py-5 ml-2 mr-4 justify-between'>
           <button
             onClick={() => navigation('/')}
             className=' text-gray-800 bg-white p-1.5 rounded-xl grid place-items-center active:scale-95 transition-all'
@@ -136,7 +137,7 @@ export default function NewPage({
           />
         </div>
         <section
-          className={`md:relative bg-white md:h-[553px] md:w-full md:max-w-4xl rounded-3xl flex flex-col gap-4 pt-6 pb-4 md:pb-2 md:pt-3 md:pl-2`}
+          className={`md:relative bg-white md:h-[553px] h-full md:w-full md:max-w-4xl rounded-3xl grid gap-4 pt-6 pb-4 md:pb-2 md:pt-3 md:pl-2 ${className}`}
         >
           {children}
         </section>
