@@ -137,7 +137,7 @@ export default function NewPage({
           />
         </div>
         <section
-          className={`md:relative bg-white md:h-[553px] h-full md:w-full md:max-w-4xl rounded-3xl grid gap-4 pt-6 pb-4 md:pb-2 md:pt-3 md:pl-2 ${className}`}
+          className={`md:relative bg-white md:h-[586px] h-full md:w-full md:max-w-4xl rounded-3xl grid gap-4 pt-6 pb-4 md:pb-2 md:pt-3 md:pl-2 ${className}`}
         >
           {children}
         </section>

@@ -7,25 +7,21 @@ interface Props {
   onChange: () => void
   label?: string
   type: ConfigType
+  disabled?: boolean
 }
 
-export default function Checkbox({ checked, onChange, label }: Props) {
+export default function Checkbox({ checked, onChange, label, disabled }: Props) {
   return (
     <button
+      disabled={disabled}
       onClick={onChange}
-      className={`w-full active:scale-95 transition-all py-1.5 px-2 rounded-xl border border-solid border-gray-300 ${
-        checked ? 'bg-gray-800 text-white' : 'bg-inherit text-gray-800'
-      }`}
+      className={`w-full active:scale-95 transition-all py-1.5 px-2 rounded-xl border border-solid border-gray-300 
+        ${checked ? 'bg-gray-800 text-white' : 'bg-inherit text-gray-800'}
+        ${disabled ? 'cursor-not-allowed opacity-40 active:scale-100' : ''}
+        `}
     >
-      <div className='flex items-center gap-1.5 w-full h-full'>
-        <div className={`${checked ? 'bg-white' : 'bg-gray-100'} rounded-full w-5 h-5 grid place-items-center`}>
-          {checked ? (
-            <TickIcon className='w-4 h-4 text-gray-800' />
-          ) : (
-            <div className='border border-solid border-gray-300 w-full h-full rounded-full' />
-          )}
-        </div>
-        <label className='text-sm font-medium'>{label}</label>
+      <div className='flex items-center justify-center gap-1.5 w-full h-full'>
+        <label className='text-sm font-medium lowercase'>{label}</label>
       </div>
     </button>
   )

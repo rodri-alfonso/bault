@@ -5,6 +5,9 @@ import { useEffect, useState } from 'react'
 import Checkbox from '@/theme/Checkbox'
 import CircularSlider from '@fseehawer/react-circular-slider'
 import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from '@/lib/config'
+import Button from '@/theme/Button'
+import Alert from '@/theme/Alert'
+import { ALERT_COPY_DEFAULT_MESSAGE } from '@/lib/config'
 
 interface Props {
   isVisible: boolean
@@ -18,18 +21,20 @@ export default function GeneratorModal({ isVisible, onClose }: Props) {
   const [password, setPassword] = useState('')
   const [config, setConfig] = useState<ConfigType[]>(['LOWERCASE', 'NUMBERS', 'SYMBOLS', 'UPPERCASE'])
   const [length, setLength] = useState(MAX_PASSWORD_LENGTH)
+  const [alertOpen, setAlertOpen] = useState(false)
 
   function handleCreatePassword() {
     setPassword(generatePassword(length, config))
   }
 
   function handleCopyPassword() {
-    navigator.clipboard.writeText(password).then(() => {
-      alert('Password copied to clipboard')
-    })
+    navigator.clipboard.writeText(password).then(() => setAlertOpen(true))
   }
 
   function handleChangeConfig(type: ConfigType) {
+    if (config.length === 1 && !config.includes('LOWERCASE')) return setConfig(['LOWERCASE'])
+    if (config.length === 1 && config.includes('LOWERCASE') && type === 'LOWERCASE') return
+
     if (config.includes(type)) {
       setConfig(config.filter((item) => item !== type))
     } else {
@@ -51,7 +56,7 @@ export default function GeneratorModal({ isVisible, onClose }: Props) {
           <PlusIcon className='rotate-45' />
         </button>
 
-        <h1 className='text-lg font-semibold text-gray-800 text-center px-10'>Generate password</h1>
+        <h1 className='text-lg font-semibold text-gray-800 text-center px-10 pb-1'>Generate password</h1>
 
         <section className='grid grid-cols-2 gap-2 place-items-center'>
           <Checkbox
@@ -77,6 +82,7 @@ export default function GeneratorModal({ isVisible, onClose }: Props) {
             label='Lowers'
             onChange={() => handleChangeConfig('LOWERCASE')}
             type='LOWERCASE'
+            disabled={config.includes('LOWERCASE') && config.length === 1}
           />
         </section>
 
@@ -96,6 +102,7 @@ export default function GeneratorModal({ isVisible, onClose }: Props) {
             trackSize={11}
             progressLineCap='flat'
             width={160}
+            initialValue={15}
             min={MIN_PASSWORD_LENGTH}
             max={MAX_PASSWORD_LENGTH}
             direction={1}
@@ -108,33 +115,37 @@ export default function GeneratorModal({ isVisible, onClose }: Props) {
         <section className='grid gap-1'>
           <span className='text-xs text-center text-gray-500'>Password generated</span>
 
-          <div className='bg-gray-100 rounded-2xl px-3 py-2 grid place-items-center'>
-            <p className='font-medium text-lg truncate w-44 text-center'>{password}</p>
+          <div className='bg-gray-100 rounded-2xl px-3 py-2 flex items-center justify-between gap-2'>
+            <p className='font-medium text-lg truncate w-44 text-center ml-auto'>{password}</p>
+            <button
+              className='p-1.5 rounded-xl bg-gray-800 text-white active:scale-95 transition-all'
+              onClick={handleCreatePassword}
+            >
+              <RepeatIcon />
+            </button>
           </div>
         </section>
 
-        <section className='flex items-center gap-2.5 justify-center pt-3'>
-          <button
-            className='bg-gray-100 text-gray-600 active:scale-95 transition-all p-2 rounded-full border-solid border border-gray-400 font-medium'
-            onClick={onClose}
-          >
-            <PlusIcon className='rotate-45 w-6 h-6' />
-          </button>
-          <button
-            className='p-2.5 rounded-full bg-gray-800 text-white active:scale-95 transition-all ring-2 ring-opacity-50 border-solid border-2 border-white ring-black'
-            onClick={handleCreatePassword}
-          >
-            <RepeatIcon className='w-7 h-7' />
-          </button>
-          <button
-            className='bg-gray-100 text-gray-600 active:scale-95 transition-all p-2 rounded-full border-solid border border-gray-400 font-medium'
+        <section className='grid gap-2 pt-3'>
+          <Button
             onClick={handleCopyPassword}
-          >
-            <CopyIcon className='w-6 h-6' />
-            {/* Copy */}
-          </button>
+            label={alertOpen ? 'Copying...' : 'Copy'}
+            className='w-full'
+            disabled={alertOpen}
+          />
+          <Button
+            onClick={onClose}
+            label='Close'
+            className='!bg-gray-50 !text-gray-600 font-medium hover:!bg-gray-900 hover:!text-white border border-solid border-gray-300'
+          />
         </section>
       </div>
+      <Alert
+        isVisible={alertOpen}
+        onClose={() => setAlertOpen(false)}
+        isEphemeral
+        message={ALERT_COPY_DEFAULT_MESSAGE}
+      />
     </Modal>
   )
 }

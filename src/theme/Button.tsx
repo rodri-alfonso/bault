@@ -11,7 +11,7 @@ export default function Button({ label, className, disabled, loading, onClick, i
       onClick={onClick}
       className={`${
         trailerIcon ? 'flex-row-reverse' : ''
-      } flex justify-center gap-2 items-center bg-gray-900 text-white mt-auto rounded-lg p-2 active:scale-95 transition-all disabled:opacity-40 disabled:scale-100 disabled:cursor-not-allowed ${className}`}
+      } flex justify-center gap-2 items-center bg-gray-900 text-white mt-auto rounded-xl p-2 active:scale-95 transition-all disabled:opacity-40 disabled:scale-100 disabled:cursor-not-allowed ${className}`}
       disabled={disabled || loading}
       {...props}
     >
