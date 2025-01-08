@@ -36,7 +36,7 @@ export default function Otp({ value, setValue, label }: Props) {
           skipDefaultStyles
         />
         <button
-          className='w-[80px] text-xl font-medium h-[70px] p-2 rounded-2xl bg-gray-700 text-center flex justify-center items-center active:scale-95 transition-all text-white'
+          className='w-[80px] text-xl font-medium h-[70px] p-2 rounded-2xl bg-gray-800 text-center flex justify-center items-center active:scale-95 transition-all text-white'
           type='button'
           onClick={handleChangeVisibility}
         >

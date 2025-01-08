@@ -1,30 +1,26 @@
 import { signIn } from '../stores/auth'
-import { Logo2 } from '@/assets/logo'
 import Button from '@/theme/Button'
 import { GoogleIcon } from '@/assets/icons'
+import SplashLayout from '@/layout/Splash'
 
 export default function LoginPage() {
   return (
-    <div className='grid h-screen mx-auto  sm:max-w-sm'>
-      <div className='w-full h-64 bg-gray-800 rounded-b-[90px] relative grid place-items-center'>
-        <div className='absolute -bottom-14 bg-white rounded-[30px] p-3 m-auto'>
-          <Logo2 className='w-24 h-24' />
+    <SplashLayout>
+      <div className='grid  mx-auto  sm:max-w-sm'>
+        <div className=''>
+          <p className='text-3xl font-extrabold text-center text-gray-800'>Welcome to Bault,</p>
+          <p className='text-lg font-semibold text-gray-600 text-center'>Your new password keeper.</p>
+
+          <div className='grid place-items-center text-center m-auto pt-8 px-10'>
+            <p className='text-base font-medium text-gray-500'>All your passwords saved and secure in one place.</p>
+          </div>
+        </div>
+
+        <div className='mt-auto pb-10 grid gap-4 px-10'>
+          <Button label='Login with Google' onClick={signIn} className='' icon={<GoogleIcon />} />
+          <p className='text-sm text-center font-medium underline'> Or check the playground</p>
         </div>
       </div>
-
-      <div className=''>
-        <p className='text-3xl font-extrabold text-center text-gray-800'>Welcome to Bault,</p>
-        <p className='text-lg font-semibold text-gray-600 text-center'>Your new password keeper.</p>
-
-        <div className='grid place-items-center text-center m-auto pt-8 px-10'>
-          <p className='text-base font-medium text-gray-500'>All your passwords saved and secure in one place.</p>
-        </div>
-      </div>
-
-      <div className='mt-auto pb-10 grid gap-4 px-10'>
-        <Button label='Login with Google' onClick={signIn} className='' icon={<GoogleIcon />} />
-        <p className='text-sm text-center font-medium underline'> Or check the playground</p>
-      </div>
-    </div>
+    </SplashLayout>
   )
 }
