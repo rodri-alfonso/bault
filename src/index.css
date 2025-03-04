@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  background-color: #111827;
+}
+
 @font-face {
   font-family: 'DMSans';
   src: url('/fonts/DMSans.ttf') format('truetype');

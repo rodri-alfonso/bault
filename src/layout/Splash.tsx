@@ -57,7 +57,6 @@ function NavButton({ onClick, icon, loading, disabled, primary }: NavButtonProps
 export default function SplashLayout({ children, className }: Props) {
   const [_, navigation] = useLocation()
   const { user } = authStore()
-  console.log('🚀 ~ SplashLayout ~ user:', user)
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   function handleLogout() {
@@ -66,7 +65,7 @@ export default function SplashLayout({ children, className }: Props) {
   }
 
   return (
-    <main className='grid place-items-center h-screen w-full relative md:px-4 md:bg-[url("/waves.svg")]'>
+    <main className='grid place-items-center h-screen w-full relative md:px-4 md:bg-white md:bg-[url("/waves.svg")]'>
       <div
         className={`md:bg-gray-800 w-full md:w-auto md:p-2.5 md:rounded-[32px] md:flex ${
           user ? 'md:min-w-[61.3rem]' : 'md:min-w-[57rem]'
@@ -99,7 +98,7 @@ export default function SplashLayout({ children, className }: Props) {
         >
           <div className='w-full rounded-b-[90px] md:rounded-[24px] mx-auto md:h-32 h-52 bg-gray-800 relative grid place-items-center md:-mb-20'>
             <div className='absolute -bottom-14 bg-white rounded-[30px] p-3 m-auto'>
-              <Logo2 className='w-24 h-24' />
+              <Logo2 className='w-24 h-24 text-gray-800 p-1' />
             </div>
           </div>
           {children}

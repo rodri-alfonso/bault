@@ -10,6 +10,7 @@ import SecurityPage from './pages/Security'
 import { timestampStore } from './stores/timestamp'
 import { useSecure } from './hooks/useSecure'
 import SecurePage from './pages/Secure'
+import Splash from './pages/Splash'
 
 function PrivateRouter() {
   const { timestamp } = timestampStore()
@@ -40,7 +41,8 @@ function App() {
 
   return (
     <Switch>
-      <Route path='/' component={LoginPage} />
+      <Route path='/' component={Splash} />
+      <Route path='/login' component={LoginPage} />
       <Redirect to='/' />
     </Switch>
   )

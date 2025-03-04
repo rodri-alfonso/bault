@@ -89,7 +89,7 @@ export default function NewPage({
   }
 
   return (
-    <main className='grid place-items-center h-screen w-full relative md:px-4 md:bg-[url("/waves.svg")]'>
+    <main className='grid place-items-center h-screen w-full relative md:px-4 md:bg-white md:bg-[url("/waves.svg")]'>
       <div className='md:bg-gray-800 w-full md:w-auto md:p-2.5 md:rounded-[32px] md:flex md:min-w-[61.3rem]'>
         <div className='hidden md:flex flex-col items-center py-5 ml-2 mr-4 justify-between'>
           <button

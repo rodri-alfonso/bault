@@ -7,12 +7,14 @@ export default function LoginPage() {
   return (
     <SplashLayout>
       <div className='grid  mx-auto  sm:max-w-sm'>
-        <div className=''>
+        <div className='pt-10'>
           <p className='text-3xl font-extrabold text-center text-gray-800'>Welcome to Bault,</p>
-          <p className='text-lg font-semibold text-gray-600 text-center'>Your new password keeper.</p>
+          <p className='text-3xl font-semibold text-gray-500 text-center'>Your new password keeper.</p>
 
-          <div className='grid place-items-center text-center m-auto pt-8 px-10'>
-            <p className='text-base font-medium text-gray-500'>All your passwords saved and secure in one place.</p>
+          <div className='grid place-items-center text-center m-auto pt-8 mx-10'>
+            <p className='text-base font-medium text-center text-gray-500'>
+              All your passwords saved and secure in one place.
+            </p>
           </div>
         </div>
 
