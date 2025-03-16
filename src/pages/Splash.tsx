@@ -5,28 +5,28 @@ import { useLocation } from 'wouter'
 export default function Splash() {
   const [_, navigate] = useLocation()
 
-  const TWENTY_WORDS_RELATED_TO_SECURE = [
-    'safe',
-    'protected',
-    'guarded',
-    'shielded',
-    'secure',
-    'locked',
-    'fortified',
-    'defended',
-    'safeguarded',
-    'preserved',
-    'watched',
-    'sheltered',
-    'covered',
-    'secured',
-    'armored',
-    'immune',
-    'bulletproof',
-    'unassailable',
-    'impregnable',
-    'invulnerable',
-  ]
+  // const TWENTY_WORDS_RELATED_TO_SECURE = [
+  //   'safe',
+  //   'protected',
+  //   'guarded',
+  //   'shielded',
+  //   'secure',
+  //   'locked',
+  //   'fortified',
+  //   'defended',
+  //   'safeguarded',
+  //   'preserved',
+  //   'watched',
+  //   'sheltered',
+  //   'covered',
+  //   'secured',
+  //   'armored',
+  //   'immune',
+  //   'bulletproof',
+  //   'unassailable',
+  //   'impregnable',
+  //   'invulnerable',
+  // ]
 
   const Mazonry = () => {
     return (
@@ -52,8 +52,6 @@ export default function Splash() {
         <div className='w-full h-72  rounded-xl bg-[url("/waves.svg")] bg-white col-span-2'></div>
         <div className='w-full h-72  rounded-xl bg-[url("/waves.svg")] bg-white col-span-2'></div>
         <div className='w-full h-72  rounded-xl bg-[url("/waves.svg")] bg-white'></div>
-        <div className='w-full h-72  rounded-xl bg-[url("/waves.svg")] bg-white'></div>
-        <div className='w-full h-72  rounded-xl bg-[url("/waves.svg")] bg-white col-span-2'></div>
       </div>
     )
   }

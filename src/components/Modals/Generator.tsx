@@ -1,5 +1,5 @@
 import Modal from '@/theme/Modal'
-import { PlusIcon, RepeatIcon, CopyIcon } from '@/assets/icons'
+import { PlusIcon, RepeatIcon } from '@/assets/icons'
 import { generatePassword } from '@/lib/password'
 import { useEffect, useState } from 'react'
 import Checkbox from '@/theme/Checkbox'

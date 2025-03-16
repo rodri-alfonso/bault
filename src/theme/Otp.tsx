@@ -19,9 +19,9 @@ export default function Otp({ value, setValue, label }: Props) {
   }
 
   return (
-    <div className='flex flex-col gap-5'>
+    <div className='flex flex-col gap-5 flex-wrap md:flex-nowrapx'>
       {label && <span className='text-gray-600 font-medium text-center pt-2'>{label}</span>}
-      <div className='flex items-center gap-2'>
+      <div className='flex items-center gap-2 px-4 flex-wrap md:px-0 md:flex-nowrap'>
         <OTPInput
           value={value}
           onChange={setValue}
@@ -30,6 +30,7 @@ export default function Otp({ value, setValue, label }: Props) {
           renderInput={(props) => <input {...props} />}
           containerStyle={'pr-0 w-full p-0 m-0'}
           inputType={type}
+          shouldAutoFocus
           inputStyle={
             'w-[70px] text-xl font-medium h-[70px] p-2 rounded-2xl bg-gray-200 text-center flex justify-center items-center m-auto'
           }

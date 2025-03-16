@@ -1,5 +1,3 @@
-import { TickIcon } from '@/assets/icons'
-
 type ConfigType = 'LOWERCASE' | 'UPPERCASE' | 'SYMBOLS' | 'NUMBERS'
 
 interface Props {

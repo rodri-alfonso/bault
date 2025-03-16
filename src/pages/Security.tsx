@@ -49,7 +49,7 @@ export default function SecurityPage() {
           <p className='text-center text-gray-500'>Enter the 4-digit code to verify your bault</p>
         </div>
         <Otp value={otp} setValue={setOtp} />
-        <div className='grid pb-4 gap-2 mt-auto'>
+        <div className='grid pb-4 gap-2 mt-auto px-4'>
           <Button
             label={isLoading ? 'Verifying...' : 'Verify'}
             disabled={isLoading || otp.length !== MAX_NUMBER_INPUTS}

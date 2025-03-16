@@ -14,6 +14,7 @@
     "canvas-confetti": "^1.9.3",
     "crypto-js": "^4.2.0",
     "firebase": "^10.12.4",
+    "motion": "^12.4.10",
     "react": "^18.2.0",
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
