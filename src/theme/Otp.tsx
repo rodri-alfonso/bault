@@ -1,6 +1,6 @@
 import OTPInput from 'react-otp-input'
 import { OTP_INPUT_NUMBER } from '@/lib/constants'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@/assets/icons'
 
 type Type = 'password' | 'text'
@@ -9,14 +9,19 @@ interface Props {
   value: string
   setValue: (otp: string) => void
   label?: string
+  hidden?: boolean
 }
 
-export default function Otp({ value, setValue, label }: Props) {
-  const [type, setType] = useState<Type>('password')
+export default function Otp({ value, setValue, label, hidden = false }: Props) {
+  const [type, setType] = useState<Type>(() => 'text')
 
   function handleChangeVisibility() {
     setType(type === 'password' ? 'text' : 'password')
   }
+
+  useEffect(() => {
+    handleChangeVisibility()
+  }, [hidden])
 
   return (
     <div className='flex flex-col gap-5 flex-wrap md:flex-nowrapx'>
@@ -37,7 +42,7 @@ export default function Otp({ value, setValue, label }: Props) {
           skipDefaultStyles
         />
         <button
-          className='w-[80px] text-xl font-medium h-[70px] p-2 rounded-2xl bg-gray-800 text-center flex justify-center items-center active:scale-95 transition-all text-white'
+          className='invisible md:visible w-[80px] text-xl font-medium h-[70px] p-2 rounded-2xl bg-gray-800 text-center flex justify-center items-center active:scale-95 transition-all text-white'
           type='button'
           onClick={handleChangeVisibility}
         >

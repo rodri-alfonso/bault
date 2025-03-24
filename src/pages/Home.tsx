@@ -76,7 +76,7 @@ export default function HomePage() {
         {isLoadingData ? (
           <div className='w-full bg-gray-200 rounded-xl py-8' />
         ) : (
-          records?.map((record) => <Record key={record.id} {...record} />)
+          records?.slice(0, 9).map((record) => <Record key={record.id} {...record} />)
         )}
       </section>
       <FavouritesModal

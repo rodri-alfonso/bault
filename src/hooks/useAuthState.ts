@@ -9,6 +9,7 @@ export default function useAuthState() {
   useEffect(() => {
     setLoading(true)
     auth.onAuthStateChanged((user) => {
+      console.log('🚀 ~ auth.onAuthStateChanged ~ user:', user)
       if (user) {
         const { displayName, photoURL, uid } = user
 

@@ -65,7 +65,7 @@ export default function SplashLayout({ children, className }: Props) {
   }
 
   return (
-    <main className='grid place-items-center h-screen w-full relative md:px-4 md:bg-white md:bg-[url("/waves.svg")]'>
+    <main className='grid place-items-center h-screen w-full relative md:px-4 bg-white md:bg-[url("/waves.svg")]'>
       <div
         className={`bg-white md:bg-gray-800 w-full md:w-auto md:p-2.5 md:rounded-[32px] md:flex ${
           user ? 'md:min-w-[61.3rem]' : 'md:min-w-[57rem]'
