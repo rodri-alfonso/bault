@@ -31,18 +31,18 @@ export default function Otp({ value, setValue, label, hidden = false }: Props) {
           value={value}
           onChange={setValue}
           numInputs={OTP_INPUT_NUMBER}
-          renderSeparator={<span className='text-gray-500'>-</span>}
+          renderSeparator={<span className='text-gray-500 '>-</span>}
           renderInput={(props) => <input {...props} />}
-          containerStyle={'pr-0 w-full p-0 m-0'}
+          containerStyle={'pr-0 w-full p-0 m-0 grid place-items-center'}
           inputType={type}
           shouldAutoFocus
           inputStyle={
-            'w-[70px] text-xl font-medium h-[70px] p-2 rounded-2xl bg-gray-200 text-center flex justify-center items-center m-auto'
+            'w-[60px] h-[60px] md:w-[70px] text-xl font-medium md:h-[70px] p-2 rounded-2xl bg-gray-200 text-center flex justify-center items-center m-auto'
           }
           skipDefaultStyles
         />
         <button
-          className='invisible md:visible w-[80px] text-xl font-medium h-[70px] p-2 rounded-2xl bg-gray-800 text-center flex justify-center items-center active:scale-95 transition-all text-white'
+          className='hidden w-[80px] text-xl font-medium h-[70px] p-2 rounded-2xl bg-gray-800 text-center md:flex justify-center items-center active:scale-95 transition-all text-white'
           type='button'
           onClick={handleChangeVisibility}
         >

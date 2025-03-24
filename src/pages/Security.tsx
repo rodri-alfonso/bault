@@ -43,7 +43,7 @@ export default function SecurityPage() {
   }
 
   return (
-    <SplashLayout>
+    <SplashLayout isBlocked>
       <form onSubmit={handleSubmit} className='h-full flex flex-col mx-auto gap-10 sm:max-w-sm pt-24'>
         <div>
           <h1 className='text-2xl font-bold text-center'>Verification</h1>
@@ -60,7 +60,7 @@ export default function SecurityPage() {
             label={`${hidePassword ? 'Show' : 'Hide'} password`}
             type='button'
             onClick={() => setHidePassword((prev) => !prev)}
-            className='md:hidden visible !bg-gray-50 !text-gray-600 font-medium hover:!bg-gray-900 hover:!text-white border border-solid border-gray-300'
+            className='md:hidden visible !bg-gray-50 !text-gray-600 font-medium border border-solid border-gray-300'
           />
         </div>
         <ModalError

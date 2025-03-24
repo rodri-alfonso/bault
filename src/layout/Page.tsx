@@ -3,7 +3,7 @@
 // }
 export default function Page({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <main className='grid place-items-center h-screen w-full'>
+    <main className='grid place-items-center h-[var(--doc-height)] w-full'>
       <div className={`h-full p-6 px-4 pb-3 ${className}`}>{children}</div>
     </main>
   )

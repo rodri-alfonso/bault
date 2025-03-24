@@ -8,6 +8,7 @@ import { useLocation } from 'wouter'
 interface Props {
   children: React.ReactNode | React.ReactNode[]
   className?: string
+  isBlocked?: boolean
 }
 
 interface NavButtonProps {
@@ -54,7 +55,7 @@ function NavButton({ onClick, icon, loading, disabled, primary }: NavButtonProps
   )
 }
 
-export default function SplashLayout({ children, className }: Props) {
+export default function SplashLayout({ children, className, isBlocked }: Props) {
   const [_, navigation] = useLocation()
   const { user } = authStore()
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -65,13 +66,13 @@ export default function SplashLayout({ children, className }: Props) {
   }
 
   return (
-    <main className='grid place-items-center h-screen w-full relative md:px-4 bg-white md:bg-[url("/waves.svg")]'>
+    <main className='grid place-items-center h-[var(--doc-height)] w-full relative md:px-4 bg-white md:bg-[url("/waves.svg")]'>
       <div
         className={`bg-white md:bg-gray-800 w-full md:w-auto md:p-2.5 md:rounded-[32px] md:flex ${
-          user ? 'md:min-w-[61.3rem]' : 'md:min-w-[57rem]'
+          user && !isBlocked ? 'md:min-w-[61.3rem]' : 'md:min-w-[57rem]'
         } relative`}
       >
-        {user && (
+        {!isBlocked && user && (
           <div className='hidden  md:flex flex-col items-center py-5 ml-2 mr-4 justify-between'>
             <button
               onClick={() => navigation('/')}
@@ -94,11 +95,11 @@ export default function SplashLayout({ children, className }: Props) {
           </div>
         )}
         <section
-          className={`h-screen md:relative bg-white md:h-[586px] md:w-full md:max-w-4xl rounded-3xl grid gap-4 pb-4 md:pb-2 md:pt-3 md:px-3.5 ${className}`}
+          className={`h-screen md:relative pt-1.5 px-1.5 bg-white md:h-[586px] md:w-full md:max-w-4xl rounded-3xl grid gap-4 pb-4 md:pb-2 md:pt-3 md:px-3.5 ${className}`}
         >
-          <div className='w-full rounded-b-[90px] md:rounded-[24px] mx-auto md:h-32 h-52 bg-gray-800 relative grid place-items-center md:-mb-20'>
+          <div className='w-full md:mx-auto rounded-3xl md:rounded-[24px] h-32 bg-gray-800 relative grid place-items-center -mb-20'>
             <div className='absolute -bottom-14 bg-white rounded-[30px] p-3 m-auto'>
-              <Logo2 className='w-24 h-24 text-gray-800 p-1' />
+              <Logo2 className='md:w-24 md:h-24 text-gray-800 md:p-1 w-20 h-20 p-0.5' />
             </div>
           </div>
           {children}

@@ -12,6 +12,7 @@ import { useSecure } from './hooks/useSecure'
 import SecurePage from './pages/Secure'
 import Splash from './pages/Splash'
 import TestPage from './pages/Test'
+import { useHeight } from './hooks/useHeight'
 
 function PrivateRouter() {
   const { timestamp } = timestampStore()
@@ -36,6 +37,7 @@ function PrivateRouter() {
 }
 
 function App() {
+  useHeight()
   const { user } = authStore()
   const { loading } = useAuthState()
 
