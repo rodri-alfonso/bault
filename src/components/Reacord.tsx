@@ -29,7 +29,7 @@ export default function Record({ id, site, user, color, password }: RegisterWith
 
   return (
     <article
-      className={`border-2 border-solid borde-gray-200 rounded-[20px] h-16 p-1 pr-3 flex items-center justify-between transition-all hover:bg-gray-50`}
+      className={`w-full border-2 border-solid borde-gray-200 rounded-[20px] h-16 p-1 pr-3 flex items-center justify-between transition-all hover:bg-gray-50`}
       style={{}}
     >
       <button

@@ -72,7 +72,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <section className='grid gap-2 h-full overflow-y-auto md:flex md:flex-wrap md:gap-2 px-3'>
+      <section className='grid gap-2 h-full overflow-y-auto md:grid-cols-3 md:grid-rows-2 md:gap-2 px-3'>
         {isLoadingData ? (
           <div className='w-full bg-gray-200 rounded-xl py-8' />
         ) : (

@@ -3,11 +3,11 @@ import { PlusIcon, RepeatIcon } from '@/assets/icons'
 import { generatePassword } from '@/lib/password'
 import { useEffect, useState } from 'react'
 import Checkbox from '@/theme/Checkbox'
-import CircularSlider from '@fseehawer/react-circular-slider'
 import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from '@/lib/config'
 import Button from '@/theme/Button'
 import Alert from '@/theme/Alert'
 import { ALERT_COPY_DEFAULT_MESSAGE } from '@/lib/config'
+import InputRange from '@/theme/InputRange'
 
 interface Props {
   isVisible: boolean
@@ -87,29 +87,7 @@ export default function GeneratorModal({ isVisible, onClose }: Props) {
         </section>
 
         <section className='w-full grid gap-2 place-items-center py-2'>
-          <CircularSlider
-            label='Characters'
-            labelFontSize='14px'
-            labelColor='#1F2937'
-            knobColor='#1F2937'
-            labelBottom
-            knobSize={30}
-            progressSize={6}
-            valueFontSize='40px'
-            progressColorFrom='#222a35'
-            progressColorTo='#1F2937'
-            trackColor='#eeeeee'
-            trackSize={11}
-            progressLineCap='flat'
-            width={160}
-            initialValue={15}
-            min={MIN_PASSWORD_LENGTH}
-            max={MAX_PASSWORD_LENGTH}
-            direction={1}
-            onChange={(value: number) => setLength(value)}
-          >
-            <div />
-          </CircularSlider>
+          <InputRange value={length} setValue={() => setLength} label='Length' counter />
         </section>
 
         <section className='grid gap-1'>
