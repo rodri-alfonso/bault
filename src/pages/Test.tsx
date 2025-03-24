@@ -1,5 +1,4 @@
 import Button from '@/theme/Button'
-import { useEffect, useState } from 'react'
 
 export default function TestPage() {
   //   const [document, setDocument] = useState('')
@@ -8,7 +7,7 @@ export default function TestPage() {
   //     fetchDocument()
   //   },[])
 
-  function fetchDocument() {}
+  // function fetchDocument() {}
 
   return (
     <div className='bg-white h-screen p-10'>
