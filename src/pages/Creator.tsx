@@ -9,7 +9,7 @@ import { addRecord } from '@/services/records'
 import type { Register, Key } from 'types'
 import { useLocation } from 'wouter'
 import { CARDS_COLORS } from '@/lib/colors'
-import { EarthIcon, MailIcon, PasswordIcon, UserIcon, KeyIcon, AddCircleIcon, PlusIcon } from '@/assets/icons'
+import { EarthIcon, MailIcon, PasswordIcon, UserIcon, KeyIcon, AddCircleIcon, PlusIcon, CopyIcon } from '@/assets/icons'
 import Typography from '@/theme/Typography'
 import Button from '@/theme/Button'
 import ColorPicker from '@/components/ColorPicker'
@@ -85,7 +85,7 @@ export default function CreatorPage() {
     >
       <div className='grid gap-6'>
         <Header className='md:hidden' />
-        <Heading className='pt-2 px-4 md:pt-6' title='Welcome,' subtitle="Let's create a new record!" />
+        <Heading className='pt-2 px-4 md:pt-10' title='Welcome,' subtitle="Let's create a new record!" />
         <div className='absolute top-6 right-4 md:right-4 md:top-4'>
           <ColorPicker color={color} setColor={setColor} />
         </div>

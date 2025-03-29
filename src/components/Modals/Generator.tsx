@@ -87,7 +87,7 @@ export default function GeneratorModal({ isVisible, onClose }: Props) {
         </section>
 
         <section className='w-full grid gap-2 place-items-center py-2'>
-          <InputRange value={length} setValue={() => setLength} label='Length' counter />
+          <InputRange value={length} setValue={setLength} label='Length' min={6} max={30} counter />
         </section>
 
         <section className='grid gap-1'>

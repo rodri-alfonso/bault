@@ -2,7 +2,7 @@ import { useParams, useLocation } from 'wouter'
 import { deleteRecord, editRecord } from '@/services/records'
 import { decrypt, encrypt } from '@/lib/encryption'
 import Header from '@/components/Header'
-import { AddCircleIcon, EarthIcon, KeyIcon, MailIcon, PasswordIcon, UserIcon } from '@/assets/icons'
+import { AddCircleIcon, EarthIcon, KeyIcon, MailIcon, PasswordIcon, UserIcon, CopyIcon, TickIcon } from '@/assets/icons'
 import { useEffect, useState } from 'react'
 import RecordCard from '@/components/RecordCard'
 import Input from '@/theme/Input'
@@ -17,6 +17,8 @@ import Heading from '@/components/Heading'
 import { recordStore } from '@/stores/records'
 import ConfirmModal from '@/components/Modals/Confirm'
 import GeneratorModal from '@/components/Modals/Generator'
+import Alert from '@/theme/Alert'
+import { ALERT_COPY_DEFAULT_MESSAGE } from '@/lib/config'
 
 export default function RecordPage() {
   const [location, navigate] = useLocation()
@@ -36,6 +38,13 @@ export default function RecordPage() {
   const [keys, setKeys] = useState<Key[]>([])
   const [currentKey, setCurrentKey] = useState('')
   const { setRecords } = recordStore()
+
+  const [isAlertVisible, setIsAlertVisible] = useState(false)
+  const [wasCopied, setWasCopied] = useState(false)
+
+  useEffect(() => {
+    if (wasCopied) setTimeout(() => setWasCopied(false), 1000)
+  }, [wasCopied])
 
   useEffect(() => {
     if (!isLoading && record) {
@@ -129,6 +138,15 @@ export default function RecordPage() {
     })
   }
 
+  function handleCopy(message: string) {
+    if (isAlertVisible) return
+
+    navigator.clipboard.writeText(message).then(() => {
+      setIsAlertVisible(true)
+      setWasCopied(true)
+    })
+  }
+
   if (isLoading || !record) return <LoaderPage />
 
   return (
@@ -152,7 +170,7 @@ export default function RecordPage() {
         </button>
       </div>
 
-      <Heading subtitle="Let's check your record!" title='Welcome back,' className='pt-2 px-4 md:pt-6' />
+      <Heading subtitle="Let's check your record!" title='Welcome back,' className='pt-2 px-4 md:pt-10' />
       <div className='pt-2 md:px-4 md:pt-6 md:pr-5 md:max-w-md'>
         <RecordCard full record={{ email, site, user, color, password, keys, id, marked: record.marked }} />
       </div>
@@ -175,6 +193,8 @@ export default function RecordPage() {
             value={email}
             placeholder='Email'
             color={color}
+            trailerIcon={wasCopied ? <TickIcon /> : <CopyIcon />}
+            trailerEvent={() => handleCopy(email)}
           />
           <Input
             icon={<PasswordIcon className='w-5 h-5' />}
@@ -192,6 +212,8 @@ export default function RecordPage() {
             value={user}
             placeholder='User'
             color={color}
+            trailerIcon={wasCopied ? <TickIcon /> : <CopyIcon />}
+            trailerEvent={() => handleCopy(user)}
           />
         </div>
         <section className='flex flex-col gap-4 pt-6 md:overflow-y-auto h-full relative'>
@@ -253,6 +275,12 @@ export default function RecordPage() {
         loading={isDeleting}
       />
       <GeneratorModal isVisible={isGeneratorVisible} onClose={() => setIsGeneratorVisible(false)} />
+      <Alert
+        isVisible={isAlertVisible}
+        message={ALERT_COPY_DEFAULT_MESSAGE}
+        onClose={() => setIsAlertVisible(false)}
+        isEphemeral
+      />
     </NewPage>
   )
 }

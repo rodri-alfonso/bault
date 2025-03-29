@@ -1,4 +1,12 @@
-import { MenuSquareIcon, Bookmark01Icon, FloppyDiskIcon, PlusIcon, KeyIcon, TickIcon } from '@/assets/icons'
+import {
+  MenuSquareIcon,
+  Bookmark01Icon,
+  FloppyDiskIcon,
+  PlusIcon,
+  KeyIcon,
+  TickIcon,
+  ArrowRightIcon,
+} from '@/assets/icons'
 import { Logo2 } from '@/assets/logo'
 import { authStore, signOut } from '@/stores/auth'
 import FavouritesModal, { BookmarkedRecord } from '@/components/Modals/Favourites'
@@ -96,7 +104,7 @@ export default function NewPage({
             onClick={() => navigation('/')}
             className=' text-gray-800 bg-white p-1.5 rounded-xl grid place-items-center active:scale-95 transition-all'
           >
-            <Logo2 className='w-7 h-7' />
+            {location === '/' ? <Logo2 className='w-7 h-7' /> : <ArrowRightIcon className='h-7 w-7 rotate-180' />}
           </button>
           <nav className='grid gap-3'>
             <NavButton icon={<MenuSquareIcon />} onClick={() => setIsModalVisible(true)} />
