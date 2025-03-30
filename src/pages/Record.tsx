@@ -37,7 +37,6 @@ export default function RecordPage() {
   const [currentKey, setCurrentKey] = useState('')
   const { setRecords } = recordStore()
 
-  const [isAlertVisible, setIsAlertVisible] = useState(false)
   const [wasCopied, setWasCopied] = useState(false)
 
   useEffect(() => {
