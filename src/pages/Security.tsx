@@ -44,7 +44,7 @@ export default function SecurityPage() {
 
   return (
     <SplashLayout isBlocked>
-      <form onSubmit={handleSubmit} className='h-full flex flex-col mx-auto gap-10 sm:max-w-sm pt-24'>
+      <form onSubmit={handleSubmit} className='h-full flex flex-col mx-auto gap-10 sm:max-w-sm'>
         <div>
           <h1 className='text-2xl font-bold text-center'>Verification</h1>
           <p className='text-center text-gray-500'>Enter the 4-digit code to verify your bault</p>

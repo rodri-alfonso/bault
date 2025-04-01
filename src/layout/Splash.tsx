@@ -94,11 +94,22 @@ export default function SplashLayout({ children, className, isBlocked }: Props) 
             />
           </div>
         )}
-        <section
+        {/* <section
           className={`h-screen md:relative pt-1.5 px-1.5 bg-white md:h-[586px] md:w-full md:max-w-4xl rounded-3xl grid gap-4 pb-4 md:pb-2 md:pt-3 md:px-3.5 ${className}`}
         >
           <div className='w-full md:mx-auto rounded-3xl md:rounded-[24px] h-32 bg-gray-800 relative grid place-items-center -mb-20'>
             <div className='absolute -bottom-14 bg-white rounded-[30px] p-3 m-auto'>
+              <Logo2 className='md:w-24 md:h-24 text-gray-800 md:p-1 w-20 h-20 p-0.5' />
+            </div>
+          </div>
+          {children}
+        </section> */}
+        <section
+          className={` h-screen md:relative pt-1.5 px-1.5 bg-white md:h-[586px] md:w-full md:max-w-4xl rounded-3xl flex flex-col w-full items-start gap-4 pb-4 md:pb-2 md:pt-3 md:px-3.5 ${className}`}
+        >
+          <div className='relative flex flex-col justify-between items-start h-96 w-full'>
+            <div className='w-full md:mx-auto rounded-3xl md:rounded-[24px] h-32 bg-gray-800 absolute grid place-items-center'></div>
+            <div className='bg-white rounded-[30px] p-3 m-auto z-20'>
               <Logo2 className='md:w-24 md:h-24 text-gray-800 md:p-1 w-20 h-20 p-0.5' />
             </div>
           </div>
