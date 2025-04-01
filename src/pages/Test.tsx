@@ -1,19 +1,20 @@
 import Button from '@/theme/Button'
 import { useEffect, useState } from 'react'
 
-import { auth, app, provider } from '@/firebase'
+import { auth } from '@/firebase'
 
 const BASE_URL = 'https://www.googleapis.com'
 
-// client ID: 86480998467-1k8dn3ncptibsdj9604ftkhn11kldhai.apps.googleusercontent.com
+// client ID: 86480998467-1k8dn3ncptibsdj9604ftkhn11kldhai.apps.googleusercontent.com ---> Already changed
 
-// api key: AIzaSyBrnbVbSAQ8HCr4HJYrr6qAPsRu_ZaiSvY
+// api key: AIzaSyBrnbVbSAQ8HCr4HJYrr6qAPsRu_ZaiSvY ---> Already changed
 
 export default function TestPage() {
   const [document, setDocument] = useState('')
 
   useEffect(() => {
     fetchDocument()
+    console.log(document)
   }, [])
 
   function fetchDocument() {
