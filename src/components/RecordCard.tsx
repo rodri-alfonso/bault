@@ -4,6 +4,7 @@ import Typography from '@/theme/Typography'
 import Alert from '@/theme/Alert'
 import { useEffect, useState } from 'react'
 import { ALERT_COPY_DEFAULT_MESSAGE } from '@/lib/config'
+import { copyToClipboard } from '@/lib/utils'
 
 interface Props {
   record: RegisterWithId
@@ -24,7 +25,7 @@ export default function RecordCard({ record, full }: Props) {
     e.stopPropagation()
     e.preventDefault()
 
-    navigator.clipboard.writeText(record.password).then(() => {
+    copyToClipboard(record.password).then(() => {
       setIsAlertVisible(true)
       setWasCopied(true)
     })

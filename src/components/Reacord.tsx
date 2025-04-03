@@ -5,6 +5,7 @@ import { CopyIcon, TickIcon } from '@/assets/icons'
 import { useEffect, useState } from 'react'
 import Alert from '@/theme/Alert'
 import { ALERT_COPY_DEFAULT_MESSAGE } from '@/lib/config'
+import { copyToClipboard } from '@/lib/utils'
 
 export default function Record({ id, site, user, color, password }: RegisterWithId) {
   const [_, navigate] = useLocation()
@@ -21,7 +22,7 @@ export default function Record({ id, site, user, color, password }: RegisterWith
     e.stopPropagation()
     e.preventDefault()
 
-    navigator.clipboard.writeText(decrypt(password))
+    copyToClipboard(decrypt(password))
 
     setIsAlertVisible(true)
     setWasCopied(true)

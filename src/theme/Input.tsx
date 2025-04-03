@@ -2,6 +2,7 @@ import { ViewOffIcon, ViewIcon, CopyIcon, TickIcon } from '@/assets/icons'
 import { useEffect, useState } from 'react'
 import Alert from './Alert'
 import { ALERT_COPY_DEFAULT_MESSAGE } from '@/lib/config'
+import { copyToClipboard } from '@/lib/utils'
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string
@@ -39,7 +40,7 @@ export default function Input({ onChange, placeholder, value, canCopy, icon, typ
   function handleCopy() {
     if (isAlertVisible) return
 
-    navigator.clipboard.writeText(String(value)).then(() => {
+    copyToClipboard(String(value)).then(() => {
       setIsAlertVisible(true)
       setWasCopied(true)
     })

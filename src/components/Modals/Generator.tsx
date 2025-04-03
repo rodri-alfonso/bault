@@ -8,6 +8,7 @@ import Button from '@/theme/Button'
 import Alert from '@/theme/Alert'
 import { ALERT_COPY_DEFAULT_MESSAGE } from '@/lib/config'
 import InputRange from '@/theme/InputRange'
+import { copyToClipboard } from '@/lib/utils'
 
 interface Props {
   isVisible: boolean
@@ -28,7 +29,7 @@ export default function GeneratorModal({ isVisible, onClose }: Props) {
   }
 
   function handleCopyPassword() {
-    navigator.clipboard.writeText(password).then(() => setAlertOpen(true))
+    copyToClipboard(password).then(() => setAlertOpen(true))
   }
 
   function handleChangeConfig(type: ConfigType) {

@@ -1,5 +1,6 @@
 import { ALERT_COPY_DEFAULT_MESSAGE } from '@/lib/config'
 import { decrypt } from '@/lib/encryption'
+import { copyToClipboard } from '@/lib/utils'
 import Alert from '@/theme/Alert'
 import Typography from '@/theme/Typography'
 import { useState } from 'react'
@@ -21,7 +22,7 @@ export default function RecordSimpleCard({ site, user, color, password = '' }: P
     e.preventDefault()
 
     const decryptedPassword = decrypt(password)
-    navigator.clipboard.writeText(decryptedPassword)
+    copyToClipboard(decryptedPassword)
 
     setIsAlertVisible(true)
   }
