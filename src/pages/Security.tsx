@@ -10,10 +10,14 @@ import Otp from '@/theme/Otp'
 
 const MAX_NUMBER_INPUTS = 4
 
-export default function SecurityPage() {
+interface Props {
+  onChangePass: () => void
+}
+
+export default function SecurityPage({ onChangePass }: Props) {
   const { user } = authStore()
   const [otp, setOtp] = useState('')
-  const { setIsProtected, setTimestamp } = timestampStore()
+  // const { setIsProtected, setTimestamp } = timestampStore()
   const [_, navigate] = useLocation()
   const [isLoading, setIsLoading] = useState(false)
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -33,8 +37,9 @@ export default function SecurityPage() {
           return
         }
 
-        setTimestamp()
-        setIsProtected(false)
+        // setTimestamp()
+        // setIsProtected(false)
+        onChangePass()
         navigate('/')
       })
       .finally(() => {

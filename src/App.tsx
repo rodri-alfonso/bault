@@ -13,16 +13,18 @@ import SecurePage from './pages/Secure'
 import Splash from './pages/Splash'
 import TestPage from './pages/Test'
 import { useHeight } from './hooks/useHeight'
+import { useState } from 'react'
 
 function PrivateRouter() {
-  const { timestamp } = timestampStore()
+  const [isSecurePass, setIsSecurePass] = useState(false)
+  // const { timestamp } = timestampStore()
   const { isLoading, hasCode } = useSecure()
 
-  const isTimestampPassedAfterThreeHours = new Date().getTime() - timestamp > 10800000
+  // const isTimestampPassedAfterThreeHours = new Date().getTime() - timestamp > 10800000
 
   if (isLoading) return <LoaderPage />
   if (!hasCode) return <SecurePage />
-  if (isTimestampPassedAfterThreeHours) return <SecurityPage />
+  if (!isSecurePass) return <SecurityPage onChangePass={() => setIsSecurePass(true)} />
 
   return (
     <Switch>
@@ -40,7 +42,9 @@ function App() {
   useHeight()
   const { user } = authStore()
   const { loading } = useAuthState()
+  // const [isSecurePass, setIsSecurePass] = useState(false)
 
+  // return <SecurityPage onChangePass={() => setIsSecurePass(true)} />
   if (loading) return <LoaderPage />
   if (user) return <PrivateRouter />
 

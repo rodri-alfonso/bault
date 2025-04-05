@@ -65,6 +65,28 @@ export default function SplashLayout({ children, className, isBlocked }: Props) 
     setIsModalVisible(false)
   }
 
+  const DesktopBanner = () => {
+    return (
+      <div className='relative flex flex-col justify-between items-start h-96 w-full'>
+        <div className='hidden w-full md:mx-auto rounded-3xl md:rounded-[24px] h-32 bg-gray-800 absolute md:grid place-items-center'></div>
+        <div className='bg-white rounded-[30px] p-3 m-auto z-20'>
+          <Logo2 className='md:w-24 md:h-24 text-gray-800 md:p-1 w-28 h-28 p-0.5' />
+        </div>
+      </div>
+    )
+  }
+
+  const MobileBanner = () => {
+    return (
+      <div className='relative flex flex-col justify-between items-start h-96 w-full'>
+        <div className='w-full md:mx-auto rounded-3xl md:rounded-[24px] h-32 bg-gray-800 absolute grid place-items-center'></div>
+        <div className='bg-white rounded-[30px] p-3 m-auto z-20'>
+          <Logo2 className='md:w-24 md:h-24 text-gray-800 md:p-1 w-20 h-20 p-0.5' />
+        </div>
+      </div>
+    )
+  }
+
   return (
     <main className='grid place-items-center h-[var(--doc-height)] w-full relative md:px-4 bg-white md:bg-[url("/waves.svg")]'>
       <div
@@ -107,12 +129,7 @@ export default function SplashLayout({ children, className, isBlocked }: Props) 
         <section
           className={` h-screen md:relative pt-1.5 px-1.5 bg-white md:h-[586px] md:w-full md:max-w-4xl rounded-3xl flex flex-col w-full items-start gap-4 pb-4 md:pb-2 md:pt-3 md:px-3.5 ${className}`}
         >
-          <div className='relative flex flex-col justify-between items-start h-96 w-full'>
-            <div className='w-full md:mx-auto rounded-3xl md:rounded-[24px] h-32 bg-gray-800 absolute grid place-items-center'></div>
-            <div className='bg-white rounded-[30px] p-3 m-auto z-20'>
-              <Logo2 className='md:w-24 md:h-24 text-gray-800 md:p-1 w-20 h-20 p-0.5' />
-            </div>
-          </div>
+          <DesktopBanner />
           {children}
         </section>
       </div>

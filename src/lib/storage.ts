@@ -1,3 +1,4 @@
+// expiration
 export const getExpirationStorage = (): number => {
   const expiration = JSON.parse(localStorage.getItem('expiration') || '0')
   return expiration || 0
